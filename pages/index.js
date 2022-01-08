@@ -2,6 +2,7 @@ import { Container, Divider } from '@chakra-ui/react';
 import Head from 'next/head';
 import useSWR from 'swr';
 import ProfileSection from '../sections/ProfileSection';
+import TechStackSection from '../sections/TechStackSection.jsx';
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -21,7 +22,7 @@ export default function Home() {
 				<Container maxW="container.lg" mt={['5', '10']} mb={['5', '10']}>
 					<ProfileSection song={data} />
 					<Divider my={7} />
-					{/* <TechStackSection /> */}
+					<TechStackSection />
 					<Divider my={7} />
 					{/* <LiveProjectSection /> */}
 				</Container>

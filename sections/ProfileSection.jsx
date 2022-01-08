@@ -45,10 +45,10 @@ const ProfileSection = ({ song }) => {
                 </Paragraph>
                 <Paragraph fontSize="2xl" lineHeight={1.6}>
                     Focused on {" "}
-                    <Link color={useColorModeValue("blue.500", "blue.400")} href="https://www.android.com/" fontWeight="500" isExternal>
+                    <Link color={useColorModeValue("blue.500", "blue.400")} href="#" fontWeight="500">
                         Web &
                     </Link>{" "}
-                    <Link color={useColorModeValue("blue.500", "blue.400")} href="https://reactnative.dev/" fontWeight="500" isExternal>
+                    <Link color={useColorModeValue("blue.500", "blue.400")} href="#" fontWeight="500">
                         Hybrid Mobile App Development
                     </Link>.
                     {"\n"}Passionate about Blockchain & IoT Technologies 🔥
