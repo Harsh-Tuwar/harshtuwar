@@ -10,15 +10,16 @@ import {
 	LightMode,
 	ButtonGroup,
 	Button,
-	useColorModeValue
+    useColorModeValue,
+    Divider
 } from '@chakra-ui/react';
 
 import { Resume } from '../constant';
 import Paragraph from '../components/Paragraph';
 import SocialButton from '../components/SocialButton';
-// import SpotifySection from './SpotifySection';
+import SpotifySection from './SpotifySection';
 
-const ProfileSection = ({song}) => {
+const ProfileSection = ({ song }) => {
     return (
         <SlideFade in offsetX={80}>
             <Box>
@@ -62,19 +63,18 @@ const ProfileSection = ({song}) => {
                             <Link href={'/contact'} style={{ textDecoration: 'none' }}>
                                 <Button
                                     colorScheme="blue"
-                                    size='sm'
-                                    margin={'5px'}
+                                    size="sm"
+                                    margin="5px"
                                     leftIcon={<BiPhoneCall color='white'/>}
                                 >
                                     Contact Me
                                 </Button>
                             </Link>
                         </ButtonGroup>
-
                     </LightMode>
                 </Box>
-
-                {/* <SpotifySection song={song}/> */}
+                <Divider my={7} />
+                <SpotifySection song={song}/>
             </Box>
         </SlideFade >
     )
