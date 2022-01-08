@@ -35,7 +35,7 @@ const SpotifySection = ({ song }) => {
 					<VStack>
 						<HStack alignSelf={{ base: "center", md: "flex-start" }} mb={5}>
 							<SiSpotify size={20} color="#1ED760" className="rotating" />
-							<Text>Spotify</Text>
+							<Text>{song?.isPlaying ? "Currently Listening On" : "Spotify"}</Text>
 						</HStack>
 					</VStack>
 
