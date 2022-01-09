@@ -2,7 +2,7 @@ import React from 'react';
 import { BiPhoneCall } from 'react-icons/bi';
 import {
 	SlideFade,
-	Box,
+    Box,
 	Heading,
 	Avatar,
 	Link,
@@ -13,6 +13,7 @@ import {
     useColorModeValue,
     Divider
 } from '@chakra-ui/react';
+import NextLink from 'next/link';
 
 import { Resume } from '../constant';
 import Paragraph from '../components/Paragraph';
@@ -60,7 +61,7 @@ const ProfileSection = ({ song }) => {
                             <SocialButton
                                 social={Resume}
                             />
-                            <Link href={'/contact'} style={{ textDecoration: 'none' }}>
+                            <NextLink href='/contact' style={{ textDecoration: 'none' }}>
                                 <Button
                                     colorScheme="blue"
                                     size="sm"
@@ -69,7 +70,7 @@ const ProfileSection = ({ song }) => {
                                 >
                                     Contact Me
                                 </Button>
-                            </Link>
+                            </NextLink>
                         </ButtonGroup>
                     </LightMode>
                 </Box>

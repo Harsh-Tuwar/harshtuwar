@@ -40,13 +40,17 @@ const NavBar = () => {
                         onClick={isOpen ? onClose : onOpen}
                     />
                     <HStack spacing={8} alignItems="center">
-                        <Avatar
-                            as={CharkaLink}
-                            size="sm"
+                        <NextLink
                             href="/"
-                            src="/profile_picture.png"
-                            _hover={{ borderColor: "blue.500" }}
-                        />
+                            passHref
+                        >
+                            <Avatar
+                                as={CharkaLink}
+                                size="sm"
+                                src="/profile_picture.png"
+                                _hover={{ borderColor: "blue.500" }}
+                            />
+                        </NextLink>
                         <HStack as="nav" spacing="4" display={{ base: 'none', md: 'flex' }}>
                             <NavItems isOpen={isOpen} onClose={onClose} onOpen={onOpen} asPath={asPath} />
                         </HStack>

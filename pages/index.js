@@ -1,4 +1,4 @@
-import { Container, Divider } from '@chakra-ui/react';
+import { Container, Divider, SlideFade, Flex } from '@chakra-ui/react';
 import Head from 'next/head';
 import useSWR from 'swr';
 import ProfileSection from '../sections/ProfileSection';
@@ -20,11 +20,14 @@ export default function Home() {
 
 			<main>
 				<Container maxW="container.lg" mt={['5', '10']} mb={['5', '10']}>
-					<ProfileSection song={data} />
-					<Divider my={7} />
-					<TechStackSection />
+					<SlideFade in offsetX={80}>
+						<Flex width="full" align="center" justifyContent="center" flexDirection="column">
+							<ProfileSection song={data} />
+							<Divider my={7} />
+							<TechStackSection />
+						</Flex>
+					</SlideFade>
 				</Container>
-
 			</main>
 		</div>
 	)
