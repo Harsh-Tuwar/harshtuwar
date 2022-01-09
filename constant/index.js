@@ -1,10 +1,10 @@
-import { SiKotlin, SiFirebase, SiFastlane, SiGmail } from 'react-icons/si';
-import { FaReact, FaJs, FaGitAlt, FaAndroid, FaJava, FaLinkedin, FaStackOverflow, FaMedium, FaGithub } from "react-icons/fa";
+import { SiKotlin, SiFirebase, SiFastlane, SiGmail, SiTypescript, SiReact, SiMongodb, SiMaterialui, SiTailwindcss, SiRedux, SiPython, SiGooglecloud, SiMicrosoftazure, SiAmazon, SiMysql, SiGraphql, SiFlutter, SiVisualstudiocode, SiDocker, SiNodedotjs } from 'react-icons/si';
+import { FaReact, FaJs, FaGitAlt, FaAndroid, FaJava, FaLinkedin, FaStackOverflow, FaMedium, FaGithub, FaAws } from "react-icons/fa";
 import { CgAlbum } from "react-icons/cg";
 
 const NavbarItems = [
     { name: "About Me", route: "/about" },
-    { name: 'Github', route: '/github' },
+    { name: 'Projects', route: '/project' },
     { name: "Contact", route: "/contact" },
 ]
 
@@ -43,44 +43,76 @@ const Resume = {
 
 const techStacks = [
     {
-        name: "Android",
-        icon: <FaAndroid fontSize="20px" />,
-        url: "https://www.android.com/",
+        name: "Typescript",
+        icon: <SiTypescript fontSize="20px" />
     },
     {
-        name: "React Native",
-        icon: <FaReact fontSize="20px" />,
-        url: "https://reactnative.dev/",
+        name: "Python",
+        icon: <SiPython fontSize="20px" />
     },
     {
-        name: "Kotlin",
-        icon: <SiKotlin fontSize="20px" />,
-        url: "https://kotlinlang.org/",
+        name: "React & React Native",
+        icon: <SiReact fontSize="20px" />
     },
     {
-        name: "Java",
-        icon: <FaJava fontSize="20px" />,
-        url: "https://www.java.com/en/",
+        name: "Redux",
+        icon: <SiRedux fontSize="20px" />
     },
     {
-        name: "Javascript",
-        icon: <FaJs fontSize="20px" />,
-        url: "https://www.javascript.com/",
+        name: "Material UI",
+        icon: <SiMaterialui fontSize="20px" />
+    },
+    {
+        name: "Tailwind CSS",
+        icon: <SiTailwindcss fontSize="20px" />
+    },
+    {
+        name: "NodeJS",
+        icon: <SiNodedotjs fontSize="20px" />
+    },
+    {
+        name: "Google Cloud",
+        icon: <SiGooglecloud fontSize="20px" />
+    },
+    {
+        name: "Azure",
+        icon: <SiMicrosoftazure fontSize="20px" />
+    },
+    {
+        name: "Amazon Web Services",
+        icon: <FaAws fontSize="20px" />
+    },
+    {
+        name: "MySQL",
+        icon: <SiMysql fontSize="20px" />
     },
     {
         name: "Firebase",
         icon: <SiFirebase fontSize="20px" />,
-        url: "https://firebase.google.com/",
+    },
+    {
+        name: "MongoDB",
+        icon: <SiMongodb fontSize="20px" />,
+    },
+    {
+        name: "GraphQL",
+        icon: <SiGraphql fontSize="20px" />
+    },
+    {
+        name: "Flutter",
+        icon: <SiFlutter fontSize="20px" />
+    },
+    {
+        name: "VSCode",
+        icon: <SiVisualstudiocode fontSize="20px" />
+    },
+    {
+        name: "Docker",
+        icon: <SiDocker fontSize="20px" />,
     },
     {
         name: "Github & GitLab",
         icon: <FaGitAlt fontSize="20px" />,
-        url: "https://www.gitlab.com/",
-    },
-    {
-        name: "CI/CD - Fastlane",
-        icon: <SiFastlane fontSize="20px" />,
-        url: "https://fastlane.tools/",
     },
 ]
 
