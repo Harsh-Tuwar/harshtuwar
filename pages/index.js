@@ -23,8 +23,6 @@ export default function Home() {
 					<ProfileSection song={data} />
 					<Divider my={7} />
 					<TechStackSection />
-					<Divider my={7} />
-					{/* <LiveProjectSection /> */}
 				</Container>
 
 			</main>
