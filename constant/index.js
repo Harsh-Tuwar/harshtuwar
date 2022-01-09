@@ -22,7 +22,7 @@ import { CgAlbum } from "react-icons/cg";
 
 const NavbarItems = [
     { name: "About Me", route: "/about" },
-    { name: 'Projects', route: '/project' },
+    { name: 'Projects', route: '/projects' },
     { name: "Contact", route: "/contact" },
 ]
 
