@@ -39,7 +39,7 @@ const SiteConfig = {
                 type: "gray"
             },
             {
-                url: "https://www.linkedin.com/in/htuwar08",
+                url: "https://www.linkedin.com/in/tuwar08",
                 icon: <FaLinkedin />,
                 name: "Linkedin",
                 type: "linkedin"
