@@ -21,8 +21,9 @@ import { FaJs, FaGitAlt, FaLinkedin, FaGithub, FaAws } from "react-icons/fa";
 import { CgAlbum } from "react-icons/cg";
 
 const NavbarItems = [
+    { name: "Home", route: "/" },
     { name: "About Me", route: "/about" },
-    { name: 'Projects', route: '/projects' },
+    // { name: 'Projects', route: '/projects' },
     { name: "Contact", route: "/contact" },
 ]
 
@@ -201,5 +202,14 @@ const certifications = [
     },
 ]
 
+const Projects = [
+    {
+        name: 'Chat App',
+        description: 'Description',
+        language: 'TypeScript',
+        clone_url: 'https://github.com/Harsh-Tuwar/Chat-App'
+    }
+]
 
-export { NavbarItems, techStacks, SiteConfig, Resume, companies, educations, certifications }
+
+export { NavbarItems, techStacks, SiteConfig, Resume, companies, educations, certifications, Projects }

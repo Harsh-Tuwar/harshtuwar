@@ -47,7 +47,7 @@ const NavBar = () => {
                             <Avatar
                                 as={CharkaLink}
                                 size="sm"
-                                src="/profile_picture.png"
+                                src="/profile_picture.jpeg"
                                 _hover={{ borderColor: "blue.500" }}
                             />
                         </NextLink>

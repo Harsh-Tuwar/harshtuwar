@@ -2,8 +2,9 @@ import React from 'react';
 import { Heading, SlideFade, Box, SimpleGrid, Text } from "@chakra-ui/react";
 import GithubCard from '../components/GithubCard';
 import Paragraph from '../components/Paragraph';
+import { Projects } from '../constant';
 
-const GithubSection = ({ repos }) => {
+const GithubSection = () => {
 	return (
 		<SlideFade in offsetY={80} delay={0.2}>
 			<Heading
@@ -19,14 +20,14 @@ const GithubSection = ({ repos }) => {
 			</Paragraph>
 			<Box my={5}>
 				<SimpleGrid columns={[1, 1, 2]} spacing={4} mt={4}>
-					{repos?.map((repo) => (
+					{Projects?.map((repo) => (
 						<GithubCard
 							name={repo.name}
 							description={repo.description}
 							language={repo.language}
 							url={repo.clone_url}
-							stargazers_count={repo.stargazers_count}
-							forks_count={repo.forks_count}
+							stargazers_count={repo?.stargazers_count}
+							forks_count={repo?.forks_count}
 							key={repo.name}
 						/>
 					))}

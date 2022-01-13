@@ -35,7 +35,7 @@ const ProfileSection = ({ song }) => {
                     <Flex alignItems={"flex-end"}>
                         <Avatar
                             name="Harsh Tuwar"
-                            src="/profile_picture.png"
+                            src="/profile_picture.jpeg"
                             mb={5}
                             size='lg'
                         />
@@ -58,9 +58,9 @@ const ProfileSection = ({ song }) => {
                 <Box mt={5}>
                     <LightMode>
                         <ButtonGroup>
-                            <SocialButton
+                            {/* <SocialButton
                                 social={Resume}
-                            />
+                            /> */}
                             <NextLink href='/contact' style={{ textDecoration: 'none' }}>
                                 <Button
                                     colorScheme="blue"

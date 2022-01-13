@@ -4,33 +4,23 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import GithubSection from '../sections/GithubSection';
 
-const Projects = ({ repos }) => {
+const Projects = () => {
 	return (
 		<div className={styles.container}>
 			<Head>
 				<title>Harsh Tuwar | Software Developer</title>
 				<meta property="og:title" content="Harsh Tuwar | Software Developer"></meta>
 				<meta name="description" content="Harsh Tuwar | Software Developer" />
-				<link rel="icon" href="/house.png" />
+				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
 			<main>
 				<Container maxW="container.lg" mt={['5', '10']} mb={['5', '10']}>
-					<GithubSection repos={repos} />
+					<GithubSection />
 				</Container>
 			</main>
 		</div>
 	);
-}
-
-export const getStaticProps = () => {
-	// const repos = await getGithubRepos({ username: process.env.GITHUB_USERNAME });
-
-    return {
-        props: {
-            repos: null,
-        },
-    };
 }
 
 export default Projects;

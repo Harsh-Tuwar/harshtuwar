@@ -29,7 +29,7 @@ const About = () => {
 				<title>Harsh Tuwar | Software Developer</title>
 				<meta property="og:title" content="Harsh Tuwar | Software Developer"></meta>
 				<meta name="description" content="Harsh Tuwar | Software Developer" />
-				<link rel="icon" href="/house.png" />
+				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
 			<main>
