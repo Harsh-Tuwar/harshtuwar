@@ -15,10 +15,16 @@ import { HiOutlineExternalLink } from "react-icons/hi";
 import { MotionBox, MotionFlex, MotionList, MotionText } from "../utils/motion";
 
 const ProjectLayoutMed = ({ project }) => {
+	const gray900_100 = useColorModeValue("gray.900", "gray.100");
+	const gray100_900 = useColorModeValue("gray.100", "gray.900");
+	const colormode_05_1 = useColorModeValue("0.5", "1");
+	const gray600_700 = useColorModeValue("gray.600", "gray.700");
+	const gray100_700 = useColorModeValue("gray.100", "gray.700");
+
 	return (
 		<Flex display={["flex", "flex", "none"]} rounded="xl"
 			borderWidth="1px"
-			borderColor={useColorModeValue("gray.600", "gray.700")}
+			borderColor={gray600_700}
 			w="full"
 			h="20rem"
 			textAlign="left"
@@ -40,19 +46,19 @@ const ProjectLayoutMed = ({ project }) => {
 						rounded="xl" objectFit="cover" opacity={0.5} />
 				</AspectRatio>
 				<Box width={'full'}
-					height={'full'} position="absolute" bg={useColorModeValue("gray.100", "gray.900")} opacity={useColorModeValue("0.5", "1")}></Box>
+					height={'full'} position="absolute" bg={gray100_900} opacity={colormode_05_1}></Box>
 			</a>
 			<MotionBox initial="initial"
 				animate="animate" width={["full", "70%"]} rounded="lg" my="auto" px="6" py="3" position="relative" zIndex="10">
 				<MotionBox variants={stagger}>
 					<a href={project.site} target="_blank" rel="noopener noreferrer">
-						<MotionText variants={fadeInUp} fontSize='2xl' fontWeight="bold" color={useColorModeValue("gray.900", "gray.100")}>
+						<MotionText variants={fadeInUp} fontSize='2xl' fontWeight="bold" color={gray900_100}>
 							{project.title}
 						</MotionText>
 						<Box width="full">
 							<MotionText
 								variants={fadeInUp}
-								bg={useColorModeValue("gray.100", "gray.700")}
+								bg={gray100_700}
 								rounded="lg"
 								align="left"
 								p="4"
@@ -61,7 +67,7 @@ const ProjectLayoutMed = ({ project }) => {
 								{project.description}
 							</MotionText>
 							{project.techStack && (
-								<MotionList variants={fadeInUp} display="flex" fontSize="xs" justifyContent="start" mt="3" color={useColorModeValue("gray.900", "gray.100")} fontWeight="bold">
+								<MotionList variants={fadeInUp} display="flex" fontSize="xs" justifyContent="start" mt="3" color={gray900_100} fontWeight="bold">
 									{project.techStack.map((s, index) => (
 										<ListItem key={index} mr="2">
 											<i>{s}</i>
@@ -89,6 +95,10 @@ const ProjectLayoutMed = ({ project }) => {
 };
 
 const LeftProjectLayoutLarge = ({ project }) => {
+	const gray600_700 = useColorModeValue("gray.600", "gray.700");
+	const gray900_100 = useColorModeValue("gray.900", "gray.100");
+	const gray100_700 = useColorModeValue("gray.100", "gray.700");
+
 	return (
 		<Flex width="full" display={["none", "none", "flex"]}>
 			<MotionBox whileHover={{ scale: 1.02 }}
@@ -104,7 +114,7 @@ const LeftProjectLayoutLarge = ({ project }) => {
 				}}
 				rounded="xl"
 				borderWidth="1px"
-				borderColor={useColorModeValue("gray.600", "gray.700")}
+				borderColor={gray600_700}
 				w="80%"
 				h="24rem"
 				textAlign="left"
@@ -138,14 +148,14 @@ const LeftProjectLayoutLarge = ({ project }) => {
 						rel="noopener noreferrer"
 						className="text-right"
 					>
-						<MotionText variants={fadeInUp} fontSize='3xl' fontWeight="bold" color={useColorModeValue("gray.900", "gray.100")}>
+						<MotionText variants={fadeInUp} fontSize='3xl' fontWeight="bold" color={gray900_100}>
 							{project.title}
 						</MotionText>
 					</a>
 					<Box width="full">
 						<MotionText
 							variants={fadeInUp}
-							bg={useColorModeValue("gray.100", "gray.700")}
+							bg={gray100_700}
 							rounded="lg"
 							align="right"
 							p="4"
@@ -154,7 +164,7 @@ const LeftProjectLayoutLarge = ({ project }) => {
 							{project.description}
 						</MotionText>
 						{project.techStack && (
-							<MotionList variants={fadeInUp} display="flex" fontSize="sm" justifyContent="end" mt="3" color={useColorModeValue("gray.900", "gray.100")} fontWeight="bold">
+							<MotionList variants={fadeInUp} display="flex" fontSize="sm" justifyContent="end" mt="3" color={gray900_100} fontWeight="bold">
 								{project.techStack.map((s, index) => (
 									<ListItem key={index} mr="3">
 										<i>{s}</i>
@@ -182,6 +192,8 @@ const LeftProjectLayoutLarge = ({ project }) => {
 };
 
 const RightProjectLayoutLarge = ({ project }) => {
+	const gray100_700 = useColorModeValue("gray.100", "gray.700");
+	const gray900_100 = useColorModeValue("gray.900", "gray.100");
 
 	return (
 		<Flex width="full" display={["none", "none", "flex"]}>
@@ -193,14 +205,14 @@ const RightProjectLayoutLarge = ({ project }) => {
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						<MotionText variants={fadeInUp} fontSize='3xl' fontWeight="bold" color={useColorModeValue("gray.900", "gray.100")}>
+						<MotionText variants={fadeInUp} fontSize='3xl' fontWeight="bold" color={gray900_100}>
 							{project.title}
 						</MotionText>
 					</a>
 					<Box width="full">
 						<MotionText
 							variants={fadeInUp}
-							bg={useColorModeValue("gray.100", "gray.700")}
+							bg={gray100_700}
 							rounded="lg"
 							align="left"
 							p="4"
@@ -209,7 +221,7 @@ const RightProjectLayoutLarge = ({ project }) => {
 							{project.description}
 						</MotionText>
 						{project.techStack && (
-							<MotionList variants={fadeInUp} display="flex" fontSize="sm" justifyContent="start" mt="3" color={useColorModeValue("gray.900", "gray.100")} fontWeight="bold">
+							<MotionList variants={fadeInUp} display="flex" fontSize="sm" justifyContent="start" mt="3" color={gray900_100} fontWeight="bold">
 								{project.techStack.map((s, index) => (
 									<ListItem key={index} mr="3">
 										<i>{s}</i>
@@ -245,7 +257,7 @@ const RightProjectLayoutLarge = ({ project }) => {
 				}}
 				rounded="xl"
 				borderWidth="1px"
-				borderColor={useColorModeValue("gray.600", "gray.700")}
+				borderColor={gray600_700}
 				w="80%"
 				h="24rem"
 				textAlign="left"
