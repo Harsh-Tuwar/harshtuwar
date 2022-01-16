@@ -23,7 +23,7 @@ import { CgAlbum } from "react-icons/cg";
 const NavbarItems = [
     { name: "Home", route: "/" },
     { name: "About Me", route: "/about" },
-    // { name: 'Projects', route: '/projects' },
+    { name: 'Projects', route: '/projects' },
     { name: "Contact", route: "/contact" },
 ]
 
@@ -55,7 +55,7 @@ const SiteConfig = {
 }
 
 const Resume = {
-    url: "https://drive.google.com/file/d/1uU61rGC1q_bxADdtqLvc1NPvH9GYDKbJ/view?usp=sharing",
+    url: "",
     icon: <CgAlbum />,
     name: "Resume"
 }
@@ -137,7 +137,7 @@ const techStacks = [
         name: "Github & GitLab",
         icon: <FaGitAlt fontSize="20px" />,
     },
-]
+];
 
 const companies = [
     {
@@ -147,7 +147,7 @@ const companies = [
         role: "Software Developer",
         skills: ["TypeScript", "JavaScript", "React", "MeteorJS", "Docker", "Azure", "NodeJS", "Express", "Github"],
         period: "Sept 2021 - Present",
-        logo: '/brane.jpeg'
+        logo: '/images/work-exp/brane.jpeg'
     },
     {
         title: "Reach Boarding Systems Inc.",
@@ -156,9 +156,9 @@ const companies = [
         role: "Software Developer",
         skills: ["TypeScript", "Python", "Google Cloud", "PWA", "Cordova", "Material Design", "Apache", "MySQL", "NodeJS", "Linux"],
         period: "Apr 2019 - Sept 2021",
-        logo: '/reach.png'
+        logo: '/images/work-exp/reach.png'
     }
-]
+];
 
 const educations = [
     {
@@ -168,9 +168,9 @@ const educations = [
         role: "Diploma in Computer Programming",
         skills: ["CGPA - 3.5", "Web & Mobile App Development", "Database Administation", "Network Security"],
         period: "Apr 2017 - Apr 2019",
-        logo: '/seneca.jpeg'
+        logo: '/images/education/seneca.jpeg'
     },
-]
+];
 
 const certifications = [
     {
@@ -180,7 +180,7 @@ const certifications = [
         role: "JavaScript Algorithms and Data Structures",
         skills: ["Algorithms", "Data Structures", "Object Oriented Programming (OOP)", "Functional Programming"],
         period: "Aug 2021 - No Expiry",
-        logo: '/freecodecamp.jpeg'
+        logo: '/images/certs/freecodecamp.jpeg'
     },
     {
         title: "TestDome",
@@ -189,7 +189,7 @@ const certifications = [
         role: "HTML/CSS, JavaScript, and React",
         skills: ["HTML", "CSS", "JavaScript", "React"],
         period: "Jan 2020 - Jan 2023",
-        logo: '/testdome.png'
+        logo: '/images/certs/testdome.png'
     },
     {
         title: "TestDome",
@@ -198,18 +198,18 @@ const certifications = [
         role: "React",
         skills: ["React"],
         period: "Jan 2020 - Jan 2023",
-        logo: '/testdome.png'
+        logo: '/images/certs/testdome.png'
     },
-]
+];
 
-const Projects = [
+const projectsList = [
     {
-        name: 'Chat App',
-        description: 'Description',
-        language: 'TypeScript',
-        clone_url: 'https://github.com/Harsh-Tuwar/Chat-App'
-    }
-]
+        title: "Portfolio Website v2",
+        imageLight: '/images/projects/portfolio-website-v2.png',
+        site: "https://harshtuwar.ml",
+        description: `This is my personal portfolio website developed to showcase my skills, experiences and projects.`,
+        techStack: ["NextJS", "ChakraUI", "JavaScript"]
+    },
+];
 
-
-export { NavbarItems, techStacks, SiteConfig, Resume, companies, educations, certifications, Projects }
+export { NavbarItems, techStacks, SiteConfig, Resume, companies, educations, certifications, projectsList };
