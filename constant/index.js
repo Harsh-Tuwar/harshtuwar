@@ -210,6 +210,13 @@ const projectsList = [
         description: `This is my personal portfolio website developed to showcase my skills, experiences and projects.`,
         techStack: ["NextJS", "ChakraUI", "JavaScript"]
     },
+    {
+        title: "HDrive - My personal cloud storage",
+        imageLight: '/images/projects/hdrive.png',
+        site: "https://drive.harshtuwar.ml",
+        description: `HDrive is a file storage service which I developed to learn about the firebase.`,
+        techStack: ["React", "Redux", "Firbase", "MaterialUI"]
+    },
 ];
 
 export { NavbarItems, techStacks, SiteConfig, Resume, companies, educations, certifications, projectsList };

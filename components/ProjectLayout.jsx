@@ -194,6 +194,7 @@ const LeftProjectLayoutLarge = ({ project }) => {
 const RightProjectLayoutLarge = ({ project }) => {
 	const gray100_700 = useColorModeValue("gray.100", "gray.700");
 	const gray900_100 = useColorModeValue("gray.900", "gray.100");
+	const gray600_700 = useColorModeValue("gray.600", "gray.700");
 
 	return (
 		<Flex width="full" display={["none", "none", "flex"]}>
