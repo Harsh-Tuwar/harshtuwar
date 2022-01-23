@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import styles from '../styles/Home.module.css';
 import Head from 'next/head';
+import Meta from '../components/Meta';
 import ErrorMessage from '../components/ErrorMessage';
 
 const Contact = () => {
@@ -80,8 +81,7 @@ const Contact = () => {
 		<div className={styles.container}>
 			<Head>
 				<title>Harsh Tuwar | Software Developer</title>
-				<meta property="og:title" content="Harsh Tuwar | Software Developer"></meta>
-				<meta name="description" content="Harsh Tuwar | Software Developer" />
+				<Meta />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

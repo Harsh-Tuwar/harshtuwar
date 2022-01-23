@@ -15,6 +15,7 @@ import Head from 'next/head';
 import Paragraph from '../components/Paragraph';
 import UnderlinedText from '../components/UnderlinedText';
 import { Fragment } from 'react';
+import Meta from '../components/Meta';
 
 const subtitle = "A selection of projects I've worked on, during my career as a software developer.";
 
@@ -23,8 +24,7 @@ const Projects = () => {
 		<div className={styles.container}>
 			<Head>
 				<title>Harsh Tuwar | Software Developer</title>
-				<meta property="og:title" content="Harsh Tuwar | Software Developer"></meta>
-				<meta name="description" content="Harsh Tuwar | Software Developer" />
+				<Meta />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

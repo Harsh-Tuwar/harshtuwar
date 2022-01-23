@@ -1,6 +1,7 @@
 import { Container, Divider, SlideFade, Flex } from '@chakra-ui/react';
 import Head from 'next/head';
 import useSWR from 'swr';
+import Meta from '../components/Meta';
 import ProfileSection from '../sections/ProfileSection';
 import TechStackSection from '../sections/TechStackSection.jsx';
 import styles from '../styles/Home.module.css'
@@ -13,8 +14,7 @@ export default function Home() {
 		<div className={styles.container}>
 			<Head>
 				<title>Harsh Tuwar | Software Developer</title>
-				<meta property="og:title" content="Harsh Tuwar | Software Developer"></meta>
-				<meta name="description" content="Harsh Tuwar | Software Developer" />
+				<Meta />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

@@ -19,6 +19,7 @@ import { companies, educations, certifications } from '../constant';
 import CompanyCard from '../components/CompanyCard';
 import UnderlinedText from '../components/UnderlinedText';
 import Paragraph from '../components/Paragraph';
+import Meta from '../components/Meta';
 
 const About = () => {
 	const { colorMode } = useColorMode();
@@ -27,8 +28,7 @@ const About = () => {
 		<div className={styles.container}>
 			<Head>
 				<title>Harsh Tuwar | Software Developer</title>
-				<meta property="og:title" content="Harsh Tuwar | Software Developer"></meta>
-				<meta name="description" content="Harsh Tuwar | Software Developer" />
+				<Meta />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
