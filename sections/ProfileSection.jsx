@@ -46,10 +46,10 @@ const ProfileSection = ({ song }) => {
                 </Paragraph>
                 <Paragraph fontSize="2xl" lineHeight={1.6}>
                     Focused on {" "}
-                    <Link color={useColorModeValue("blue.500", "blue.400")} href="#" fontWeight="500">
+                    <Link color={useColorModeValue("green.500", "green.400")} href="#" fontWeight="500">
                         Web
                     </Link>{" & "}
-                    <Link color={useColorModeValue("blue.500", "blue.400")} href="#" fontWeight="500">
+                    <Link color={useColorModeValue("green.500", "green.400")} href="#" fontWeight="500">
                         Hybrid Mobile App Development
                     </Link>.
                     {"\n"}Passionate about Blockchain & Machine Learning & IoT Technologies 🔥
@@ -63,7 +63,7 @@ const ProfileSection = ({ song }) => {
                             /> */}
                             <NextLink href='/contact' style={{ textDecoration: 'none' }}>
                                 <Button
-                                    colorScheme="blue"
+                                    colorScheme="green"
                                     size="sm"
                                     margin="5px"
                                     leftIcon={<BiPhoneCall color='white'/>}

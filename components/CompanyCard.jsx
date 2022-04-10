@@ -23,7 +23,7 @@ const CompanyCard = ({ title, role, skills, period, logo, alt, url, colorMode })
 			rounded="xl"
 			bg={whiteToGrayShade}
 			borderColor={grayToDarkGrayShade}
-			_hover={{ borderColor: "blue.500" }}
+			_hover={{ borderColor: "green.500" }}
 			position="relative"
 		>
 			<LinkOverlay href={url} rel="noopener" isExternal>

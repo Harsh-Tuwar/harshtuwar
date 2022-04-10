@@ -19,14 +19,14 @@ const StackCard = ({ stack }) => {
 				display="flex"
 				role="group"
 				_hover={{
-					borderColor: "blue.500"
+					borderColor: "green.500"
 				}}
 			>
 				<Flex alignItems="center" justifyContent="space-between">
-					<IconButton as="a" aria-label={stack?.name} mr={3} _groupHover={{ color: "blue.500" }} icon={stack?.icon} />
+					<IconButton as="a" aria-label={stack?.name} mr={3} _groupHover={{ color: "green.500" }} icon={stack?.icon} />
 					<LinkOverlay href={stack?.url} rel="noopener" isExternal>
 						<Flex>
-							<Text size="sm" _hover={{ color: "blue.500" }}>{stack?.name}</Text>
+							<Text size="sm" _hover={{ color: "green.500" }}>{stack?.name}</Text>
 						</Flex>
 					</LinkOverlay>
 				</Flex>

@@ -154,7 +154,7 @@ const Contact = () => {
                                             mt={4}
                                             isLoading={isLoading}
                                             loadingText='Submitting'
-                                            colorScheme={'blue'}
+                                            colorScheme={'green'}
                                         >
                                             Send Message
                                         </Button>

@@ -23,7 +23,7 @@ const NavBar = () => {
 
     return (
         <>
-            <Box bg={whiteToGrayShade} px={4} boxShadow="lg">
+            <Box bg={whiteToGrayShade} px={4} boxShadow="lg" borderTop="2px" borderTopColor="green.500">
                 <Flex
                     h={16}
                     alignItems="center"
@@ -48,7 +48,7 @@ const NavBar = () => {
                                 as={CharkaLink}
                                 size="sm"
                                 src="/profile_picture.jpeg"
-                                _hover={{ borderColor: "blue.500" }}
+                                _hover={{ borderColor: "green.500" }}
                             />
                         </NextLink>
                         <HStack as="nav" spacing="4" display={{ base: 'none', md: 'flex' }}>
@@ -78,8 +78,8 @@ const NavBar = () => {
 }
 
 const NavItems = ({ isOpen, onClose, onOpen, asPath }) => {
-    const blueShade = useColorModeValue("blue.500", "blue.300");
-    const grayShade = useColorModeValue("gray.200", "gray:900");
+    const fontColorShades = useColorModeValue("black.900", "white.300");
+    const linkBgShades = useColorModeValue("green.200", "green.500");
 
     return (
         <>
@@ -96,9 +96,10 @@ const NavItems = ({ isOpen, onClose, onOpen, asPath }) => {
                         rounded="md"
                         _hover={{
                             textDecoration: "none",
-                            bg: grayShade
+                            bg: linkBgShades
                         }}
-                        color={link.route === asPath && blueShade}
+                        bg={link.route === asPath && linkBgShades}
+                        color={link.route === asPath && fontColorShades}
                         onClick={isOpen ? onClose : onOpen}
                     >
                         {link.name}

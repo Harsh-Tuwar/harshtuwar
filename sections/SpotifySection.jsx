@@ -26,7 +26,7 @@ const SpotifySection = ({ song }) => {
 				margin={2}
 				rounded="10px"
 				_hover={{
-					borderColor: "blue.500"
+					borderColor: "green.500"
 				}}
 				borderColor={grayShade}
 				href={song?.isPlaying ? song?.songUrl : null}
@@ -53,7 +53,7 @@ const SpotifySection = ({ song }) => {
 						}
 
 						<Flex flexDirection="column" ml={[0, 0, 5, 5]} mt={[5, 5, 0, 0]}>
-							<Heading as="h2" fontSize="lg" fontWeight="600" color="blue.400" alignSelf={["center", "flex-start"]}>
+							<Heading as="h2" fontSize="lg" fontWeight="600" color="green.400" alignSelf={["center", "flex-start"]}>
 								{song?.isPlaying ? song?.title : "Not Listening"}
 							</Heading>
 
