@@ -19,11 +19,15 @@ import {
 } from 'react-icons/si';
 import { FaJs, FaGitAlt, FaLinkedin, FaGithub, FaAws } from "react-icons/fa";
 import { CgAlbum } from "react-icons/cg";
+import { HiOutlineHeart, HiCheck } from "react-icons/hi";
+import { BiGlasses } from "react-icons/bi";
+import { FiShoppingBag } from "react-icons/fi";
 
 const NavbarItems = [
     { name: "Home", route: "/" },
     { name: "About Me", route: "/about" },
     { name: 'Projects', route: '/projects' },
+    { name: "Books", route: "/books" },
     { name: "Contact", route: "/contact" },
 ]
 
@@ -219,4 +223,115 @@ const projectsList = [
     },
 ];
 
-export { NavbarItems, techStacks, SiteConfig, Resume, companies, educations, certifications, projectsList };
+const currentlyReading = {
+    id: '0',
+    title: 'The Design of Everyday Things',
+    author: 'Don Norman',
+    cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
+    state: 'READING',
+    link: ''
+};
+
+const favReadings = [
+    {
+        id: '0',
+        title: 'The Design of Everyday Things',
+        author: 'Don Norman',
+        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
+        state: 'FAV',
+    },
+    {
+        id: '1',
+        title: 'The Design of Everyday Things',
+        author: 'Don Norman',
+        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
+        state: 'FAV',
+    },
+    {
+        id: '2',
+        title: 'The Design of Everyday Things',
+        author: 'Don Norman',
+        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
+        state: 'FAV',
+    },
+    {
+        id: '3',
+        title: 'The Design of Everyday Things',
+        author: 'Don Norman',
+        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
+        state: 'FAV',
+    },
+    {
+        id: '4',
+        title: 'The Design of Everyday Things',
+        author: 'Don Norman',
+        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
+        state: 'FAV',
+    }
+];
+
+
+const wishlistReading = [
+    {
+        id: '0',
+        title: 'The Design of Everyday Things',
+        author: 'Don Norman',
+        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
+        state: 'WISH',
+    },
+    {
+        id: '1',
+        title: 'The Design of Everyday Things',
+        author: 'Don Norman',
+        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
+        state: 'WISH',
+    },
+    {
+        id: '2',
+        title: 'The Design of Everyday Things',
+        author: 'Don Norman',
+        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
+        state: 'WISH',
+    },
+];
+
+
+const doneReading = [
+    {
+        id: '0',
+        title: 'The Design of Everyday Things',
+        author: 'Don Norman',
+        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
+        state: 'DONE',
+    },
+    {
+        id: '1',
+        title: 'The Design of Everyday Things',
+        author: 'Don Norman',
+        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
+        state: 'DONE',
+    },
+];
+
+const bookTags = {
+    'Favorites': { color: 'red.400', icon: HiOutlineHeart },
+    'Reading': { color: 'purple.400', icon: BiGlasses },
+    'Wishlist': { color: 'green.400', icon: FiShoppingBag },
+    'Finished': { color: 'blue.400', icon: HiCheck }
+};
+
+export {
+    NavbarItems,
+    techStacks,
+    SiteConfig,
+    Resume,
+    companies,
+    educations,
+    certifications,
+    projectsList,
+    bookTags,
+    currentlyReading,
+    favReadings,
+    wishlistReading,
+    doneReading
+};
