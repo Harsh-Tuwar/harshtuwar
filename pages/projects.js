@@ -1,21 +1,17 @@
 import {
 	VStack,
-	Heading,
-	Flex,
-	Stack,
 	Container,
 	Box,
 } from "@chakra-ui/react";
 import { projectsList } from '../constant';
 import { PageSlideFade } from '../components/PageTransitions';
 import { LeftProjectLayoutLarge, ProjectLayoutMed, RightProjectLayoutLarge } from "../components/ProjectLayout";
-import { AiFillProject } from "react-icons/ai";
 import styles from '../styles/Home.module.css'
 import Head from 'next/head';
 import Paragraph from '../components/Paragraph';
-import UnderlinedText from '../components/UnderlinedText';
 import { Fragment } from 'react';
 import Meta from '../components/Meta';
+import Header from '../components/PageTitle';
 
 const subtitle = "A selection of projects I've worked on, during my career as a software developer.";
 
@@ -32,14 +28,9 @@ const Projects = () => {
 				<Container maxW="container.lg" mt={['5', '10']} mb={['5', '10']}>
 					<PageSlideFade>
 						<Box>
-							<UnderlinedText>
-								<Flex alignItems="center">
-									<Stack pr={3}>
-										<AiFillProject size="30px" />
-									</Stack>
-									<Heading>Projects</Heading>
-								</Flex>
-							</UnderlinedText>
+							<Header mt={0} mb={6} emoji="💻">
+								Projects
+							</Header>
 
 							<Paragraph fontSize="lg" lineHeight={1.6} my={5}>
 								{subtitle}

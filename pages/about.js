@@ -20,6 +20,7 @@ import CompanyCard from '../components/CompanyCard';
 import UnderlinedText from '../components/UnderlinedText';
 import Paragraph from '../components/Paragraph';
 import Meta from '../components/Meta';
+import Header from '../components/PageTitle';
 
 const About = () => {
 	const { colorMode } = useColorMode();
@@ -36,14 +37,9 @@ const About = () => {
 				<Container maxW="container.lg" mt={['5', '10']} mb={['5', '10']}>
 					<SlideFade in offsetX={80}>
 						<Box>
-							<UnderlinedText>
-								<Flex alignItems="center">
-									<Stack pr={3}>
-										<AiFillStar size="30px" />
-									</Stack>
-									<Heading>About Me</Heading>
-								</Flex>
-							</UnderlinedText>
+							<Header mt={0} mb={6} emoji="🤩">
+								About Me
+							</Header>
 
 							<Paragraph fontSize="lg" lineHeight={1.6} my={5}>
 								I am a software developer with 3+ years 💪🏼 of working experience. My developer🧑🏼‍🏫 &nbsp; journey started with Javascript/HTML/CSS
@@ -58,15 +54,9 @@ const About = () => {
 							</Paragraph>
 
 							<Flex alignItems="center" my={10}>
-								<UnderlinedText>
-									<Flex alignItems="center">
-										<Stack pr={3}>
-											<BsFillBriefcaseFill size="30px" />
-										</Stack>
-
-										<Heading>Career</Heading>
-									</Flex>
-								</UnderlinedText>
+								<Header mt={0} mb={0} emoji="💼">
+									Career
+								</Header>
 							</Flex>
 
 							<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
@@ -87,14 +77,9 @@ const About = () => {
 							</VStack>
 
 							<Flex alignItems="center" my={10}>
-								<UnderlinedText>
-									<Flex alignItems="center">
-										<Stack pr={3}>
-											<FaGraduationCap size={'30px'} />
-										</Stack>
-										<Heading>Education</Heading>
-									</Flex>
-								</UnderlinedText>
+								<Header mt={0} mb={0} emoji="🎓">
+									Education
+								</Header>
 							</Flex>
 
 							<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
@@ -115,14 +100,9 @@ const About = () => {
 							</VStack>
 
 							<Flex alignItems="center" my={10}>
-								<UnderlinedText>
-									<Flex alignItems="center">
-										<Stack pr={3}>
-											<FaCertificate size={'30px'} />
-										</Stack>
-										<Heading>Certificates</Heading>
-									</Flex>
-								</UnderlinedText>
+								<Header mt={0} mb={0} emoji="🧐">
+									Certificates
+								</Header>
 							</Flex>
 
 							<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
