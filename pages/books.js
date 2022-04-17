@@ -58,7 +58,7 @@ const Books = () => {
 										if (state === 'Reading') {
 											return (<Book key={book.id} book={book} />)
 										} else { return null; }
-									}) : <Skeleton height='120px' width="378px" /> }
+									}) : <Skeleton height='120px' width="378px" rounded="md"/> }
 								</SimpleGrid>
 							</VStack>
 
@@ -83,7 +83,7 @@ const Books = () => {
 										if (state === 'Favorites') {
 											return (<Book key={book.id} book={book} />)
 										} else { return null; }
-									}) : <Skeleton height='120px' width="378px" /> }
+									}) : <Skeleton height='120px' width="378px" rounded="md"/> }
 								</SimpleGrid>
 							</VStack>
 
@@ -108,7 +108,7 @@ const Books = () => {
 										if (state === 'Wishlist') {
 											return (<Book key={book.id} book={book} />)
 										} else { return null; }
-									}) : <Skeleton height='120px' width="378px" /> }
+									}) : <Skeleton height='120px' width="378px" rounded="md"/> }
 								</SimpleGrid>
 							</VStack>
 
@@ -133,7 +133,7 @@ const Books = () => {
 										if (state === 'Finished') {
 											return (<Book key={book.id} book={book} />)
 										} else { return null; }
-									}) : <Skeleton height='120px' width="378px" /> }
+									}) : <Skeleton height='120px' width="378px" rounded="md"/> }
 								</SimpleGrid>
 							</VStack>
 						</Box>
