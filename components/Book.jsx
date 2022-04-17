@@ -14,7 +14,7 @@ import BookTag from './BookTag';
 
 const Book = ({ book: { cover, title, author, state, link } }) => {
 	return (
-		<LinkBox as="article">
+		<LinkBox as="article" width={"300px"}>
 			<HStack
 				p={4}
 				bg={mode("gray.50", "gray.700")}
@@ -46,7 +46,7 @@ const Book = ({ book: { cover, title, author, state, link } }) => {
 						<Heading size="xs">{title}</Heading>
 					</LinkOverlay>
 					<Text color={mode("gray.600", "gray.400")} fontSize="xs">
-						{author}
+						By {author}
 					</Text>
 				</VStack>
 			</HStack>

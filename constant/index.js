@@ -239,7 +239,6 @@ const favReadings = [
         author: 'Don Norman',
         cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
         state: 'FAV',
-        link: ''
     },
     {
         id: '1',
@@ -247,7 +246,6 @@ const favReadings = [
         author: 'Don Norman',
         cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
         state: 'FAV',
-        link: ''
     },
     {
         id: '2',
@@ -255,7 +253,6 @@ const favReadings = [
         author: 'Don Norman',
         cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
         state: 'FAV',
-        link: ''
     },
     {
         id: '3',
@@ -263,7 +260,6 @@ const favReadings = [
         author: 'Don Norman',
         cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
         state: 'FAV',
-        link: ''
     },
     {
         id: '4',
@@ -271,7 +267,6 @@ const favReadings = [
         author: 'Don Norman',
         cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
         state: 'FAV',
-        link: ''
     }
 ];
 
@@ -283,7 +278,6 @@ const wishlistReading = [
         author: 'Don Norman',
         cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
         state: 'WISH',
-        link: ''
     },
     {
         id: '1',
@@ -291,7 +285,6 @@ const wishlistReading = [
         author: 'Don Norman',
         cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
         state: 'WISH',
-        link: ''
     },
     {
         id: '2',
@@ -299,7 +292,6 @@ const wishlistReading = [
         author: 'Don Norman',
         cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
         state: 'WISH',
-        link: ''
     },
 ];
 
@@ -311,7 +303,6 @@ const doneReading = [
         author: 'Don Norman',
         cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
         state: 'DONE',
-        link: ''
     },
     {
         id: '1',
@@ -319,15 +310,14 @@ const doneReading = [
         author: 'Don Norman',
         cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
         state: 'DONE',
-        link: ''
     },
 ];
 
 const bookTags = {
-    FAV: { color: 'red.400', icon: HiOutlineHeart },
-    READING: { color: 'purple.400', icon: BiGlasses },
-    WISH: { color: 'green.400', icon: FiShoppingBag },
-    DONE: { color: 'blue.400', icon: HiCheck }
+    'Favorites': { color: 'red.400', icon: HiOutlineHeart },
+    'Reading': { color: 'purple.400', icon: BiGlasses },
+    'Wishlist': { color: 'green.400', icon: FiShoppingBag },
+    'Finished': { color: 'blue.400', icon: HiCheck }
 };
 
 export {
