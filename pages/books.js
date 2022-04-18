@@ -5,14 +5,12 @@ import { Container, Box, VStack, Heading, SimpleGrid, Skeleton } from "@chakra-u
 import Paragraph from '../components/Paragraph';
 import { PageSlideFade } from '../components/PageTransitions';
 import Header from '../components/PageTitle';
-import { currentlyReading, doneReading, favReadings, wishlistReading } from '../constant';
 import Book from '../components/Book';
-import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 
 const subtitle = "A collection of interesting books that I read or look forward to reading.";
-const gapBtwnTwoBookCards = 10;
+const gapBtwnTwoBookCards = 4;
 
 const Books = () => {
 	const fetcher = (url) => fetch(url).then((data) => data.json()).catch((e) => console.log(e));

@@ -223,96 +223,6 @@ const projectsList = [
     },
 ];
 
-const currentlyReading = {
-    id: '0',
-    title: 'The Design of Everyday Things',
-    author: 'Don Norman',
-    cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
-    state: 'READING',
-    link: ''
-};
-
-const favReadings = [
-    {
-        id: '0',
-        title: 'The Design of Everyday Things',
-        author: 'Don Norman',
-        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
-        state: 'FAV',
-    },
-    {
-        id: '1',
-        title: 'The Design of Everyday Things',
-        author: 'Don Norman',
-        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
-        state: 'FAV',
-    },
-    {
-        id: '2',
-        title: 'The Design of Everyday Things',
-        author: 'Don Norman',
-        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
-        state: 'FAV',
-    },
-    {
-        id: '3',
-        title: 'The Design of Everyday Things',
-        author: 'Don Norman',
-        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
-        state: 'FAV',
-    },
-    {
-        id: '4',
-        title: 'The Design of Everyday Things',
-        author: 'Don Norman',
-        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
-        state: 'FAV',
-    }
-];
-
-
-const wishlistReading = [
-    {
-        id: '0',
-        title: 'The Design of Everyday Things',
-        author: 'Don Norman',
-        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
-        state: 'WISH',
-    },
-    {
-        id: '1',
-        title: 'The Design of Everyday Things',
-        author: 'Don Norman',
-        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
-        state: 'WISH',
-    },
-    {
-        id: '2',
-        title: 'The Design of Everyday Things',
-        author: 'Don Norman',
-        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
-        state: 'WISH',
-    },
-];
-
-
-const doneReading = [
-    {
-        id: '0',
-        title: 'The Design of Everyday Things',
-        author: 'Don Norman',
-        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
-        state: 'DONE',
-    },
-    {
-        id: '1',
-        title: 'The Design of Everyday Things',
-        author: 'Don Norman',
-        cover: 'https://www.colorbook.io/imagecreator.php?hex=1168A6&width=1920&height=1080&text=book',
-        state: 'DONE',
-    },
-];
-
 const bookTags = {
     'Favorites': { color: 'red.400', icon: HiOutlineHeart },
     'Reading': { color: 'purple.400', icon: BiGlasses },
@@ -330,8 +240,4 @@ export {
     certifications,
     projectsList,
     bookTags,
-    currentlyReading,
-    favReadings,
-    wishlistReading,
-    doneReading
 };
