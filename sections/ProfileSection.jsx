@@ -49,8 +49,8 @@ const ProfileSection = ({ song }) => {
                     </Link>{" & "}
                     <Link color={useColorModeValue("green.500", "green.400")} href="#" fontWeight="500">
                         Hybrid Mobile App Development
-                    </Link>.
-                    {"\n"}Passionate about Blockchain & Machine Learning & IoT Technologies 🔥
+                    </Link>
+                    {" "} and Passionate about Blockchain🧊, Machine Learning🤖 as well as the IoT Technologies 🔥
                 </Paragraph>
 
                 <Box mt={5}>

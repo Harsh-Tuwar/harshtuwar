@@ -36,14 +36,14 @@ const About = () => {
 							</Header>
 
 							<Paragraph fontSize="lg" lineHeight={1.6} my={5}>
-								I am a software developer with 3+ years 💪🏼 of working experience. My developer🧑🏼‍🏫 &nbsp; journey started with Javascript/HTML/CSS
-								during my diploma. After graduation, this journey continued with JS/TS and Web Development overall when
-								I joined Reach Boarding 👔
+								I am a full stack software engineer with 3+ years 💪🏼 of working experience based in Toronto, ON and specialized in Web and Hybrid mobile app development.
+								I am passionate😍 about Blockchain, Machine Learning and IoT technologies and strongly believe that these technologies can solve many of the real life problems😄 we are facing currently as a society.
+								In my spare time, I love listening to 🎧 AudioBooks, watching 🎥 Netflix/Anime, cooking😋 and hanging out with friends👥. I am in the software development field to make an “impact” and solve real life problems by using various technologies.
 							</Paragraph>
 
 							<Paragraph fontSize="lg" lineHeight={1.6} my={5}>
-								As a full-time software engineer🧑🏼‍💻, I was lucky enough to work with bunch of web🕸 technologies including
-								various cloud platforms☁️ and tools. In my free time I self taught myself about Hybrid mobile📱 app development
+								As a full-time software engineer🧑🏼‍💻, I was lucky enough get a chance to work with bunch of web🕸 technologies including
+								various cloud platforms☁️ and tools. After getting a good grip of web technologies, I self taught myself about Hybrid mobile📱 app development
 								using Flutter and React Native.
 							</Paragraph>
 
