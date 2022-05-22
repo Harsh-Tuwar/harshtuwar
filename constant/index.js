@@ -187,6 +187,15 @@ const educations = [
 
 const certifications = [
     {
+        title: "HackerRank",
+        alt: "HackerRank",
+        url: "https://www.hackerrank.com/certificates/8dc50c4fefda",
+        role: "JavaScript (Intermediate)",
+        skills: ["Design Patterns", "Memory management", "Concurrency Model", "Event Loops"],
+        period: "May 2022 - No Expiry",
+        logo: '/images/certs/hackerrank.png'
+    },
+    {
         title: "freeCodeCamp",
         alt: "freeCodeCamp",
         url: "https://www.freecodecamp.org/certification/fcca64b2bf4-bc47-4608-b18b-70ccc1e6a603/javascript-algorithms-and-data-structures",
