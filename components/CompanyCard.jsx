@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+	HStack,
 	Flex,
 	Image,
 	Stack,
@@ -8,7 +9,9 @@ import {
 	Tag,
 	useColorModeValue,
 	LinkBox,
-	LinkOverlay
+	LinkOverlay,
+	TagLabel,
+	VStack,
 } from '@chakra-ui/react';
 
 const CompanyCard = ({ title, role, skills, period, logo, alt, url, colorMode }) => {
@@ -28,14 +31,12 @@ const CompanyCard = ({ title, role, skills, period, logo, alt, url, colorMode })
 		>
 			<LinkOverlay href={url} rel="noopener" isExternal>
 				<Flex justifyContent="space-between">
-					<Flex>
-						<Image rounded="full" w={16} h={16} objectFit="cover" src={logo} alt={alt} />
-
-						<Stack spacing={2} pl={3} align="left">
+					<HStack>
+						<Image rounded="full" w={16} h={16} objectFit="scale-down" src={logo} alt={alt} />
+						<VStack spacing={2} pl={3} align="left">
 							<Heading align="left" fontSize="xl" color={`mode.${colorMode}.careet.text`} >
 								{title}
 							</Heading>
-
 							<Heading
 								align="left"
 								fontSize="sm"
@@ -43,39 +44,39 @@ const CompanyCard = ({ title, role, skills, period, logo, alt, url, colorMode })
 							>
 								{role}
 							</Heading>
-							<Stack
-								spacing={1}
-								mt={3}
-								alignItems="center"
-								isInline
+							<HStack
+								flexWrap="wrap"
 								display={["none", "none", "flex", "flex"]}
 							>
-								{skills.map(skill => (
-									<Tag size="sm" padding="0 5px" key={skill}>
-										{skill}
-									</Tag>
-								))}
+								{skills.map(skill => {
+									return <Tag size="md" key={skill} m={2} borderRadius='full' variant='solid' >
+										<TagLabel>{skill}</TagLabel>
+									</Tag>;
+								})}
+							</HStack>
+							<Stack display={["flex", "flex", "none", "none"]}>
+								<Text fontSize={14} color={`mode.${colorMode}.career.subtext`}>
+									{period}
+								</Text>
 							</Stack>
-						</Stack>
-					</Flex>
-					<Stack display={["none", "none", "flex", "flex"]}>
+						</VStack>
+					</HStack>
+					<Stack display={["none", "none", "flex", "flex"]} alignItems="flex-end" width="180px">
 						<Text fontSize={14} color={`mode.${colorMode}.career.subtext`}>
 							{period}
 						</Text>
 					</Stack>
 				</Flex>
-				<Stack
-					spacing={1}
-					mt={3}
-					alignItems="center"
+				<HStack
+					flexWrap="wrap"
 					display={["flex", "flex", "none", "none"]}
 				>
-					{skills.map(skill => (
-						<Tag size="sm" padding="0 5px" key={skill}>
-							{skill}
-						</Tag>
-					))}
-				</Stack>
+					{skills.map(skill => {
+						return <Tag size="md" key={skill} m={2} borderRadius='full' variant='solid' >
+							<TagLabel>{skill}</TagLabel>
+						</Tag>;
+					})}
+				</HStack>
 			</LinkOverlay>
 		</LinkBox>
 	);

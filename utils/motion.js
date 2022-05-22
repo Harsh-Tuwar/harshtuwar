@@ -4,7 +4,8 @@ import {
 	Image,
 	forwardRef,
 	Text,
-	List
+	List,
+	Wrap
 } from "@chakra-ui/react";
 import { motion, isValidMotionProp } from "framer-motion";
 

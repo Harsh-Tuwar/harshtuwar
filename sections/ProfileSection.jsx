@@ -15,9 +15,7 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
-import { Resume } from '../constant';
 import Paragraph from '../components/Paragraph';
-import SocialButton from '../components/SocialButton';
 import SpotifySection from './SpotifySection';
 
 const ProfileSection = ({ song }) => {

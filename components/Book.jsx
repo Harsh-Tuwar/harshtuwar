@@ -14,7 +14,7 @@ import BookTag from './BookTag';
 
 const Book = ({ book: { cover, title, author, state, link } }) => {
 	return (
-		<LinkBox as="article">
+		<LinkBox as="article" maxWidth={'430px'}>
 			<HStack
 				p={4}
 				bg={mode("gray.50", "gray.700")}

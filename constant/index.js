@@ -145,12 +145,21 @@ const techStacks = [
 
 const companies = [
     {
+        title: "DMG Blockchain Solutions Inc.",
+        alt: "dmg image",
+        url: 'https://dmgblockchain.com/',
+        role: "Full Stack Developer - Lead",
+        skills: ["TypeScript", "React", "NextJS", "ContextAPI", "Docker", "AWS", "NodeJS", "Express", "PostgreSQL", "Blockchain", "Go"],
+        period: "Mar 2022 - Present",
+        logo: '/images/work-exp/dmg.png'
+    },
+    {
         title: "Brane Inc.",
         alt: "brane image",
         url: 'https://www.brane.ca/',
-        role: "Software Developer",
+        role: "Full Stack Developer",
         skills: ["TypeScript", "JavaScript", "React", "MeteorJS", "Docker", "Azure", "NodeJS", "Express", "Github"],
-        period: "Sept 2021 - Present",
+        period: "Sept 2021 - Mar 2022",
         logo: '/images/work-exp/brane.jpeg'
     },
     {
@@ -194,16 +203,7 @@ const certifications = [
         skills: ["HTML", "CSS", "JavaScript", "React"],
         period: "Jan 2020 - Jan 2023",
         logo: '/images/certs/testdome.png'
-    },
-    {
-        title: "TestDome",
-        alt: "testdome",
-        url: "https://www.testdome.com/cert/e6b172cc381e4fc8aa4be38f899a2fbe",
-        role: "React",
-        skills: ["React"],
-        period: "Jan 2020 - Jan 2023",
-        logo: '/images/certs/testdome.png'
-    },
+    }
 ];
 
 const projectsList = [
@@ -219,7 +219,14 @@ const projectsList = [
         imageLight: '/images/projects/hdrive.png',
         site: "https://drive.harshtuwar.ml",
         description: `HDrive is a file storage service which I developed to learn about the firebase.`,
-        techStack: ["React", "Redux", "Firbase", "MaterialUI"]
+        techStack: ["React", "Redux", "Firebase", "MaterialUI"]
+    },
+    {
+        title: "WeCrypt",
+        imageLight: '/images/projects/wecrypt.png',
+        site: "https://wecrypt.vercel.app",
+        description: `WeCrypt is a Web3 App that supports metamask pairing and interaction with the smart contract.`,
+        techStack: ["React", "ContextAPI", "Solidity", "Vite", "Metamask", "Tailwind", "Ethers", "Hardhat", "Alchemy"]
     },
 ];
 

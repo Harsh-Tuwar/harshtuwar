@@ -2,22 +2,16 @@ import React from 'react';
 import {
 	Container,
 	SlideFade,
-	Heading,
 	Flex,
-	Stack,
 	Box,
 	VStack,
 	useColorMode
 } from '@chakra-ui/react';
 import styles from '../styles/Home.module.css';
 import Head from 'next/head';
-import { FaCertificate, FaGraduationCap } from 'react-icons/fa';
-import { BsFillBriefcaseFill } from 'react-icons/bs';
-import { AiFillStar } from 'react-icons/ai';
 import { MotionBox } from '../utils/motion';
 import { companies, educations, certifications } from '../constant';
 import CompanyCard from '../components/CompanyCard';
-import UnderlinedText from '../components/UnderlinedText';
 import Paragraph from '../components/Paragraph';
 import Meta from '../components/Meta';
 import Header from '../components/PageTitle';
