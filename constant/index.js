@@ -189,6 +189,15 @@ const certifications = [
     {
         title: "HackerRank",
         alt: "HackerRank",
+        url: "https://www.hackerrank.com/certificates/4ed3f112170c",
+        role: "Problem Solving (Intermediate)",
+        skills: ["Data Structures", "HashMaps", "Stacks", "Queues", "Algorithms"],
+        period: "May 2022 - No Expiry",
+        logo: '/images/certs/hackerrank.png'
+    },
+    {
+        title: "HackerRank",
+        alt: "HackerRank",
         url: "https://www.hackerrank.com/certificates/8dc50c4fefda",
         role: "JavaScript (Intermediate)",
         skills: ["Design Patterns", "Memory management", "Concurrency Model", "Event Loops"],
