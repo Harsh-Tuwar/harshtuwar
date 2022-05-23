@@ -188,7 +188,7 @@ const educations = [
 const certifications = [
     {
         title: "HackerRank",
-        alt: "HackerRank",
+        alt: "hackerrank-4ed3f112170c",
         url: "https://www.hackerrank.com/certificates/4ed3f112170c",
         role: "Problem Solving (Intermediate)",
         skills: ["Data Structures", "HashMaps", "Stacks", "Queues", "Algorithms"],
@@ -197,10 +197,19 @@ const certifications = [
     },
     {
         title: "HackerRank",
-        alt: "HackerRank",
+        alt: "hackerrank-8dc50c4fefda",
         url: "https://www.hackerrank.com/certificates/8dc50c4fefda",
         role: "JavaScript (Intermediate)",
         skills: ["Design Patterns", "Memory management", "Concurrency Model", "Event Loops"],
+        period: "May 2022 - No Expiry",
+        logo: '/images/certs/hackerrank.png'
+    },
+    {
+        title: "HackerRank",
+        alt: "HackerRank",
+        url: "https://www.hackerrank.com/certificates/d4471c5e49a1",
+        role: "Rest API (Intermediate)",
+        skills: ["API Consumption", "Filtering", "Sorting", "Searching", "Pagination"],
         period: "May 2022 - No Expiry",
         logo: '/images/certs/hackerrank.png'
     },
