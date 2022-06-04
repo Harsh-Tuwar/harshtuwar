@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
 	Container,
 	SlideFade,
@@ -14,9 +13,9 @@ import {
 	useColorModeValue,
 	useToast
 } from '@chakra-ui/react';
+import React, { useState } from 'react';
 import styles from '../styles/Home.module.css';
-import Head from 'next/head';
-import Meta from '../components/Meta';
+import PageHeader from '../components/PageHeader';
 import ErrorMessage from '../components/ErrorMessage';
 
 const Contact = () => {
@@ -79,12 +78,7 @@ const Contact = () => {
 
 	return (
 		<div className={styles.container}>
-			<Head>
-				<title>Harsh Tuwar | Software Developer</title>
-				<Meta />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
-
+			<PageHeader />
 			<main>
 				<Container maxW="container.lg" mt={['5', '10']} mb={['5', '10']}>
 					<SlideFade in offsetX={80}>
