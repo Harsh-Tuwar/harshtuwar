@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeInUp, stagger} from "./FramerAnimations";
+import { HiOutlineExternalLink } from "react-icons/hi";
 import {
 	useColorModeValue,
 	IconButton,
@@ -11,7 +12,6 @@ import {
 	Skeleton,
 	AspectRatio
 } from "@chakra-ui/react";
-import { HiOutlineExternalLink } from "react-icons/hi";
 import { MotionBox, MotionFlex, MotionList, MotionText } from "../utils/motion";
 
 const skillsTextColor = 'black';
@@ -48,8 +48,13 @@ const ProjectLayoutMed = ({ project }) => {
 						alt=''
 						rounded="xl" objectFit="cover" opacity={0.5} />
 				</AspectRatio>
-				<Box width={'full'}
-					height={'full'} position="absolute" bg={gray100_900} opacity={colormode_05_1}></Box>
+				<Box
+					width={'full'}
+					height={'full'}
+					position="absolute"
+					bg={gray100_900}
+					opacity={colormode_05_1}
+				></Box>
 			</a>
 			<MotionBox initial="initial" animate="animate" width={["full", "70%"]} rounded="lg" my="auto" px="6" py="3" position="relative" zIndex="10">
 				<MotionBox variants={stagger}>

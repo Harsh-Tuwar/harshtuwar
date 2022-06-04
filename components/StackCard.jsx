@@ -1,6 +1,6 @@
 import React from 'react';
-import { LinkBox, IconButton, LinkOverlay, Text, useColorModeValue, Flex } from '@chakra-ui/react';
 import { MotionBox } from '../utils/motion';
+import { LinkBox, IconButton, LinkOverlay, Text, useColorModeValue, Flex } from '@chakra-ui/react';
 
 const StackCard = ({ stack }) => {
 	const greyShade = useColorModeValue("gray.300", "gray.700");

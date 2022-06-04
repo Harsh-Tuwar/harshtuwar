@@ -11,10 +11,10 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from "next/router";
-import { useDisclosure } from '@chakra-ui/hooks';
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { NavbarItems } from '../constant';
+import { useDisclosure } from '@chakra-ui/hooks';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 const NavBar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
