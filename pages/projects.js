@@ -7,23 +7,17 @@ import { projectsList } from '../constant';
 import { PageSlideFade } from '../components/PageTransitions';
 import { LeftProjectLayoutLarge, ProjectLayoutMed, RightProjectLayoutLarge } from "../components/ProjectLayout";
 import styles from '../styles/Home.module.css'
-import Head from 'next/head';
 import Paragraph from '../components/Paragraph';
 import { Fragment } from 'react';
-import Meta from '../components/Meta';
 import Header from '../components/PageTitle';
+import PageHeader from '../components/PageHeader';
 
 const subtitle = "A selection of projects I've worked on, during my career as a software developer.";
 
 const Projects = () => {
 	return (
 		<div className={styles.container}>
-			<Head>
-				<title>Harsh Tuwar | Software Developer</title>
-				<Meta />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
-
+			<PageHeader />
 			<main>
 				<Container maxW="container.lg" mt={['5', '10']} mb={['5', '10']}>
 					<PageSlideFade>

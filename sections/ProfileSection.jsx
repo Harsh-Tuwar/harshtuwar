@@ -19,6 +19,8 @@ import Paragraph from '../components/Paragraph';
 import SpotifySection from './SpotifySection';
 
 const ProfileSection = ({ song }) => {
+    const highlightedTextColor = useColorModeValue("green.500", "green.400");
+
     return (
         <SlideFade in offsetX={80}>
             <Box>
@@ -44,10 +46,10 @@ const ProfileSection = ({ song }) => {
                 </Paragraph>
                 <Paragraph fontSize="2xl" lineHeight={1.6}>
                     Focused on {" "}
-                    <Link color={useColorModeValue("green.500", "green.400")} href="#" fontWeight="500">
+                    <Link color={highlightedTextColor} href="#" fontWeight="500">
                         Web
                     </Link>{" & "}
-                    <Link color={useColorModeValue("green.500", "green.400")} href="#" fontWeight="500">
+                    <Link color={highlightedTextColor} href="#" fontWeight="500">
                         Hybrid Mobile App Development
                     </Link>
                     {" "} and Passionate about Blockchain🧊, Machine Learning🤖 as well as the IoT Technologies 🔥
@@ -56,9 +58,6 @@ const ProfileSection = ({ song }) => {
                 <Box mt={5}>
                     <LightMode>
                         <ButtonGroup>
-                            {/* <SocialButton
-                                social={Resume}
-                            /> */}
                             <NextLink href='/contact' style={{ textDecoration: 'none' }}>
                                 <Button
                                     colorScheme="green"
