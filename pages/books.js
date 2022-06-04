@@ -1,12 +1,11 @@
-import Meta from '../components/Meta';
-import styles from '../styles/Home.module.css';
-import Head from 'next/head';
-import { Container, Box, VStack, Heading, SimpleGrid, Skeleton } from "@chakra-ui/react";
-import Paragraph from '../components/Paragraph';
-import { PageSlideFade } from '../components/PageTransitions';
-import Header from '../components/PageTitle';
-import Book from '../components/Book';
 import useSWR from 'swr';
+import Book from '../components/Book';
+import Header from '../components/PageTitle';
+import styles from '../styles/Home.module.css';
+import Paragraph from '../components/Paragraph';
+import PageHeader from '../components/PageHeader';
+import { PageSlideFade } from '../components/PageTransitions';
+import { Container, Box, VStack, Heading, SimpleGrid, Skeleton } from "@chakra-ui/react";
 
 const subtitle = "A collection of interesting books that I read or look forward to reading.";
 const gapBtwnTwoBookCards = 4;
@@ -33,12 +32,7 @@ const Books = () => {
 
 	return (
 		<div className={styles.container}>
-			<Head>
-				<title>Harsh Tuwar | Software Developer</title>
-				<Meta />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
-
+			<PageHeader />
 			<main>
 				<Container maxW="container.lg" mt={['5', '10']} mb={['5', '10']}>
 					<PageSlideFade>

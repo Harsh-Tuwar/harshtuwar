@@ -1,4 +1,3 @@
-import React from 'react';
 import {
 	Container,
 	SlideFade,
@@ -7,26 +6,21 @@ import {
 	VStack,
 	useColorMode
 } from '@chakra-ui/react';
-import styles from '../styles/Home.module.css';
-import Head from 'next/head';
+import React from 'react';
 import { MotionBox } from '../utils/motion';
-import { companies, educations, certifications } from '../constant';
-import CompanyCard from '../components/CompanyCard';
-import Paragraph from '../components/Paragraph';
-import Meta from '../components/Meta';
 import Header from '../components/PageTitle';
+import styles from '../styles/Home.module.css';
+import Paragraph from '../components/Paragraph';
+import PageHeader from '../components/PageHeader';
+import CompanyCard from '../components/CompanyCard';
+import { companies, educations, certifications } from '../constant';
 
 const About = () => {
 	const { colorMode } = useColorMode();
 
 	return (
 		<div className={styles.container}>
-			<Head>
-				<title>Harsh Tuwar | Software Developer</title>
-				<Meta />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
-
+			<PageHeader />
 			<main>
 				<Container maxW="container.lg" mt={['5', '10']} mb={['5', '10']}>
 					<SlideFade in offsetX={80}>
