@@ -123,6 +123,11 @@ const DropdownLinks = ({ onOpen, asPath }) => {
     const iconColorShades = useColorModeValue("green", "white");
     const linkBgShades = useColorModeValue("green.200", "green.500");
     const fontColorShades = useColorModeValue("black.900", "white.300");
+    const menuListBgShades = useColorModeValue('rgb(255, 255, 255)', 'rgb(26, 32, 44)');
+    const menuListBoxShadowShades = useColorModeValue(
+        '2px 4px 6px 2px rgba(160, 174, 192, 0.6)',
+        '2px 4px 6px 2px rgba(9, 17, 28, 0.6)'
+    );
 
     const dropdownIconsHashMap = {
         '/books': <Icon as={BsBook} size={20} color={iconColorShades} />,
@@ -162,12 +167,9 @@ const DropdownLinks = ({ onOpen, asPath }) => {
                     </MenuButton>
                     <MenuList
                         zIndex={5}
-                        bg={useColorModeValue('rgb(255, 255, 255)', 'rgb(26, 32, 44)')}
+                        bg={menuListBgShades}
                         border="none"
-                        boxShadow={useColorModeValue(
-                            '2px 4px 6px 2px rgba(160, 174, 192, 0.6)',
-                            '2px 4px 6px 2px rgba(9, 17, 28, 0.6)'
-                        )}
+                        boxShadow={menuListBoxShadowShades}
                     >
                         {DropDownLinks.map((link) => (
                             <NextLink
