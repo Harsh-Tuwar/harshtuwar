@@ -3,18 +3,26 @@ import {
     Flex,
     IconButton,
     HStack,
+    Text,
     Box,
     Stack,
     Link as CharkaLink,
     useColorModeValue,
+    Menu,
+    Icon,
+    MenuButton,
+    MenuList,
     Avatar
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from "next/router";
-import { NavbarItems } from '../constant';
+import { NavbarItems, DropDownLinks } from '../constant';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { BiChevronDown } from 'react-icons/bi';
+import { MdTimeline } from "react-icons/md";
+import { BsBook } from "react-icons/bs";
 
 const NavBar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -106,7 +114,94 @@ const NavItems = ({ isOpen, onClose, onOpen, asPath }) => {
                     </CharkaLink>
                 </NextLink>
             ))}
+            <DropdownLinks onOpen={onOpen} asPath={asPath} />
         </>
+    );
+}
+
+const DropdownLinks = ({ onOpen, asPath }) => {
+    const iconColorShades = useColorModeValue("green", "white");
+    const linkBgShades = useColorModeValue("green.200", "green.500");
+
+    const dropdownIconsHashMap = {
+        '/books': <Icon as={BsBook} size={20} color={iconColorShades} />,
+        '/projects': <Icon as={MdTimeline} size={20} color={iconColorShades} />
+    }
+
+    return (
+        <Menu autoSelect={false} isLazy>
+            {({ isOpen, onClose }) => (
+                <>
+                    <MenuButton
+                        variant="ghost"
+                        size="md"
+                        px={3}
+                        py={1}
+                        lineHeight="inherit"
+                        fontSize={'1em'}
+                        rounded={'md'}
+                        height={'auto '}
+                        bg={DropDownLinks.map((item) => item.route).includes(asPath) ? linkBgShades : ''}
+                        _hover={{
+                            textDecoration: "none",
+                            bg: linkBgShades
+                        }}
+                    >
+                        <HStack>
+                            <Text>Links</Text>
+                            <Icon
+                                as={BiChevronDown}
+                                h={5}
+                                w={5}
+                                ml={1}
+                                transition={'all .25s ease-in-out'}
+                                transform={isOpen ? 'rotate(180deg)' : ''}
+                            />
+                        </HStack>
+                    </MenuButton>
+                    <MenuList
+                        zIndex={5}
+                        bg={useColorModeValue('rgb(255, 255, 255)', 'rgb(26, 32, 44)')}
+                        border="none"
+                        boxShadow={useColorModeValue(
+                            '2px 4px 6px 2px rgba(160, 174, 192, 0.6)',
+                            '2px 4px 6px 2px rgba(9, 17, 28, 0.6)'
+                        )}
+                    >
+                        {DropDownLinks.map((link) => (
+                            <NextLink
+                                href={link.route}
+                                key={link.name}
+                                passHref
+                            >
+                                <CharkaLink
+                                    href={link.route}
+                                    px={4}
+                                    py={2}
+                                    my={2}
+                                    mx={1}
+                                    as={"div"}
+                                    fontSize={"1em"}
+                                    rounded="md"
+                                    _hover={{
+                                        textDecoration: "none",
+                                        bg: linkBgShades
+                                    }}
+                                    bg={link.route === asPath && linkBgShades}
+                                    color={link.route === asPath && fontColorShades}
+                                    onClick={isOpen ? onClose : onOpen}
+                                >
+                                    <HStack my={1}>
+                                        {dropdownIconsHashMap[link.route]}
+                                        <Text px={3}>{link.name}</Text>
+                                    </HStack>
+                                </CharkaLink>
+                            </NextLink>
+                        ))}
+                    </MenuList>
+                </>
+            )}
+        </Menu>
     );
 }
 

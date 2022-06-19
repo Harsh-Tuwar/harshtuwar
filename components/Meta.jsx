@@ -1,7 +1,7 @@
 const Meta = () => {
 	return (
 		<>
-			<meta charset="UTF-8" />
+			<meta charSet="UTF-8" />
 			<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview: -1, max-video-preview:-1" />
 			<meta name="author" content="Harsh Tuwar"></meta>
 			<meta property="og:type" content="website" />

@@ -26,11 +26,14 @@ import { FiShoppingBag } from "react-icons/fi";
 const NavbarItems = [
     { name: "Home", route: "/" },
     { name: "About Me", route: "/about" },
-    { name: 'Projects', route: '/projects' },
-    { name: "Books", route: "/books" },
     { name: "Contact", route: "/contact" },
-]
+];
 
+const DropDownLinks = [
+    { name: 'Books', route: '/books' },
+    { name: 'Projects', route: '/projects'},
+];
+  
 const SiteConfig = {
     copyright: `Copyright © ${new Date().getFullYear()} Harsh Tuwar. All Rights Reserved.`,
     author: {
@@ -266,6 +269,7 @@ const bookTags = {
 
 export {
     NavbarItems,
+    DropDownLinks,
     techStacks,
     SiteConfig,
     Resume,
