@@ -122,6 +122,7 @@ const NavItems = ({ isOpen, onClose, onOpen, asPath }) => {
 const DropdownLinks = ({ onOpen, asPath }) => {
     const iconColorShades = useColorModeValue("green", "white");
     const linkBgShades = useColorModeValue("green.200", "green.500");
+    const fontColorShades = useColorModeValue("black.900", "white.300");
 
     const dropdownIconsHashMap = {
         '/books': <Icon as={BsBook} size={20} color={iconColorShades} />,
