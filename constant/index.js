@@ -190,6 +190,15 @@ const educations = [
 
 const certifications = [
     {
+        title: "Coursera",
+        alt: "2c2f27cd6dd870db4c43d6e91b94401c",
+        url: "https://coursera.org/share/2c2f27cd6dd870db4c43d6e91b94401c",
+        role: "Blockchain Basics",
+        skills: ["Ethereum", "Cryptography", "Blockchain", "Bitcoin", "Proof of work", "Proof of stake"],
+        period: "Sept 2022 - No Expiry",
+        logo: '/images/certs/coursera.jpeg'
+    },
+    {
         title: "HackerRank",
         alt: "hackerrank-4ed3f112170c",
         url: "https://www.hackerrank.com/certificates/4ed3f112170c",
