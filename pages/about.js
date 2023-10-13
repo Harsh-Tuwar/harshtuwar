@@ -14,7 +14,6 @@ import styles from '../styles/Home.module.css';
 import Paragraph from '../components/Paragraph';
 import PageHeader from '../components/PageHeader';
 import CompanyCard from '../components/CompanyCard';
-import { companies, educations, certifications } from '../constant';
 import useSWR from 'swr';
 
 const getFetcher = (url) => fetch(url).then(async (res) => {
@@ -22,7 +21,9 @@ const getFetcher = (url) => fetch(url).then(async (res) => {
 
 	return {
 		aboutMe: aboutMeRes.aboutMe,
-		workExp: aboutMeRes.workExp
+		workExp: aboutMeRes.workExp,
+		certs: aboutMeRes.certs,
+		edu: aboutMeRes.eduData
 	};
 });
 
@@ -57,7 +58,7 @@ const About = () => {
 
 							{fetchingAboutContent ? <Skeleton height='600px' rounded="md" my={5} /> : (
 								<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
-									{aboutMeContent.workExp.map((expItem, index) => (
+									{aboutMeContent.workExp.sort((a, b) => ((a.ordinal < b.ordinal) ? -1 : ((a.ordinal > b.ordinal) ? 1 : 0))).map((expItem, index) => (
 										<MotionBox whileHover={{ y: -5 }} key={index}>
 											<CompanyCard
 												key={index}
@@ -80,22 +81,28 @@ const About = () => {
 								</Header>
 							</Flex>
 
-							<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
-								{educations.map((education, index) => (
-									<MotionBox whileHover={{ y: -5 }} key={index}>
-										<CompanyCard
-											key={index}
-											title={education.title}
-											role={education.role}
-											skills={education.skills}
-											period={education.period}
-											logo={education.logo}
-											url={education.url}
-											colorMode={colorMode}
-										/>
-									</MotionBox>
-								))}
-							</VStack>
+							
+							{fetchingAboutContent ? <Skeleton height={'200px'} rounded={'md'} my={5} /> : (
+								<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
+									{aboutMeContent.edu
+										.sort((a, b) => ((a.ordinal < b.ordinal) ? -1 : ((a.ordinal > b.ordinal) ? 1 : 0)))
+										.map((eduItem, index) => (
+											<MotionBox whileHover={{ y: -5 }} key={index}>
+												<CompanyCard
+													key={index}
+													title={eduItem.instName}
+													role={eduItem.degree}
+													skills={eduItem.skills.map((s) => s.name)}
+													period={eduItem.period}
+													logo={eduItem.logo}
+													url={eduItem.url}
+													colorMode={colorMode}
+												/>
+											</MotionBox>
+										))
+									}
+								</VStack>
+							)}
 
 							<Flex alignItems="center" my={10}>
 								<Header mt={0} mb={0} emoji="🧐">
@@ -103,22 +110,27 @@ const About = () => {
 								</Header>
 							</Flex>
 
-							<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
-								{certifications.map((education, index) => (
-									<MotionBox whileHover={{ y: -5 }} key={index}>
-										<CompanyCard
-											key={index}
-											title={education.title}
-											role={education.role}
-											skills={education.skills}
-											period={education.period}
-											logo={education.logo}
-											url={education.url}
-											colorMode={colorMode}
-										/>
-									</MotionBox>
-								))}
-							</VStack>
+							{fetchingAboutContent ? <Skeleton height={'600px'} rounded={'md'} my={5} /> : (
+								<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
+									{aboutMeContent.certs
+										.sort((a, b) => ((a.ordinal < b.ordinal) ? -1 : ((a.ordinal > b.ordinal) ? 1 : 0)))
+										.map((certItem, index) => (
+											<MotionBox whileHover={{ y: -5 }} key={index}>
+												<CompanyCard
+													key={index}
+													title={certItem.orgName}
+													role={certItem.certName}
+													skills={certItem.skills.map((s) => s.name)}
+													period={certItem.period}
+													logo={certItem.orgLogo}
+													url={certItem.url}
+													colorMode={colorMode}
+												/>
+											</MotionBox>
+										))
+									}
+								</VStack>
+							)}
 						</Box>
 					</SlideFade>
 				</Container>

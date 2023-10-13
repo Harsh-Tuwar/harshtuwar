@@ -47,8 +47,62 @@ export default async (_, res) => {
 		});
 	})
 
+	const certsData = [];
+	const certSecData = await notion.databases.query({
+		database_id: 'e7c18a7833534ec083ab9a1d6f3ca2fe'
+	});
+
+	certSecData.results.forEach((item) => {
+		const certObj = item.properties;
+		const ordinal = certObj['Ordinal']['number'];
+		const certName = certObj['CertificateName']['rich_text'];
+		const skills = certObj['Skills']['multi_select'];
+		const period = certObj['Period']['rich_text'];
+		const orgName = certObj['OrgName']['title'];
+		const orgLogo = certObj['OrgLogo']['files'];
+		const certUrl = certObj['CertURL'];
+
+		certsData.push({
+			ordinal: ordinal,
+			orgName: orgName[0].plain_text,
+			certName: certName[0].plain_text,
+			period: period[0].plain_text,
+			skills: skills,
+			orgLogo: orgLogo[0].file.url,
+			url: certUrl.url
+		});
+	});
+
+	const educationData = [];
+	const eduSecData = await notion.databases.query({
+		database_id: '3e9b9087ea5049b4b5413edcf8d2af2b'
+	});
+
+	eduSecData.results.forEach((item) => {
+		const eduObj = item.properties;
+		const ordinal = eduObj['Ordinal']['number'];
+		const instName = eduObj['InstName']['title'];
+		const skills = eduObj['Skills']['multi_select'];
+		const period = eduObj['Period']['rich_text'];
+		const degreeName = eduObj['DegreeName']['rich_text'];
+		const instLogo = eduObj['InstLogo']['files'];
+		const instUrl = eduObj['InstURL'];
+
+		educationData.push({
+			ordinal,
+			instName: instName[0].plain_text,
+			skills: skills,
+			period: period[0].plain_text,
+			degree: degreeName[0].plain_text,
+			logo: instLogo[0].file.url,
+			url: instUrl.url
+		});
+	});
+
 	return res.status(200).json({
 		aboutMe: aboutMeParas,
-		workExp: workExData
+		workExp: workExData,
+		certs: certsData,
+		eduData: educationData
 	});
 };
