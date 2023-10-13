@@ -4,7 +4,8 @@ import {
 	Flex,
 	Box,
 	VStack,
-	useColorMode
+	useColorMode,
+	Skeleton
 } from '@chakra-ui/react';
 import React from 'react';
 import { MotionBox } from '../utils/motion';
@@ -13,10 +14,22 @@ import styles from '../styles/Home.module.css';
 import Paragraph from '../components/Paragraph';
 import PageHeader from '../components/PageHeader';
 import CompanyCard from '../components/CompanyCard';
-import { companies, educations, certifications } from '../constant';
+import useSWR from 'swr';
+
+const getFetcher = (url) => fetch(url).then(async (res) => {
+	const aboutMeRes = await res.json();
+
+	return {
+		aboutMe: aboutMeRes.aboutMe,
+		workExp: aboutMeRes.workExp,
+		certs: aboutMeRes.certs,
+		edu: aboutMeRes.eduData
+	};
+});
 
 const About = () => {
 	const { colorMode } = useColorMode();
+	const { data: aboutMeContent, isLoading: fetchingAboutContent } = useSWR('/api/about', getFetcher, { revalidateOnFocus: false });
 
 	return (
 		<div className={styles.container}>
@@ -29,17 +42,13 @@ const About = () => {
 								About Me
 							</Header>
 
-							<Paragraph fontSize="lg" lineHeight={1.6} my={5}>
-								I am a full stack software engineer with 3+ years 💪🏼 of working experience based in Toronto, ON and specialized in Web and Hybrid mobile app development.
-								I am passionate😍 about Blockchain, Machine Learning and IoT technologies and strongly believe that these technologies can solve many of the real life problems😄 we are facing currently as a society.
-								In my spare time, I love listening to 🎧 AudioBooks, watching 🎥 Netflix/Anime, cooking😋 and hanging out with friends👥. I am in the software development field to make an “impact” and solve real life problems by using various technologies.
-							</Paragraph>
-
-							<Paragraph fontSize="lg" lineHeight={1.6} my={5}>
-								As a full-time software engineer🧑🏼‍💻, I was lucky enough get a chance to work with bunch of web🕸 technologies including
-								various cloud platforms☁️ and tools. After getting a good grip of web technologies, I self taught myself about Hybrid mobile📱 app development
-								using Flutter and React Native.
-							</Paragraph>
+							{fetchingAboutContent ? <Skeleton height='300px' rounded="md" my={5} /> : aboutMeContent.aboutMe && aboutMeContent.aboutMe.map((para, index) => {
+								return (
+									<Paragraph fontSize="lg" lineHeight={1.6} my={5} key={index}>
+										{para}
+									</Paragraph>
+								)
+							})}
 
 							<Flex alignItems="center" my={10}>
 								<Header mt={0} mb={0} emoji="💼">
@@ -47,22 +56,24 @@ const About = () => {
 								</Header>
 							</Flex>
 
-							<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
-								{companies.map((company, index) => (
-									<MotionBox whileHover={{ y: -5 }} key={index}>
-										<CompanyCard
-											key={index}
-											title={company.title}
-											role={company.role}
-											skills={company.skills}
-											period={company.period}
-											logo={company.logo}
-											url={company.url}
-											colorMode={colorMode}
-										/>
-									</MotionBox>
-								))}
-							</VStack>
+							{fetchingAboutContent ? <Skeleton height='600px' rounded="md" my={5} /> : (
+								<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
+									{aboutMeContent.workExp.sort((a, b) => ((a.ordinal < b.ordinal) ? -1 : ((a.ordinal > b.ordinal) ? 1 : 0))).map((expItem, index) => (
+										<MotionBox whileHover={{ y: -5 }} key={index}>
+											<CompanyCard
+												key={index}
+												title={expItem.companyName}
+												role={expItem.position}
+												skills={expItem.skills.map((s) => s.name)}
+												period={expItem.tenure}
+												logo={expItem.logo}
+												url={expItem.url}
+												colorMode={colorMode}
+											/>
+										</MotionBox>
+									))}
+								</VStack>
+							)}
 
 							<Flex alignItems="center" my={10}>
 								<Header mt={0} mb={0} emoji="🎓">
@@ -70,22 +81,28 @@ const About = () => {
 								</Header>
 							</Flex>
 
-							<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
-								{educations.map((education, index) => (
-									<MotionBox whileHover={{ y: -5 }} key={index}>
-										<CompanyCard
-											key={index}
-											title={education.title}
-											role={education.role}
-											skills={education.skills}
-											period={education.period}
-											logo={education.logo}
-											url={education.url}
-											colorMode={colorMode}
-										/>
-									</MotionBox>
-								))}
-							</VStack>
+							
+							{fetchingAboutContent ? <Skeleton height={'200px'} rounded={'md'} my={5} /> : (
+								<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
+									{aboutMeContent.edu
+										.sort((a, b) => ((a.ordinal < b.ordinal) ? -1 : ((a.ordinal > b.ordinal) ? 1 : 0)))
+										.map((eduItem, index) => (
+											<MotionBox whileHover={{ y: -5 }} key={index}>
+												<CompanyCard
+													key={index}
+													title={eduItem.instName}
+													role={eduItem.degree}
+													skills={eduItem.skills.map((s) => s.name)}
+													period={eduItem.period}
+													logo={eduItem.logo}
+													url={eduItem.url}
+													colorMode={colorMode}
+												/>
+											</MotionBox>
+										))
+									}
+								</VStack>
+							)}
 
 							<Flex alignItems="center" my={10}>
 								<Header mt={0} mb={0} emoji="🧐">
@@ -93,22 +110,27 @@ const About = () => {
 								</Header>
 							</Flex>
 
-							<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
-								{certifications.map((education, index) => (
-									<MotionBox whileHover={{ y: -5 }} key={index}>
-										<CompanyCard
-											key={index}
-											title={education.title}
-											role={education.role}
-											skills={education.skills}
-											period={education.period}
-											logo={education.logo}
-											url={education.url}
-											colorMode={colorMode}
-										/>
-									</MotionBox>
-								))}
-							</VStack>
+							{fetchingAboutContent ? <Skeleton height={'600px'} rounded={'md'} my={5} /> : (
+								<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
+									{aboutMeContent.certs
+										.sort((a, b) => ((a.ordinal < b.ordinal) ? -1 : ((a.ordinal > b.ordinal) ? 1 : 0)))
+										.map((certItem, index) => (
+											<MotionBox whileHover={{ y: -5 }} key={index}>
+												<CompanyCard
+													key={index}
+													title={certItem.orgName}
+													role={certItem.certName}
+													skills={certItem.skills.map((s) => s.name)}
+													period={certItem.period}
+													logo={certItem.orgLogo}
+													url={certItem.url}
+													colorMode={colorMode}
+												/>
+											</MotionBox>
+										))
+									}
+								</VStack>
+							)}
 						</Box>
 					</SlideFade>
 				</Container>

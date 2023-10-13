@@ -43,7 +43,7 @@ const Contact = () => {
 			body: JSON.stringify(formData)
 		}
 
-		const response = await fetch('https://api.harshtuwar.ml/send', requestOptions).catch((e) => {
+		const response = await fetch('https://harshtuwar-api.vercel.app/send', requestOptions).catch((e) => {
 			toast({
 				title: "Hmm...",
 				description: "Contact forms fields can not be empty!",

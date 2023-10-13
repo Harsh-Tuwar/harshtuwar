@@ -42,7 +42,7 @@ const ProfileSection = ({ song }) => {
                     </Flex>
                 </Flex>
                 <Paragraph fontSize="2xl" lineHeight={1.6}>
-                    Software Developer from Toronto, Canada 🇨🇦
+                    Seasoned Senior Full Stack Developer from Toronto, Canada 🇨🇦
                 </Paragraph>
                 <Paragraph fontSize="2xl" lineHeight={1.6}>
                     Focused on {" "}
@@ -52,7 +52,10 @@ const ProfileSection = ({ song }) => {
                     <Link color={highlightedTextColor} href="#" fontWeight="500">
                         Hybrid Mobile App Development
                     </Link>
-                    {" "} and Passionate about Blockchain🧊, Machine Learning🤖 as well as the IoT Technologies 🔥
+                    {" "} and Passionate about Blockchain🧊, Machine Learning🤖 as well as IoT Technologies 🔥
+                </Paragraph>
+                <Paragraph fontSize="2xl" lineHeight={1.6}>
+                    React, Next.js, Node, Event Driven Architecture (EDA) Expert 📡
                 </Paragraph>
 
                 <Box mt={5}>
