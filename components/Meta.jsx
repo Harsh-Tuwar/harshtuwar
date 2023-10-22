@@ -5,12 +5,12 @@ const Meta = () => {
 			<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview: -1, max-video-preview:-1" />
 			<meta name="author" content="Harsh Tuwar"></meta>
 			<meta property="og:type" content="website" />
-			<meta property="og:url" content="https://harshtuwar.ml/" />
+			<meta property="og:url" content="https://harshtuwar.vercel.app/" />
 			<meta property="og:site_name" content="Harsh Tuwar | Software Developer" />
 			<meta name="description" content="Harsh Tuwar | Software Developer" />
 			<meta property="og:title" content="Harsh Tuwar | Software Developer" /> 
 			<meta property="og:description" content="Harsh Tuwar is fullstack sofware developer based in Ontario. He is intersted in Blockchain, Machine learing, IoT and hybrid mobile app development." />
-			<meta name="google-site-verification" content="33ge1JB4DvSV7i4Sa36Xbrrc1rPWNeFR5EMz4i3wZwA" />
+			<meta name="google-site-verification" content="zWs6TBVdIUCyTF8RwlKpkku5-Az7NZ9vRfcdTKtw5nw" />
 			<meta name="description" content="Harsh Tuwar is fullstack sofware developer based in Ontario. He is intersted in Blockchain, Machine learing, IoT and hybrid mobile app development." />
 			<meta name="keywords" content="Harsh, Tuwar, Software engineer, Harsh Tuwar, Brian, Software Developer,
 			 	Murray, Reach, boarding, touchline, seneca, college, programmer, computer, NODE JS, janki dixit,
