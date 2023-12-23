@@ -174,9 +174,9 @@ const LeftProjectLayoutLarge = ({ project }) => {
 							{project.description}
 						</MotionText>
 						{project.techStack && (
-							<MotionList variants={fadeInUp}  display="flex" fontSize="sm" justifyContent="end" mt="3" color={skillsTextColor} fontWeight="bold">
+							<MotionList variants={fadeInUp} display="flex" fontSize="sm" justifyContent="end" mt="3" color={skillsTextColor} fontWeight="bold" style={{ flexWrap: 'wrap' }}>
 								{project.techStack.map((s, index) => (
-									<ListItem key={index} mr="3" backgroundColor={skillsBgColor} style={{ borderRadius: 16, padding: '5px 10px' }} flexWrap="wrap">
+									<ListItem key={index} mr="3" backgroundColor={skillsBgColor} style={{ borderRadius: 16, padding: '5px 10px' }}>
 										<i>{s}</i>
 									</ListItem>
 								))}

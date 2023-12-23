@@ -163,6 +163,13 @@ const techStacks = [
 
 const projectsList = [
     {
+        title: "Tasko - A Task Management Software",
+        imageLight: '/images/projects/tasko.png',
+        site: "https://mytasko.vercel.app",
+        description: `Tasko is a task management software to collaborate, manage projects and reach new productivity peaks.`,
+        techStack: ["React", "NextJS 14", "Server Actions", "MySQL", "Prisma", "Stripe", "Tailwind CSS"]
+    },
+    {
         title: "Portfolio Website v2",
         imageLight: '/images/projects/portfolio-website-v2.png',
         site: "https://harshtuwar.ml",
@@ -175,13 +182,6 @@ const projectsList = [
         site: "https://drive.harshtuwar.ml",
         description: `HDrive is a file storage service which I developed to learn about the firebase.`,
         techStack: ["React", "Redux", "Firebase", "MaterialUI"]
-    },
-    {
-        title: "WeCrypt",
-        imageLight: '/images/projects/wecrypt.png',
-        site: "https://wecrypt.vercel.app",
-        description: `WeCrypt is a Web3 App that supports metamask pairing and interaction with the smart contract.`,
-        techStack: ["React", "ContextAPI", "Solidity", "Vite", "Metamask", "Tailwind", "Ethers", "Hardhat", "Alchemy"]
     },
 ];
 

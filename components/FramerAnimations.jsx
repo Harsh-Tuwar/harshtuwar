@@ -12,6 +12,7 @@ export const fadeInUp = {
 	initial: {
 		y: 60,
 		opacity: 0,
+		flexWrap: 'wrap',
 		transition: { duration: 0.6, ease: easing },
 	},
 	animate: {
