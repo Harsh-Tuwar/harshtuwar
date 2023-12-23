@@ -166,6 +166,7 @@ const projectsList = [
         title: "Tasko - A Task Management Software",
         imageLight: '/images/projects/tasko.png',
         site: "https://mytasko.vercel.app",
+        github: "https://github.com/Harsh-Tuwar/tasko",
         description: `Tasko is a task management software to collaborate, manage projects and reach new productivity peaks.`,
         techStack: ["React", "NextJS 14", "Server Actions", "MySQL", "Prisma", "Stripe", "Tailwind CSS"]
     },
@@ -173,6 +174,7 @@ const projectsList = [
         title: "Portfolio Website v2",
         imageLight: '/images/projects/portfolio-website-v2.png',
         site: "https://harshtuwar.ml",
+        github: "https://github.com/Harsh-Tuwar/harshtuwar-next",
         description: `This is my personal portfolio website developed to showcase my skills, experiences and projects.`,
         techStack: ["NextJS", "ChakraUI", "JavaScript"]
     },
@@ -180,6 +182,7 @@ const projectsList = [
         title: "HDrive - My personal cloud storage",
         imageLight: '/images/projects/hdrive.png',
         site: "https://drive.harshtuwar.ml",
+        github: "https://github.com/Harsh-Tuwar/HDrive",
         description: `HDrive is a file storage service which I developed to learn about the firebase.`,
         techStack: ["React", "Redux", "Firebase", "MaterialUI"]
     },

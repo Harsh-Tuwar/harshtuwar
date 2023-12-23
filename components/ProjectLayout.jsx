@@ -13,6 +13,7 @@ import {
 	AspectRatio
 } from "@chakra-ui/react";
 import { MotionBox, MotionFlex, MotionList, MotionText } from "../utils/motion";
+import { FaGithub } from 'react-icons/fa';
 
 const skillsTextColor = 'black';
 
@@ -86,6 +87,15 @@ const ProjectLayoutMed = ({ project }) => {
 						</Box>
 					</a>
 					<MotionFlex variants={fadeInUp} pt={2} mt={1} justifyContent="start">
+						<a href={project.github} target="_blank" rel="noopener noreferrer" style={{ marginRight: 10 }}>
+							<IconButton
+								colorScheme="gray"
+								rounded="full"
+								size="md"
+								aria-label="medal"
+								icon={<FaGithub />}
+							/>
+						</a>
 						<a href={project.site} target="_blank" rel="noopener noreferrer">
 							<IconButton
 								colorScheme="gray"
@@ -185,6 +195,15 @@ const LeftProjectLayoutLarge = ({ project }) => {
 					</Box>
 
 					<MotionFlex variants={fadeInUp} pt={2} mt={1} justifyContent="end">
+						<a href={project.github} target="_blank" rel="noopener noreferrer" style={{ marginRight: 10 }}>
+							<IconButton
+								colorScheme="gray"
+								rounded="full"
+								size="md"
+								aria-label="medal"
+								icon={<FaGithub />}
+							/>
+						</a>
 						<a href={project.site} target="_blank" rel="noopener noreferrer">
 							<IconButton
 								colorScheme="gray"
@@ -244,6 +263,15 @@ const RightProjectLayoutLarge = ({ project }) => {
 					</Box>
 
 					<MotionFlex variants={fadeInUp} pt={2} mt={1} justifyContent="start">
+						<a href={project.github} target="_blank" rel="noopener noreferrer" style={{ marginRight: 10 }}>
+							<IconButton
+								colorScheme="gray"
+								rounded="full"
+								size="md"
+								aria-label="medal"
+								icon={<FaGithub />}
+							/>
+						</a>
 						<a href={project.site} target="_blank" rel="noopener noreferrer">
 							<IconButton
 								colorScheme="gray"
