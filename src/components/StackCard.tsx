@@ -1,4 +1,3 @@
-'use client';
 import { MotionBox } from '@/utils/motion';
 import { useColorModeValue, LinkBox, Flex, IconButton, LinkOverlay, Text } from '@chakra-ui/react';
 

@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import { Text, TextProps, useColorModeValue } from '@chakra-ui/react';
 

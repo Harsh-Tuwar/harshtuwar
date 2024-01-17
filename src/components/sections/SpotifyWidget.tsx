@@ -19,7 +19,7 @@ interface SpotifySong {
 	album: string;
 	albumImageUrl: string;
 	artist: string;
-	isPlaying: true;
+	isPlaying: boolean;
 	songUrl: string;
 	title: string;
 };

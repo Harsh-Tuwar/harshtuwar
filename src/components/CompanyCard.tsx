@@ -1,4 +1,3 @@
-'use client';
 import {
 	HStack,
 	Flex,
@@ -79,7 +78,7 @@ const CompanyCard = ({
 									display={["none", "none", "flex", "flex"]}
 								>
 									{skills.map(skill => {
-										return <Tag size="md" key={skill} m={2} borderRadius='full' variant='solid' >
+										return <Tag size="md" key={skill} m={0.5} borderRadius='full' variant='solid' >
 											<TagLabel>{skill}</TagLabel>
 										</Tag>;
 									})}
@@ -129,7 +128,7 @@ const CompanyCard = ({
 					display={["flex", "flex", "none", "none"]}
 				>
 					{skills.map(skill => {
-						return <Tag size="md" key={skill} m={2} borderRadius='full' variant='solid' >
+						return <Tag size="md" key={skill} m={0.5} borderRadius='full' variant='solid' >
 							<TagLabel>{skill}</TagLabel>
 						</Tag>;
 					})}

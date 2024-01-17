@@ -1,4 +1,3 @@
-'use client';
 import { motion } from "framer-motion";
 import { FaGithub } from 'react-icons/fa';
 import { stagger, fadeInUp } from '@/components/FramerAnimation';
