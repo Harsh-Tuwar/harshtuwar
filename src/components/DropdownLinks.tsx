@@ -1,4 +1,3 @@
-'use client';
 import { useColorModeValue, Icon, Menu, MenuButton, HStack, MenuList, Text, Link as ChakraLink } from '@chakra-ui/react';
 import { BiChevronDown } from 'react-icons/bi';
 import { BsBook } from 'react-icons/bs';

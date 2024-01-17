@@ -1,4 +1,3 @@
-'use client';
 import NextLink from 'next/link';
 import { useColorModeValue, Link as ChakraLink } from '@chakra-ui/react';
 

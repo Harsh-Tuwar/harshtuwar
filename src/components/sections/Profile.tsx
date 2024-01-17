@@ -1,4 +1,3 @@
-'use client';
 import NextLink from 'next/link';
 
 import { BiPhoneCall } from 'react-icons/bi';
@@ -20,17 +19,21 @@ import {
 import Paragraph from '../Paragraph';
 import SpotifyWidget from './SpotifyWidget';
 
-interface SpotifySong {
+interface SpotifyNotPlaying {
+	isPlaying: boolean;
+}
+
+interface SpotifySong extends SpotifyNotPlaying {
 	album: string;
 	albumImageUrl: string;
 	artist: string;
-	isPlaying: true;
+	isPlaying: boolean;
 	songUrl: string;
 	title: string;
 };
 
 interface ProfileProps {
-	song: SpotifySong;
+	song: SpotifySong ;
 };
 
 const Profile = ({ song }: ProfileProps) => {
