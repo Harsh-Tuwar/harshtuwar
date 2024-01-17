@@ -27,7 +27,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           <DottedSvgs />
-          <main suppressHydrationWarning>
+          <main>
             {children}
           </main>
           <Footer />

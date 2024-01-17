@@ -5,7 +5,6 @@ import {
 	Flex,
 	HStack,
 	IconButton,
-	Link as CharkaLink,
 	Stack,
 	useColorModeValue,
 	useDisclosure,
@@ -42,18 +41,14 @@ const Navbar = () => {
 						display={["inherit", "inherit", "none"]}
 						onClick={isOpen ? onClose : onOpen}
 					/>
-					<HStack spacing={8} alignItems="center">
-						<NextLink
-							href="/"
-							passHref
-						>
-							<Avatar
-								as={CharkaLink}
-								size="sm"
-								src="/profile_picture.jpeg"
-								_hover={{ borderColor: "green.500" }}
-							/>
-						</NextLink>
+					<HStack spacing={8} alignItems="center" suppressHydrationWarning>
+						<Avatar
+							href={"/"}
+							as={NextLink}
+							size="sm"
+							src="/profile_picture.jpeg"
+							_hover={{ borderColor: "green.500" }}
+						/>
 						<HStack as="nav" spacing="4" display={{ base: 'none', md: 'flex' }}>
 							<NavItems isOpen={isOpen} onClose={onClose} onOpen={onOpen} pathname={pathname} />
 						</HStack>

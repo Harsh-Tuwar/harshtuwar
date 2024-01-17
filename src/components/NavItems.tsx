@@ -26,27 +26,23 @@ const NavItems = ({
 	return (
 		<>
 			{NavbarItems.map((link) => (
-				<NextLink
-					href={link.route}
+				<ChakraLink
 					key={link.name}
-					passHref
+					as={NextLink}
+					href={link.route}
+					px={2}
+					py={1}
+					rounded="md"
+					_hover={{
+						textDecoration: "none",
+						bg: linkBgShades
+					}}
+					bg={link.route === pathname && linkBgShades}
+					color={link.route === pathname && fontColorShades}
+					onClick={isOpen ? onClose : onOpen}
 				>
-					<ChakraLink
-						href={link.route}
-						px={2}
-						py={1}
-						rounded="md"
-						_hover={{
-							textDecoration: "none",
-							bg: linkBgShades
-						}}
-						bg={link.route === pathname && linkBgShades}
-						color={link.route === pathname && fontColorShades}
-						onClick={isOpen ? onClose : onOpen}
-					>
-						{link.name}
-					</ChakraLink>
-				</NextLink>
+					{link.name}
+				</ChakraLink>
 			))}
 			<DropdownLinks onOpen={onOpen} pathname={pathname} />
 		</>
