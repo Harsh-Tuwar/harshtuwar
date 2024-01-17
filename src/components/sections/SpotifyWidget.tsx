@@ -60,7 +60,7 @@ const SpotifyWidget = ({ song }: SpotifyWidgetProps) => {
 								margin="auto"
 								src={song?.albumImageUrl}
 								alt={song?.album}
-								objectFit="cover"
+								style={{ objectFit: 'cover' }}
 								boxSize={["100px", "100px", "100px", "100px"]}
 								fallback={<SiSpotify size={20} color="#1ED760" />}
 							/>
