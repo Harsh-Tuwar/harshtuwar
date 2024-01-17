@@ -23,7 +23,7 @@ const subtitle = "A selection of projects I've worked on, during my career as a 
 
 const Projects = () => {
   const { data, isLoading } = useSWR('/api/projects', fetcher);
-
+  
   return (
     <div>
       <PageHeader />
