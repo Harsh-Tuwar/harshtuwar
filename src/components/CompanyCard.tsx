@@ -52,7 +52,7 @@ const CompanyCard = ({
 			<LinkOverlay href={url} rel="noopener" isExternal>
 				<Flex display={["none", "none", "flex", "flex"]} >
 					<HStack display={'flex'} flexGrow={1} className='main-parent__container-desktop' width={'100%'}>
-						<Image rounded="full" w={16} h={16} objectFit="scale-down" src={logo} alt={alt} />
+						<Image rounded="full" w={16} h={16} style={{ objectFit: 'scale-down' }} src={logo} alt={alt} />
 						<HStack className='main-container__desktop' width={'inherit'}>
 							<VStack spacing={2} pl={3} align="left" display={"flex"} flexGrow={1} className='sub-container__desktop'>
 								<HStack display={'flex'} className='title-role-period__desktop'>
@@ -90,7 +90,7 @@ const CompanyCard = ({
 				</Flex>
 				<Flex justifyContent="space-between" display={["flex", "flex", "none", "none"]}>
 					<HStack >
-						<Image rounded="full" w={16} h={16} objectFit="scale-down" src={logo} alt={alt} />
+						<Image rounded="full" w={16} h={16} style={{ objectFit: 'scale-down' }} src={logo} alt={alt} />
 						<VStack spacing={2} pl={3} align="left">
 							<Heading fontSize="xl" color={`mode.${colorMode}.careet.text`} >
 								{title}

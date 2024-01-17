@@ -43,7 +43,9 @@ const Book = ({ book: { cover, title, author, state, link } }: BookProps) => {
 						alt={`${title} cover`}
 						height={83}
 						width={55}
-						objectFit="cover"
+						style={{
+							objectFit: 'cover'
+						}}
 					/>
 					<BookTag
 						state={state}

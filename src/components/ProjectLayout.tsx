@@ -58,7 +58,7 @@ const ProjectLayoutMed = ({ project }: ProjectLayoutMedProps) => {
 						height={'full'}
 						position="absolute"
 						alt=''
-						rounded="xl" objectFit="cover" opacity={0.5} />
+						rounded="xl" style={{ objectFit: 'cover' }} opacity={0.5} />
 				</AspectRatio>
 				<Box
 					width={'full'}
@@ -164,7 +164,7 @@ const LeftProjectLayoutLarge = ({ project }: LeftProjectLayoutLargeProps) => {
 							alt=''
 							height={'full'}
 							position="absolute"
-							rounded="xl" objectFit="cover" opacity={0.5} _hover={{ opacity: 1 }}
+							rounded="xl" style={{ objectFit: 'cover' }} opacity={0.5} _hover={{ opacity: 1 }}
 						/>
 					</AspectRatio>
 				</a>
@@ -326,7 +326,7 @@ const RightProjectLayoutLarge = ({ project }: RightProjectLayoutLargeProps) => {
 							width={'full'}
 							height={'full'}
 							position="absolute"
-							rounded="xl" objectFit="cover" opacity={0.5} _hover={{ opacity: 1 }} />
+							rounded="xl" style={{ objectFit: 'cover' }} opacity={0.5} _hover={{ opacity: 1 }} />
 					</AspectRatio>
 				</a>
 			</MotionBox>
