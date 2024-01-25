@@ -54,7 +54,7 @@ export async function GET() {
 	if (response.status === 204 || response.status > 400) {
 		return NextResponse.json({ isPlaying: false }, { status: 200 });
 	}
-	
+
 	const song = await response.json();
 	const isPlaying = song.is_playing;
 	const title = song.item.name;
