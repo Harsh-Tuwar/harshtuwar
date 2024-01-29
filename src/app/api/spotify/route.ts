@@ -17,12 +17,12 @@ const getAccessToken = async () => {
 
 	const response = await fetch(TOKEN_ENDPOINT, {
 		method: 'POST',
+		cache: 'no-store',
+		body: params.toString(),
 		headers: {
 			Authorization: `Basic ${basic}`,
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
-		cache: 'no-store',
-		body: params.toString(),
 	});
 
 	return response.json();
@@ -32,10 +32,10 @@ const getNowPlaying = async () => {
 	const { access_token } = await getAccessToken();
 
 	return fetch(NOW_PLAYING_ENDPOINT, {
+		cache: 'no-store',
 		headers: {
 			Authorization: `Bearer ${access_token}`,
 		},
-		cache: 'no-store',
 	});
 };
 
