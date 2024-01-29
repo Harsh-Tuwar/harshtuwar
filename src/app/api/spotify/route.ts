@@ -21,6 +21,7 @@ const getAccessToken = async () => {
 			Authorization: `Basic ${basic}`,
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
+		cache: 'no-store',
 		body: params.toString(),
 	});
 
@@ -34,6 +35,7 @@ const getNowPlaying = async () => {
 		headers: {
 			Authorization: `Bearer ${access_token}`,
 		},
+		cache: 'no-store',
 	});
 };
 
