@@ -1,4 +1,7 @@
 'use client';
+const dynamic = 'force-dynamic';
+const revalidate = 0
+
 import useSWR from 'swr';
 import { Container, SlideFade, Flex, Divider } from '@chakra-ui/react';
 
