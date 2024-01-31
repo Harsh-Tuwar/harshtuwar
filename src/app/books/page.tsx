@@ -1,4 +1,8 @@
 'use client';
+
+const dynamic = 'force-dynamic';
+const revalidate = 0
+
 import Book from '@/components/Book';
 import PageHeader from '@/components/PageHeader';
 import PageTitle from '@/components/PageTitle';

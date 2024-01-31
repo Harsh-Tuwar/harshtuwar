@@ -7,6 +7,7 @@ import { Providers } from './providers';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import DottedSvgs from '@/components/DottedSvgs';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           <DottedSvgs />
           <main>
             {children}
+            <SpeedInsights />
           </main>
           <Footer />
         </Providers>
