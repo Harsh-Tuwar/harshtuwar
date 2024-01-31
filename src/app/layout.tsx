@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { revalidatePath } from 'next/cache';
 
 import { Providers } from './providers';
 
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
   description: 'Harsh Tuwar is a full stack senior developer with 5+ years of experience. This is his portfolio website.',
   robots: 'index, follow, max-snippet:-1, max-image-preview: -1, max-video-preview:-1',
 }
+
+revalidatePath('/', 'layout')
 
 export default function RootLayout({
   children,
