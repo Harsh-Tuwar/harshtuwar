@@ -18,13 +18,15 @@ export const metadata: Metadata = {
   robots: 'index, follow, max-snippet:-1, max-image-preview: -1, max-video-preview:-1',
 }
 
-revalidatePath('/', 'layout')
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
-}) {
+  }) {
+  revalidatePath('/', 'layout');
+  
+  
   return (
     <html lang="en">
       <body className={inter.className}>
