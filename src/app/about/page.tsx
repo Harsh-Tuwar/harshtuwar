@@ -75,7 +75,7 @@ const About = () => {
 
 							{fetchingAboutContent || !aboutMeContent ? <Skeleton height='600px' rounded="md" my={5} /> : (
 								<VStack spacing={4} marginBottom={6} align="left" mx={[0, 0, 6]} mt={5}>
-									{aboutMeContent.workExp.sort((a: IExpItem, b: IExpItem) => ((a.ordinal < b.ordinal) ? -1 : ((a.ordinal > b.ordinal) ? 1 : 0))).map((expItem: IExpItem, index: number) => (
+									{aboutMeContent.workExp.sort((a: IExpItem, b: IExpItem) => a.ordinal - b.ordinal).map((expItem: IExpItem, index: number) => (
 										<MotionBox whileHover={{ y: -5 }} key={index}>
 											<CompanyCard
 												key={index}

@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { revalidatePath } from 'next/cache';
 
 import { Providers } from './providers';
 
@@ -23,9 +22,7 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
-  }) {
-  revalidatePath('/', 'layout');
-  
+}) {
   
   return (
     <html lang="en">
