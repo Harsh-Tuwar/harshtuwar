@@ -46,7 +46,7 @@ interface ICertItem {
 
 const About = () => {
 	const { colorMode } = useColorMode();
-	const { data: aboutMeContent, isLoading: fetchingAboutContent } = useSWR('/api/about', aboutMeFetcher, { revalidateOnFocus: false });
+	const { data: aboutMeContent, isLoading: fetchingAboutContent } = useSWR('/api/about', aboutMeFetcher );
 
 	return (
 		<div>
