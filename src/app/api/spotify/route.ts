@@ -1,4 +1,5 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 
 const {
 	NEXT_PUBLIC_SPOTIFY_CLIENT_ID: client_id,
@@ -10,6 +11,8 @@ const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
+const { signal } = new AbortController();
+
 const getAccessToken = async () => {
 	const params = new URLSearchParams();
 	params.append('grant_type', 'refresh_token');
@@ -18,6 +21,7 @@ const getAccessToken = async () => {
 	const response = await fetch(TOKEN_ENDPOINT, {
 		method: 'POST',
 		cache: 'no-store',
+		signal,
 		body: params.toString(),
 		headers: {
 			Authorization: `Basic ${basic}`,
@@ -33,6 +37,7 @@ const getNowPlaying = async () => {
 
 	return fetch(NOW_PLAYING_ENDPOINT, {
 		cache: 'no-store',
+		signal,
 		headers: {
 			Authorization: `Bearer ${access_token}`,
 		},
@@ -50,8 +55,9 @@ interface Artist {
 	uri: string;
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
 	const response = await getNowPlaying();
+	const path = request.nextUrl.searchParams.get('path')
 
 	if (response.status === 204 || response.status > 400) {
 		return NextResponse.json({ isPlaying: false }, { status: 200 });
