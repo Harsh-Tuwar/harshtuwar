@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 
 const CERTS_DATABASE_ID = 'e7c18a7833534ec083ab9a1d6f3ca2fe';
 const WORK_EXP_DATABASE_ID = 'f2281d86df84429385387d6eb97f0fd4';
@@ -125,6 +126,8 @@ export async function GET() {
 			url: instUrl.url
 		});
 	});
+
+	revalidateTag('about_me');
 
 	return NextResponse.json({
 		aboutMe: aboutMeParas,
