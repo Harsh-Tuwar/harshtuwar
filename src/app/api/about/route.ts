@@ -1,4 +1,3 @@
-import { Client } from '@notionhq/client';
 import { NextResponse } from 'next/server';
 
 const CERTS_DATABASE_ID = 'e7c18a7833534ec083ab9a1d6f3ca2fe';
@@ -6,20 +5,30 @@ const WORK_EXP_DATABASE_ID = 'f2281d86df84429385387d6eb97f0fd4';
 const EDUCATION_DATABASE_ID = '3e9b9087ea5049b4b5413edcf8d2af2b';
 const ABOUT_SECTION_PARAGRAPHS_BLOCK_ID = '4a73a288f1cc4f818d8236128c700d63';
 
+const NOTION_API_ENDPOINT = 'https://api.notion.com/v1';
+
 // TODO: Type this
 export async function GET() {
-	const notion = new Client({
-		auth: process.env.NOTION_API_KEY,
-	});
-
+	const educationData: any = [];
 	const aboutMeParas: string[] = [];
-	const aboutMeSecData = await notion.blocks.children.list({
-		block_id: ABOUT_SECTION_PARAGRAPHS_BLOCK_ID
+	const workExData: any = [];
+	const certsData: any = [];
+
+	const headers = {
+		'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
+		'Notion-Version': '2022-06-28'
+	};
+
+	const aboutMeReq = await fetch(`${NOTION_API_ENDPOINT}/blocks/${ABOUT_SECTION_PARAGRAPHS_BLOCK_ID}/children`, {
+		headers,
+		cache: 'no-store'
 	});
 
-	if (aboutMeSecData.results.length) {
+	const aboutMeRes = await aboutMeReq.json();
+
+	if (aboutMeRes.results.length) {
 		// TODO: type this
-		aboutMeSecData.results.forEach((item: any) => {
+		aboutMeRes.results.forEach((item: any) => {
 			const type = item.type;
 			const value = item[type].rich_text;
 
@@ -29,12 +38,15 @@ export async function GET() {
 		});
 	}
 
-	const workExData: any = [];
-	const workExpSecData = await notion.databases.query({
-		database_id: WORK_EXP_DATABASE_ID
+	const workExpReq = await fetch(`${NOTION_API_ENDPOINT}/databases/${WORK_EXP_DATABASE_ID}/query`, {
+		headers,
+		method: 'POST',
+		cache: 'no-store'
 	});
 
-	workExpSecData.results.forEach((item: any) => {
+	const workExpRes = await workExpReq.json();
+
+	workExpRes.results.forEach((item: any) => {
 		const workExObj = item.properties;
 		const tenure = workExObj['Tenure']['rich_text'];
 		const ordinal = workExObj['Ordinal']['number'];
@@ -55,12 +67,16 @@ export async function GET() {
 		});
 	})
 
-	const certsData: any = [];
-	const certSecData = await notion.databases.query({
-		database_id: CERTS_DATABASE_ID
+
+	const certsReq = await fetch(`${NOTION_API_ENDPOINT}/databases/${CERTS_DATABASE_ID}/query`, {
+		headers,
+		method: 'POST',
+		cache: 'no-store'
 	});
 
-	certSecData.results.forEach((item: any) => {
+	const certsResp = await certsReq.json();
+
+	certsResp.results.forEach((item: any) => {
 		const certObj = item.properties;
 		const ordinal = certObj['Ordinal']['number'];
 		const certName = certObj['CertificateName']['rich_text'];
@@ -81,12 +97,15 @@ export async function GET() {
 		});
 	});
 
-	const educationData: any = [];
-	const eduSecData = await notion.databases.query({
-		database_id: EDUCATION_DATABASE_ID
+	const eduReq = await fetch(`${NOTION_API_ENDPOINT}/databases/${EDUCATION_DATABASE_ID}/query`, {
+		headers,
+		method: 'POST',
+		cache: 'no-store'
 	});
 
-	eduSecData.results.forEach((item: any) => {
+	const eduRes = await eduReq.json();
+
+	eduRes.results.forEach((item: any) => {
 		const eduObj = item.properties;
 		const ordinal = eduObj['Ordinal']['number'];
 		const instName = eduObj['InstName']['title'];
