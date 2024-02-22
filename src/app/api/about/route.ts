@@ -1,11 +1,6 @@
 import { NextResponse } from 'next/server';
 import { revalidateTag } from 'next/cache';
 
-const CERTS_DATABASE_ID = 'e7c18a7833534ec083ab9a1d6f3ca2fe';
-const WORK_EXP_DATABASE_ID = 'f2281d86df84429385387d6eb97f0fd4';
-const EDUCATION_DATABASE_ID = '3e9b9087ea5049b4b5413edcf8d2af2b';
-const ABOUT_SECTION_PARAGRAPHS_BLOCK_ID = '4a73a288f1cc4f818d8236128c700d63';
-
 const NOTION_API_ENDPOINT = 'https://api.notion.com/v1';
 
 // TODO: Type this
@@ -14,6 +9,13 @@ export async function GET() {
 	const aboutMeParas: string[] = [];
 	const workExData: any = [];
 	const certsData: any = [];
+
+	const {
+		ABOUT_SECTION_PARAGRAPHS_BLOCK_ID,
+		WORK_EXP_DATABASE_ID,
+		CERTS_DATABASE_ID,
+		EDUCATION_DATABASE_ID
+	} = process.env;
 
 	const headers = {
 		'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
