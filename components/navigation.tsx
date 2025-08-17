@@ -8,7 +8,7 @@ import { Moon, Sun, Menu, X } from "lucide-react"
 import { useTheme } from "next-themes"
 import { cn } from "@/lib/utils"
 import Image from 'next/image'
-import { images } from '@/lib/images'
+import { config } from '@/lib/config'
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -63,7 +63,7 @@ export function Navigation() {
       <nav className="fixed top-0 w-full z-50 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Image src={images.ht_logo} width={62} height={62} alt='HT_Logo' />
+            <Image src={config.images.htLogo} width={62} height={62} alt='HT_Logo' />
             <div className="hidden md:flex items-center space-x-8">
               <div className="w-20 h-4 bg-muted animate-pulse rounded"></div>
               <div className="w-20 h-4 bg-muted animate-pulse rounded"></div>
@@ -91,7 +91,7 @@ export function Navigation() {
             href="/"
             className="font-montserrat font-black text-xl text-primary hover:text-primary/80 transition-colors duration-200"
           >
-            <Image src={images.ht_logo} width={62} height={62} alt='HT_Logo' />
+            <Image src={config.images.htLogo} width={62} height={62} alt='HT_Logo' />
           </Link>
 
           {/* Desktop Navigation */}

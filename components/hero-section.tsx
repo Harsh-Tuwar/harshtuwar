@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { config } from '@/lib/config'
 import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
 import Link from "next/link"
 
@@ -10,10 +11,10 @@ export function HeroSection() {
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="font-montserrat font-black text-4xl sm:text-5xl lg:text-6xl text-foreground leading-tight">
-                Hi, I'm <span className="text-primary">John Doe</span>
+                Hi, I'm <span className="text-primary">{config.name}</span>
               </h1>
               <h2 className="font-montserrat font-semibold text-xl sm:text-2xl text-muted-foreground">
-                Senior Full Stack Developer
+                {config.role}
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
                 I craft exceptional digital experiences using modern web technologies. Passionate about clean code,
