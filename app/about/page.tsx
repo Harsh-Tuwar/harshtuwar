@@ -1,0 +1,25 @@
+import { Navigation } from "@/components/navigation"
+import { AboutHero } from "@/components/about-hero"
+import { SkillsSection } from "@/components/skills-section"
+import { ExperienceTimeline } from "@/components/experience-timeline"
+import { TechnologiesGrid } from "@/components/technologies-grid"
+import { createMetadata } from "@/lib/metadata"
+
+export const metadata = createMetadata({
+  title: "About",
+  description:
+    "Learn more about John Doe, a Senior Full Stack Developer with expertise in React, Next.js, TypeScript, and modern web technologies.",
+  url: "/about",
+})
+
+export default function AboutPage() {
+  return (
+    <main className="min-h-screen">
+      <Navigation />
+      <AboutHero />
+      <SkillsSection />
+      <TechnologiesGrid />
+      <ExperienceTimeline />
+    </main>
+  )
+}
