@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { config } from '@/lib/config'
 import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
 import Link from "next/link"
-import HomeContentSkeleton from '@/app/(content)/(home)/HeadlineSkeleton';
+import HeadlineSkeleton from '@/app/(content)/(home)/HeadlineSkeleton';
 import HeadlineContent from '@/app/(content)/(home)/HeadlineContent';
 
 export function HeroSection() {
@@ -19,7 +19,7 @@ export function HeroSection() {
               <h2 className="font-montserrat font-semibold text-xl sm:text-2xl text-muted-foreground">
                 {config.role}
               </h2>
-              <Suspense fallback={<HomeContentSkeleton />}>
+              <Suspense fallback={<HeadlineSkeleton />}>
                 <HeadlineContent />
               </Suspense>
             </div>
