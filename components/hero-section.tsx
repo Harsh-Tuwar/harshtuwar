@@ -65,7 +65,7 @@ export function HeroSection() {
             <div className="relative">
               <div className="w-80 h-80 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                 <img
-                  src="/software-developer-headshot.png"
+                  src={config.images.softDevHeadhshot}
                   alt="John Doe - Senior Full Stack Developer"
                   className="w-72 h-72 rounded-full object-cover border-4 border-background shadow-2xl"
                 />
