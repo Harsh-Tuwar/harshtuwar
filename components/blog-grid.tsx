@@ -10,7 +10,7 @@ import { Calendar, Clock, Search, User } from "lucide-react"
 import Link from "next/link"
 import { GetAllBlogsResponse } from '@/types/global.types'
 
-const categories = ["All", "React", "Next.js", "TypeScript", "Web Development", "Performance", "Tutorial"]
+const categories = ["All", "React", "NextJS", "TypeScript", "Web Development", "Performance", "Tutorial"]
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json()).then((data) => data.data);
 
@@ -30,12 +30,12 @@ export function BlogGrid() {
     return <p className="text-center text-muted-foreground">Loading posts...</p>
   }
 
-  const filteredPosts = blogPosts.filter((post: any) => {
-    const matchesCategory = selectedCategory === "All" || post.category === selectedCategory
+  const filteredPosts = blogPosts.filter((post: GetAllBlogsResponse) => {
+    const matchesCategory = selectedCategory === "All" || post.category.findIndex((ic) => ic.name === selectedCategory) !== -1
     const matchesSearch =
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.tags.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      post.tags.some((tag) => tag.name.toLowerCase().includes(searchQuery.toLowerCase()))
 
     return matchesCategory && matchesSearch
   })
@@ -116,9 +116,9 @@ function BlogPostCard({ post }: BlogPostCardProps) {
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute top-4 right-4">
-          <Badge variant="secondary" className="bg-primary/10 text-primary">
-            {post.category.map((i) => i.name).join(', ')}
-          </Badge>
+          {post.category.map((i) => {
+            return <Badge variant="secondary" className="bg-primary/10 text-primary">{i.name}</Badge>
+          })}
         </div>
       </div>
 
