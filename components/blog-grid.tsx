@@ -1,26 +1,41 @@
 "use client"
 
 import { useState } from "react"
+import useSWR from "swr"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Calendar, Clock, Search, User } from "lucide-react"
 import Link from "next/link"
-import { blogPosts } from "@/lib/blog-data"
+import { GetAllBlogsResponse } from '@/types/global.types'
 
 const categories = ["All", "React", "Next.js", "TypeScript", "Web Development", "Performance", "Tutorial"]
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json()).then((data) => data.data);
 
 export function BlogGrid() {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [searchQuery, setSearchQuery] = useState("")
 
-  const filteredPosts = blogPosts.filter((post) => {
+  const { data: blogPosts, error, isLoading } = useSWR("/api/content/blogs", fetcher)
+
+  console.log(blogPosts);
+
+  if (error) {
+    return <p className="text-center text-red-500">Failed to load posts.</p>
+  }
+
+  if (isLoading) {
+    return <p className="text-center text-muted-foreground">Loading posts...</p>
+  }
+
+  const filteredPosts = blogPosts.filter((post: any) => {
     const matchesCategory = selectedCategory === "All" || post.category === selectedCategory
     const matchesSearch =
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      post.tags.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
 
     return matchesCategory && matchesSearch
   })
@@ -62,7 +77,7 @@ export function BlogGrid() {
 
         {/* Blog Posts Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post) => (
+          {filteredPosts.map((post: any) => (
             <BlogPostCard key={post.slug} post={post} />
           ))}
         </div>
@@ -88,7 +103,7 @@ export function BlogGrid() {
 }
 
 interface BlogPostCardProps {
-  post: (typeof blogPosts)[0]
+  post: GetAllBlogsResponse
 }
 
 function BlogPostCard({ post }: BlogPostCardProps) {
@@ -96,13 +111,13 @@ function BlogPostCard({ post }: BlogPostCardProps) {
     <Card className="group hover:shadow-xl transition-all duration-300 border-border/50 hover:border-primary/20 h-full flex flex-col">
       <div className="relative overflow-hidden rounded-t-lg">
         <img
-          src={post.image || "/placeholder.svg"}
-          alt={post.title}
+          src={post.heroImage || "/placeholder.svg"}
+          alt={post.heroImageName}
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute top-4 right-4">
           <Badge variant="secondary" className="bg-primary/10 text-primary">
-            {post.category}
+            {post.category.map((i) => i.name).join(', ')}
           </Badge>
         </div>
       </div>
@@ -127,8 +142,8 @@ function BlogPostCard({ post }: BlogPostCardProps) {
         <div className="space-y-4">
           <div className="flex flex-wrap gap-2">
             {post.tags.slice(0, 3).map((tag) => (
-              <Badge key={tag} variant="outline" className="text-xs">
-                {tag}
+              <Badge key={tag.id} variant="outline" className="text-xs">
+                {tag.name}
               </Badge>
             ))}
             {post.tags.length > 3 && (
