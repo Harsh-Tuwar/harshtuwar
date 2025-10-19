@@ -68,6 +68,16 @@ export type GetAllBlogsResponse = {
 	readTime: string,
 	title: string,
 	dynamicUrl: string,
-	featuredImage: string
+	featuredImage?: string
 }
 
+export type GetRecentBlogsResponse = {
+	id: string,
+	category: NotionMultiSelect[],
+	excerpt: string,
+	readTime: string,
+	title: string,
+	slug: string,
+	publishedAt: string,
+	dynamicUrl: string,
+}

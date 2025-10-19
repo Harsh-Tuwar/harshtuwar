@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import { Client } from '@notionhq/client';
-import { DatabaseObjectResponse, PageObjectResponse, PartialDatabaseObjectResponse, PartialPageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+import { DataSourceObjectResponse, PageObjectResponse, PartialDataSourceObjectResponse, PartialPageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { GetAllBlogsResponse, NotionPageProps } from '@/types/global.types';
 
-function parseContent(response: (PageObjectResponse | PartialPageObjectResponse | PartialDatabaseObjectResponse | DatabaseObjectResponse)[]): GetAllBlogsResponse[] {
+function parseContent(response: (PageObjectResponse | PartialPageObjectResponse | DataSourceObjectResponse | PartialDataSourceObjectResponse)[]): GetAllBlogsResponse[] {
 	return response.map((pageItem) => {
 		const id = pageItem.id;
 		const itemProps = (pageItem as PageObjectResponse).properties as unknown as NotionPageProps;
@@ -45,8 +45,9 @@ export async function GET() {
 			auth: process.env.NOTION_API_KEY
 		});
 
-		const page = await notion.databases.query({
-			database_id: "2543324a94d08091b9eadf72ae36e3c3"
+		const page = await notion.dataSources.query({
+			// data_source_id: "2543324a94d08091b9eadf72ae36e3c3"
+			data_source_id: "2543324a-94d0-800b-a6ce-000bcc893e63"
 		});
 
 		return NextResponse.json({
