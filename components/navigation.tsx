@@ -8,7 +8,7 @@ import { Moon, Sun, Menu, X } from "lucide-react"
 import { useTheme } from "next-themes"
 import { cn } from "@/lib/utils"
 import Image from 'next/image'
-import { config } from '@/lib/config'
+import { siteConfig as config } from '@/lib/metadata'
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)

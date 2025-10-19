@@ -19,7 +19,7 @@ export function RecentBlogPosts() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {recentPosts.map((post) => (
-            <Card key={post.slug} className="group hover:shadow-lg transition-all duration-300 border-border/50">
+            <Card key={post.slug} className="group hover:shadow-lg transition-all duration-300 border-border/50 pt-6">
               <CardHeader>
                 <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
                   <span className="bg-primary/10 text-primary px-2 py-1 rounded-md font-medium">{post.category}</span>
@@ -38,7 +38,7 @@ export function RecentBlogPosts() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="mb-4 leading-relaxed">{post.excerpt}</CardDescription>
-                <Button asChild variant="ghost" className="p-0 h-auto font-semibold text-primary hover:text-primary/80">
+                <Button asChild variant="ghost" className="p-2 h-auto font-semibold text-primary">
                   <Link href={`/blog/${post.slug}`}>
                     Read More
                     <ArrowRight className="ml-1 h-4 w-4" />

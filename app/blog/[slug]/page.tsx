@@ -1,20 +1,37 @@
 import { Navigation } from "@/components/navigation"
 import { BlogPost } from "@/components/blog-post"
 import { StructuredData } from "@/components/structured-data"
-import { blogPosts } from "@/lib/blog-data"
 import { createMetadata } from "@/lib/metadata"
 import { notFound } from "next/navigation"
+import { GetAllBlogsResponse } from '@/types/global.types'
 
-interface BlogPostPageProps {
-  params: {
-    slug: string
-  }
+const BLOG_CONTENT_ENDPOINT = 'api/content/blogs/';
+
+export async function getBlockContent(pageId: string): Promise<{
+  markdown: string,
+  metadata: GetAllBlogsResponse
+}> {
+  const url = process.env?.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
+
+	const res = await fetch(`${url}/${BLOG_CONTENT_ENDPOINT}/${pageId}`, {
+		cache: "no-store"
+  });
+  
+  if (!res.ok) {
+		throw new Error("Failed to fetch content.");
+	}
+
+	const jsonData = await res.json();
+
+	return { markdown: jsonData.data, metadata: jsonData.metadata };
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps) {
-  const post = blogPosts.find((post) => post.slug === params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const response = await getBlockContent(slug);
+  const metadata = response.metadata;
 
-  if (!post) {
+  if (!metadata) {
     return createMetadata({
       title: "Post Not Found",
       description: "The requested blog post could not be found.",
@@ -22,44 +39,43 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   }
 
   return createMetadata({
-    title: post.title,
-    description: post.excerpt,
-    url: `/blog/${post.slug}`,
+    title: metadata.title,
+    description: metadata.excerpt,
+    url: `/blog/${metadata.dynamicUrl}`,
     type: "article",
-    image: post.image,
+    image: metadata.heroImage,
   })
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = blogPosts.find((post) => post.slug === params.slug)
-
-  if (!post) {
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const response = await getBlockContent(slug);
+  
+  if (!response) {
     notFound()
   }
 
+  const post = response.metadata;
+  const markdown = response.markdown;
+  
   return (
     <main className="min-h-screen">
       <Navigation />
-      <BlogPost post={post} />
+      
+      <BlogPost markdown={markdown} metadata={post} />
+
       <StructuredData
         type="Article"
         data={{
           headline: post.title,
           description: post.excerpt,
-          image: post.image,
+          image: post.heroImage,
           datePublished: post.publishedAt,
           dateModified: post.publishedAt,
-          wordCount: post.content.split(" ").length,
           articleSection: post.category,
           keywords: post.tags,
         }}
       />
     </main>
   )
-}
-
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }))
 }

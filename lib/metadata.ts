@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
 
 export const siteConfig = {
-  name: "John Doe",
-  title: "John Doe - Senior Full Stack Developer",
+  name: "Harsh Tuwar",
+  role: "Senior Full Stack Developer",
+  title: "Harsh Tuwar | Senior Full Stack Developer",
   description:
     "Personal portfolio and blog of John Doe, a Senior Full Stack Developer specializing in modern web technologies, React, Next.js, and TypeScript.",
   url: "https://johndoe.dev",
@@ -13,6 +14,11 @@ export const siteConfig = {
     twitter: "@johndoe",
     linkedin: "https://linkedin.com/in/johndoe",
     github: "https://github.com/johndoe",
+  },
+  showBlogs: false,
+  images: {
+    htLogo: '/images/HT_Logo.png',
+		softDevHeadhshot: '/images/software-developer-headshot.png'
   },
   keywords: [
     "Full Stack Developer",

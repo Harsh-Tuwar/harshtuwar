@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Calendar, Clock, Search, User } from "lucide-react"
+import { Calendar, Clock, Search } from "lucide-react"
 import Link from "next/link"
 import { GetAllBlogsResponse } from '@/types/global.types'
 
@@ -19,8 +19,6 @@ export function BlogGrid() {
   const [searchQuery, setSearchQuery] = useState("")
 
   const { data: blogPosts, error, isLoading } = useSWR("/api/content/blogs", fetcher)
-
-  console.log(blogPosts);
 
   if (error) {
     return <p className="text-center text-red-500">Failed to load posts.</p>
@@ -69,10 +67,6 @@ export function BlogGrid() {
               ))}
             </div>
           </div>
-
-          <p className="text-muted-foreground">
-            {filteredPosts.length} {filteredPosts.length === 1 ? "post" : "posts"} found
-          </p>
         </div>
 
         {/* Blog Posts Grid */}
@@ -113,11 +107,11 @@ function BlogPostCard({ post }: BlogPostCardProps) {
         <img
           src={post.heroImage || "/placeholder.svg"}
           alt={post.heroImageName}
-          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 brightness-70"
         />
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 space-x-1">
           {post.category.map((i) => {
-            return <Badge variant="secondary" className="bg-primary/10 text-primary">{i.name}</Badge>
+            return <Badge key={i.id} variant="secondary" className="bg-background/95 text-primary hover:text-primary hover:bg-background/95">{i.name}</Badge>
           })}
         </div>
       </div>
@@ -155,12 +149,12 @@ function BlogPostCard({ post }: BlogPostCardProps) {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <User className="h-4 w-4" />
-              {post.author}
+              {/* <User className="h-4 w-4" /> */}
+              {/* {post.author} */}
             </div>
 
-            <Button asChild size="sm" variant="ghost" className="text-primary hover:text-primary">
-              <Link href={`/blog/${post.slug}`}>Read More →</Link>
+            <Button asChild size="sm" variant="ghost" className="text-primary hover:text-background">
+              <Link href={`/blog/${post.id}`} >Read More →</Link>
             </Button>
           </div>
         </div>

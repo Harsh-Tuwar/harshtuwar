@@ -6,14 +6,7 @@ import { StructuredData } from "@/components/structured-data"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { createMetadata } from "@/lib/metadata"
 import "./globals.css"
-// core styles shared by all of react-notion-x (required)
-import 'react-notion-x/src/styles.css'
 
-// used for code syntax highlighting (optional)
-import 'prismjs/themes/prism-tomorrow.css'
-
-// used for rendering equations (optional)
-import 'katex/dist/katex.min.css'
 
 const inter = Inter({
   subsets: ["latin"],
