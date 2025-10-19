@@ -18,7 +18,8 @@ export const siteConfig = {
   showBlogs: false,
   images: {
     htLogo: '/images/HT_Logo.png',
-		softDevHeadhshot: '/images/software-developer-headshot.png'
+    softDevHeadhshot: '/images/software-developer-headshot.png',
+    manCoding: 'images/undraw_developer-avatar_f6ac.svg'
   },
   keywords: [
     "Full Stack Developer",

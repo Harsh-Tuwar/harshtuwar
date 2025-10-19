@@ -8,6 +8,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
+import { siteConfig } from '@/lib/metadata'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
@@ -100,85 +101,97 @@ export default function SpotifyWidget() {
     : 0
 
   return (
-    <section className="bg-gradient-to-br from-background via-muted/50 to-background">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <MotionCard
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 250, damping: 20 }}
-          className={cn(
-            "relative border bg-card overflow-hidden group shadow-lg",
-            song?.isPlaying ? "hover:border-green-500" : "hover:border-muted-foreground"
-          )}
-        >
-          <Link
-            href={song?.isPlaying && song?.songUrl ? song.songUrl : "#"}
-            target="_blank"
-            rel="noopener noreferrer"
+    <section className="bg-gradient-to-br from-background via-muted/50 to-background py-16 px-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 items-center">
+        {/* Image (1/4 width on desktop) */}
+        <div className="flex justify-center mr-3 md:justify-end">
+          <Image
+            src={siteConfig.images.manCoding}
+            alt="Music vibes"
+            width={400}
+            height={400}
+          />
+        </div>
+        {/* Spotify Widget (3/4 width on desktop) */}
+        <div className="md:col-span-3">
+          <MotionCard
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 250, damping: 20 }}
+            className={cn(
+              "relative border bg-card overflow-hidden group shadow-lg",
+              song?.isPlaying ? "hover:border-green-500" : "hover:border-muted-foreground"
+            )}
           >
-            <CardContent className="p-6 flex flex-col gap-6">
-              {/* Header */}
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <SiSpotify size={22} color="#1ED760" className={cn(song?.isPlaying && "animate-pulse")} />
-                <span className="text-sm tracking-wide">
-                  {song?.isPlaying ? "Now Playing on Spotify" : "Spotify"}
-                </span>
-              </div>
-
-              {/* Main Content */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
-                {/* Album Art */}
-                {song?.isPlaying ? (
-                  <div className="relative">
-                    <Image
-                      src={song.albumImageUrl}
-                      alt={song.album}
-                      width={140}
-                      height={140}
-                      className="rounded-xl shadow-md ring-2 ring-green-500/50 group-hover:ring-green-500 transition"
-                    />
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-center w-[140px] h-[140px] rounded-xl bg-muted">
-                    <SiSpotify size={60} color="#1ED760" />
-                  </div>
-                )}
-
-                {/* Song Info */}
-                <div className="flex flex-col mt-4 sm:mt-0 sm:flex-1">
-                  <h2 className="text-xl font-bold text-foreground truncate text-center sm:text-left">
-                    {song?.isPlaying ? song.title : "Not Listening"}
-                  </h2>
-                  <p className="text-muted-foreground mt-1 text-sm text-center sm:text-left">
-                    {song?.isPlaying ? song.artist : "Spotify"}
-                  </p>
-                  {song?.isPlaying && (
-                    <>
-                      <p className="text-xs text-muted-foreground mt-1 text-center sm:text-left">
-                        {song.album} {song.releaseDate && `• ${song.releaseDate.slice(0, 4)}`}
-                      </p>
-
-                      {/* Progress Bar */}
-                      {duration ? (
-                        <div className="mt-4">
-                          <div className="relative h-1 w-full bg-muted rounded-full overflow-hidden">
-                            <div
-                              className="absolute top-0 left-0 h-full bg-green-500"
-                              style={{ width: `${progressPercent}%` }}
-                            />
-                          </div>
-                          <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                            <span>{msToTime(displayProgress)}</span>
-                            <span>{msToTime(duration)}</span>
-                          </div>
-                        </div>
-                      ) : null}
-                    </>
-                  )}
+            <Link
+              href={song?.isPlaying && song?.songUrl ? song.songUrl : "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <CardContent className="p-6 flex flex-col gap-6">
+                {/* Header */}
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <SiSpotify size={22} color="#1ED760" className={cn(song?.isPlaying && "animate-pulse")} />
+                  <span className="text-sm tracking-wide">
+                    {song?.isPlaying ? "Now Playing on Spotify" : "Spotify"}
+                  </span>
                 </div>
-              </div>
-            </CardContent>
-          </Link>
-        </MotionCard>
+
+                {/* Main Content */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
+                  {/* Album Art */}
+                  {song?.isPlaying ? (
+                    <div className="relative">
+                      <Image
+                        src={song.albumImageUrl}
+                        alt={song.album}
+                        width={140}
+                        height={140}
+                        className="rounded-xl shadow-md ring-2 ring-green-500/50 group-hover:ring-green-500 transition"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center w-[140px] h-[140px] rounded-xl bg-muted">
+                      <SiSpotify size={60} color="#1ED760" />
+                    </div>
+                  )}
+
+                  {/* Song Info */}
+                  <div className="flex flex-col mt-4 sm:mt-0 sm:flex-1">
+                    <h2 className="text-xl font-bold text-foreground truncate text-center sm:text-left">
+                      {song?.isPlaying ? song.title : "Not Listening"}
+                    </h2>
+                    <p className="text-muted-foreground mt-1 text-sm text-center sm:text-left">
+                      {song?.isPlaying ? song.artist : "Spotify"}
+                    </p>
+                    {song?.isPlaying && (
+                      <>
+                        <p className="text-xs text-muted-foreground mt-1 text-center sm:text-left">
+                          {song.album} {song.releaseDate && `• ${song.releaseDate.slice(0, 4)}`}
+                        </p>
+
+                        {/* Progress Bar */}
+                        {duration ? (
+                          <div className="mt-4">
+                            <div className="relative h-1 w-full bg-muted rounded-full overflow-hidden">
+                              <div
+                                className="absolute top-0 left-0 h-full bg-green-500"
+                                style={{ width: `${progressPercent}%` }}
+                              />
+                            </div>
+                            <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                              <span>{msToTime(displayProgress)}</span>
+                              <span>{msToTime(duration)}</span>
+                            </div>
+                          </div>
+                        ) : null}
+                      </>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Link>
+          </MotionCard>
+        </div>
       </div>
     </section>
   )
