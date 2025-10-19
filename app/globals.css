@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -166,5 +167,15 @@
 
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-muted-foreground/50;
-  }
+  }  
+}
+
+.prose pre {
+  background-color: #1e1e1e !important;
+  color: #f8f8f2 !important;
+}
+
+.prose code {
+  background-color: rgba(30, 30, 30, 0.9) !important;
+  color: #f8f8f2 !important;
 }

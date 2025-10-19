@@ -17,6 +17,14 @@ export type NotionPageProps = {
 	slug: NotionText,
 	author: NotionText,
 	readTime: NotionText,
+	featuredImage: {
+		files: {
+			name: string
+			file: {
+				url: string
+			}
+		}[]
+	}
 	title: {
 		title: {
 			plain_text: string
@@ -59,6 +67,7 @@ export type GetAllBlogsResponse = {
 	author: string,
 	readTime: string,
 	title: string,
-	dynamicUrl: string
+	dynamicUrl: string,
+	featuredImage: string
 }
 

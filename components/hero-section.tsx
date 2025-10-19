@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Button } from "@/components/ui/button"
-import { config } from '@/lib/config'
+import { siteConfig as config } from '@/lib/metadata'
 import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
 import Link from "next/link"
 import HeadlineSkeleton from '@/app/(content)/(home)/HeadlineSkeleton';
