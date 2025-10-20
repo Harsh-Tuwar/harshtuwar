@@ -1,65 +1,121 @@
 import { Button } from "@/components/ui/button"
+import { siteConfig } from '@/lib/metadata'
+import { RichText } from '@/types/global.types';
 import { Download, MapPin, Calendar } from "lucide-react"
 
-export function AboutHero() {
+const ABOUT_CONTENT_ENDPOINT = 'api/content/about';
+
+async function getAboutContent(): Promise<{ data: RichText[][] }> {
+  const url = process.env?.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
+
+	const res = await fetch(`${url}/${ABOUT_CONTENT_ENDPOINT}`, {
+		cache: "no-store"
+	});
+
+	if (!res.ok) {
+		throw new Error("Failed to fetch content.");
+	}
+
+	const jsonData = await res.json();
+
+	return { data: jsonData.data };
+}
+
+export async function AboutHero() {
+  const response = await getAboutContent();
+
   return (
-    <section className="pt-24 pb-16 bg-gradient-to-br from-background via-muted/30 to-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <div className="space-y-6">
-              <h1 className="font-montserrat font-black text-4xl sm:text-5xl text-foreground">
-                About <span className="text-primary">Me</span>
-              </h1>
-              <div className="flex flex-wrap items-center gap-6 text-muted-foreground">
-                <div className="flex items-center">
-                  <MapPin className="h-5 w-5 mr-2 text-primary" />
-                  San Francisco, CA
-                </div>
-                <div className="flex items-center">
-                  <Calendar className="h-5 w-5 mr-2 text-primary" />
-                  5+ Years Experience
-                </div>
-              </div>
-              <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
-                <p>
-                  I'm a passionate Senior Full Stack Developer with over 5 years of experience building scalable web
-                  applications and leading development teams. My journey in tech started with a Computer Science degree
-                  and has evolved through various roles at startups and established companies.
-                </p>
-                <p>
-                  I specialize in modern JavaScript frameworks, cloud architecture, and creating exceptional user
-                  experiences. When I'm not coding, you'll find me contributing to open source projects, mentoring
-                  junior developers, or exploring the latest in web technologies.
-                </p>
-                <p>
-                  My approach combines technical expertise with strong communication skills, enabling me to bridge the
-                  gap between complex technical concepts and business objectives.
-                </p>
-              </div>
+    <section className="relative overflow-hidden py-24 bg-gradient-to-br from-background via-muted/20 to-background">
+  {/* Decorative Gradient Blobs */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute -top-20 -left-20 w-72 h-72 bg-primary/10 blur-3xl rounded-full"></div>
+    <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-accent/10 blur-3xl rounded-full"></div>
+  </div>
+
+  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid lg:grid-cols-2 gap-20 items-center">
+
+      {/* Text Section */}
+      <div className="space-y-12">
+        <header className="space-y-6">
+          <h1 className="text-5xl sm:text-6xl font-extrabold font-serif tracking-tight text-foreground leading-[1.1]">
+            About <span className="text-primary">Me</span>
+          </h1>
+
+          <div className="flex flex-wrap items-center gap-6 text-muted-foreground/90 text-base font-medium">
+            <div className="flex items-center">
+              <MapPin className="h-5 w-5 mr-2 text-primary" />
+              {siteConfig.location}
             </div>
-
-            <Button size="lg" className="font-semibold">
-              <Download className="mr-2 h-4 w-4" />
-              Download Resume
-            </Button>
-          </div>
-
-          <div className="flex justify-center lg:justify-end">
-            <div className="relative">
-              <div className="w-96 h-96 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 p-8">
-                <img
-                  src="/developer-multiple-monitors.png"
-                  alt="John Doe working"
-                  className="w-full h-full rounded-xl object-cover"
-                />
-              </div>
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-primary/5 rounded-full"></div>
-              <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-accent/5 rounded-full"></div>
+            <div className="flex items-center">
+              <Calendar className="h-5 w-5 mr-2 text-primary" />
+              {new Date().getFullYear() - siteConfig.experienceStartYear}+ Years Experience
             </div>
           </div>
+        </header>
+
+        {/* About Content — Enhanced Typography */}
+        <div className="relative space-y-6 text-[1.05rem] font-light leading-[1.9] tracking-[0.01em] text-muted-foreground/90 text-justify selection:bg-primary/10 selection:text-primary transition-colors duration-500 hyphens-auto">
+          {response.data.map((para, i) => (
+            <p
+              key={i}
+              className="hover:text-foreground/95 transition-colors duration-500"
+            >
+              {para.map((content, j) => {
+                const { bold, italic, underline, strikethrough, color = "default" } = content.annotations;
+
+                const className = [
+                  bold ? "font-semibold text-foreground" : "",
+                  italic ? "italic text-foreground/90" : "",
+                  underline ? "underline underline-offset-4 decoration-primary/40" : "",
+                  strikethrough ? "line-through text-muted-foreground/70" : "",
+                  color !== "default" ? `text-${color}-500` : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ");
+
+                return (
+                  <span
+                    key={j}
+                    className={`${className} [text-wrap:balance]`}
+                  >
+                    {content.text}
+                  </span>
+                );
+              })}
+            </p>
+          ))}
+        </div>
+
+        {siteConfig.allowResumeDownload && (
+          <Button
+            size="lg"
+            className="font-semibold shadow-md hover:shadow-xl hover:-translate-y-[2px] transition-all duration-300 bg-primary/90 hover:bg-primary text-primary-foreground"
+          >
+            <Download className="mr-2 h-4 w-4" />
+            Download Resume
+          </Button>
+        )}
+      </div>
+
+      {/* Image Section */}
+      <div className="flex justify-center lg:justify-end">
+        <div className="relative group">
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-primary/30 via-accent/10 to-background blur-2xl opacity-60 group-hover:opacity-80 transition-all duration-700"></div>
+          <div className="relative w-[420px] h-[420px] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-border/10">
+            <img
+              src="/developer-multiple-monitors.png"
+              alt="Developer at work"
+              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+          </div>
+          <div className="absolute -top-8 -right-6 w-24 h-24 bg-primary/10 rounded-full blur-2xl"></div>
+          <div className="absolute -bottom-10 -left-8 w-32 h-32 bg-accent/10 rounded-full blur-2xl"></div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
   )
 }

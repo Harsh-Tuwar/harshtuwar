@@ -56,7 +56,7 @@ export function ExperienceTimeline() {
                 {/* Timeline dot */}
                 <div className="absolute left-6 w-4 h-4 bg-primary rounded-full border-4 border-background hidden md:block"></div>
 
-                <Card className="md:ml-16 border-border/50 hover:shadow-lg transition-all duration-300">
+                <Card className="md:ml-16 border-border/50 hover:shadow-lg transition-all duration-300 pt-6">
                   <CardHeader>
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                       <div>

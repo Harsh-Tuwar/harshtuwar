@@ -3,12 +3,12 @@ import { AboutHero } from "@/components/about-hero"
 import { SkillsSection } from "@/components/skills-section"
 import { ExperienceTimeline } from "@/components/experience-timeline"
 import { TechnologiesGrid } from "@/components/technologies-grid"
-import { createMetadata } from "@/lib/metadata"
+import { createMetadata, siteConfig } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "About",
   description:
-    "Learn more about John Doe, a Senior Full Stack Developer with expertise in React, Next.js, TypeScript, and modern web technologies.",
+    `Learn more about ${siteConfig.author.name}, a ${siteConfig.role} with expertise in React, Next.js, TypeScript, and modern web technologies.`,
   url: "/about",
 })
 

@@ -81,3 +81,33 @@ export type GetRecentBlogsResponse = {
 	publishedAt: string,
 	dynamicUrl: string,
 }
+
+export type RichText = {
+  text: string;
+  annotations: {
+	bold: boolean;
+	italic: boolean;
+	underline: boolean;
+	strikethrough: boolean;
+	code: boolean;
+	color: string;
+  };
+};
+
+export interface NotionResultItem { 
+	type: string
+	paragraph: {
+		rich_text: [
+			type: string,
+			plain_text: string,
+			annotation: {
+				bold: boolean,
+				italic: boolean,
+				strikethrough: boolean,
+				underline: boolean,
+				code: boolean,
+				color: string
+			}
+		]
+	}
+}

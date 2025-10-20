@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
-import { Client } from '@notionhq/client';
+import { notion } from '@/lib/notion';
 import { RichText, NotionResultItem } from '@/types/global.types';
+import { NextResponse } from 'next/server';
 
 function parseBlocks(apiResponse: any): RichText[][] {
   if (!apiResponse?.results) return [];
@@ -25,20 +25,16 @@ function parseBlocks(apiResponse: any): RichText[][] {
 
 export async function GET() {
 	try {
-		const notion = new Client({
-			auth: process.env.NOTION_API_KEY,
-		});
-
 		const responseFromNotion = await notion.blocks.children.list({
-			block_id: "02c78ac2798b4a5095299849ae322874",
+			block_id: '2923324a94d080188a8df932cba65334'
 		});
 
 		const paragraphs = parseBlocks(responseFromNotion);
-		
+
 		return NextResponse.json({
 			success: true,
 			data: paragraphs
-		}, { status: 200 })
+		}, { status: 200 });
 	} catch (error) {
 		console.error("Fetch Content Error: ", error);
 		return NextResponse.json({
