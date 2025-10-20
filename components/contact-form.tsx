@@ -110,7 +110,7 @@ export function ContactForm() {
   }
 
   return (
-    <Card className="border-border/50">
+    <Card className="border-border/50 pt-6">
       <CardHeader>
         <CardTitle className="font-montserrat text-2xl">Send me a message</CardTitle>
         <CardDescription>Fill out the form below and I'll get back to you as soon as possible.</CardDescription>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import useSWR from "swr"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Calendar, Clock, Search } from "lucide-react"
 import Link from "next/link"
 import { GetAllBlogsResponse } from '@/types/global.types'
+import BlogGridSkeleton from '@/components/skeletons/blog-grid-skeleton'
 
 const categories = ["All", "React", "NextJS", "TypeScript", "Web Development", "Performance", "Tutorial"]
 
@@ -24,11 +25,7 @@ export function BlogGrid() {
     return <p className="text-center text-red-500">Failed to load posts.</p>
   }
 
-  if (isLoading) {
-    return <p className="text-center text-muted-foreground">Loading posts...</p>
-  }
-
-  const filteredPosts = blogPosts.filter((post: GetAllBlogsResponse) => {
+  const filteredPosts = blogPosts && blogPosts.filter((post: GetAllBlogsResponse) => {
     const matchesCategory = selectedCategory === "All" || post.category.findIndex((ic) => ic.name === selectedCategory) !== -1
     const matchesSearch =
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -69,14 +66,18 @@ export function BlogGrid() {
           </div>
         </div>
 
-        {/* Blog Posts Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post: any) => (
-            <BlogPostCard key={post.slug} post={post} />
-          ))}
-        </div>
+        {isLoading && <BlogGridSkeleton />}
 
-        {filteredPosts.length === 0 && (
+        {/* Blog Posts Grid */}
+        <Suspense fallback={<BlogGridSkeleton />}>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredPosts?.map((post: GetAllBlogsResponse) => (
+              <BlogPostCard key={post.slug} post={post} />
+            ))}
+          </div>
+        </Suspense>
+
+        {filteredPosts?.length === 0 && (
           <div className="text-center py-16">
             <p className="text-muted-foreground text-lg">No posts found matching your criteria.</p>
             <Button
