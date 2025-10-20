@@ -1,16 +1,13 @@
 "use client"
 
-import { SiSpotify } from "react-icons/si"
-import { cn } from "@/lib/utils"
-import useSWR from "swr"
-import { Card, CardContent } from "@/components/ui/card"
 import { motion } from "framer-motion"
+import { SiSpotify } from "react-icons/si"
+import useSWR from "swr"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
-import { siteConfig } from '@/lib/metadata'
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+import { Card, CardContent } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
 interface SpotifySong {
   album: string
@@ -24,180 +21,134 @@ interface SpotifySong {
   releaseDate?: string
 }
 
-const MotionCard = motion.create(Card)
-const DRIFT_MS = 1500 // only re-anchor if drift is larger than this
+const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
-export default function SpotifyWidget() {
-  const { data: song } = useSWR<SpotifySong>("/api/spotify", fetcher, {
-    refreshInterval: 5000,
-    revalidateOnFocus: false, // avoid sudden jumps on tab focus
-    dedupingInterval: 4000,
-  })
-
-  // Anchor model: display = baseProgress + (now - baseTs)
-  const [baseProgress, setBaseProgress] = useState(0)
-  const [baseTs, setBaseTs] = useState(0)
-  const [duration, setDuration] = useState(0)
-  const [title, setTitle] = useState<string>("")
-  const [displayProgress, setDisplayProgress] = useState(0)
+// 🎵 custom hook for smooth playback progress
+function useSmoothProgress(song?: SpotifySong) {
+  const [progress, setProgress] = useState(song?.progress ?? 0)
   const rafRef = useRef<number | null>(null)
+  const [base, setBase] = useState({ ts: performance.now(), value: song?.progress ?? 0 })
 
-  // Start / update RAF loop
   useEffect(() => {
-    const tick = () => {
-      const now = performance.now()
-      const next = Math.min(baseProgress + Math.max(0, now - baseTs), duration || Infinity)
-      setDisplayProgress(next)
-      rafRef.current = requestAnimationFrame(tick)
-    }
-
-    if (duration > 0) {
-      rafRef.current = requestAnimationFrame(tick)
-    }
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-      rafRef.current = null
-    }
-  }, [baseProgress, baseTs, duration])
-
-  // Re-anchor when a NEW track arrives (hard reset).
-  useEffect(() => {
-    if (!song?.isPlaying || song.progress == null || !song.duration) {
-      setDisplayProgress(0)
-      setDuration(0)
+    if (!song?.isPlaying || !song.duration) {
+      setProgress(0)
       return
     }
 
     const now = performance.now()
+    setBase({ ts: now, value: song.progress ?? 0 })
 
-    // Track changed
-    if (song.title !== title) {
-      setTitle(song.title)
-      setDuration(song.duration)
-      setBaseProgress(song.progress)
-      setBaseTs(now)
-      return
+    const update = () => {
+      const elapsed = performance.now() - base.ts
+      const next = Math.min(base.value + elapsed, song.duration)
+      setProgress(next)
+      rafRef.current = requestAnimationFrame(update)
     }
 
-    // Same track: compute current displayed, then softly re-anchor if drift is large
-    const currentDisplayed = Math.min(baseProgress + Math.max(0, now - baseTs), duration || song.duration)
-    const drift = song.progress - currentDisplayed
+    rafRef.current = requestAnimationFrame(update)
+    return () => rafRef.current && cancelAnimationFrame(rafRef.current)
+  }, [song?.title, song?.isPlaying])
 
-    if (Math.abs(drift) > DRIFT_MS) {
-      // Re-anchor WITHOUT visual jump: keep currentDisplayed the same
-      // Choose new base so that: song.progress + (now - newBaseTs) = currentDisplayed
-      const newBaseTs = now - (currentDisplayed - song.progress)
-      setDuration(song.duration)
-      setBaseProgress(song.progress)
-      setBaseTs(newBaseTs)
-    } else {
-      // Tiny drift: ignore to keep it buttery smooth
-      if (duration !== song.duration) setDuration(song.duration)
-    }
-  }, [song?.title, song?.progress, song?.duration, song?.isPlaying])
+  return {
+    progress,
+    progressPercent: song?.duration ? (progress / song.duration) * 100 : 0,
+  }
+}
 
-  const progressPercent = song?.isPlaying && duration
-    ? Math.min(100, (displayProgress / duration) * 100)
-    : 0
+export default function SpotifyWidget() {
+  const { data: song } = useSWR<SpotifySong>("/api/spotify", fetcher, {
+    refreshInterval: 5000,
+    revalidateOnFocus: false,
+  })
+
+  const { progress, progressPercent } = useSmoothProgress(song)
 
   return (
-    <section className="bg-gradient-to-br from-background via-muted/50 to-background py-16 px-6">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 items-center">
-        {/* Image (1/4 width on desktop) */}
-        <div className="flex justify-center mr-3 md:justify-end">
-          <Image
-            src={siteConfig.images.manCoding}
-            alt="Music vibes"
-            width={400}
-            height={400}
-          />
-        </div>
-        {/* Spotify Widget (3/4 width on desktop) */}
-        <div className="md:col-span-3">
-          <MotionCard
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 250, damping: 20 }}
+    <section className="bg-gradient-to-b from-background via-muted/40 to-background py-12 px-4">
+      <div className="max-w-3xl mx-auto">
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        >
+          <Card
             className={cn(
-              "relative border bg-card overflow-hidden group shadow-lg",
-              song?.isPlaying ? "hover:border-green-500" : "hover:border-muted-foreground"
+              "relative overflow-hidden rounded-2xl backdrop-blur-xl border border-muted/50 bg-card/70 shadow-lg transition-all",
+              song?.isPlaying && "ring-2 ring-green-500/40"
             )}
           >
             <Link
-              href={song?.isPlaying && song?.songUrl ? song.songUrl : "#"}
+              href={song?.songUrl ?? "#"}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <CardContent className="p-6 flex flex-col gap-6">
-                {/* Header */}
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <SiSpotify size={22} color="#1ED760" className={cn(song?.isPlaying && "animate-pulse")} />
-                  <span className="text-sm tracking-wide">
-                    {song?.isPlaying ? "Now Playing on Spotify" : "Spotify"}
-                  </span>
-                </div>
-
-                {/* Main Content */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6">
-                  {/* Album Art */}
-                  {song?.isPlaying ? (
-                    <div className="relative">
-                      <Image
-                        src={song.albumImageUrl}
-                        alt={song.album}
-                        width={140}
-                        height={140}
-                        className="rounded-xl shadow-md ring-2 ring-green-500/50 group-hover:ring-green-500 transition"
-                      />
-                    </div>
+              <CardContent className="flex flex-col sm:flex-row items-center gap-6 p-6">
+                {/* Album Art */}
+                <div className="relative w-[120px] h-[120px] flex-shrink-0">
+                  {song?.albumImageUrl ? (
+                    <Image
+                      src={song.albumImageUrl}
+                      alt={song.album}
+                      fill
+                      className="rounded-xl object-cover shadow-md"
+                    />
                   ) : (
-                    <div className="flex items-center justify-center w-[140px] h-[140px] rounded-xl bg-muted">
-                      <SiSpotify size={60} color="#1ED760" />
+                    <div className="w-full h-full flex items-center justify-center rounded-xl bg-muted">
+                      <SiSpotify size={50} color="#1ED760" />
                     </div>
                   )}
+                </div>
 
-                  {/* Song Info */}
-                  <div className="flex flex-col mt-4 sm:mt-0 sm:flex-1">
-                    <h2 className="text-xl font-bold text-foreground truncate text-center sm:text-left">
-                      {song?.isPlaying ? song.title : "Not Listening"}
-                    </h2>
-                    <p className="text-muted-foreground mt-1 text-sm text-center sm:text-left">
-                      {song?.isPlaying ? song.artist : "Spotify"}
-                    </p>
-                    {song?.isPlaying && (
-                      <>
-                        <p className="text-xs text-muted-foreground mt-1 text-center sm:text-left">
-                          {song.album} {song.releaseDate && `• ${song.releaseDate.slice(0, 4)}`}
-                        </p>
-
-                        {/* Progress Bar */}
-                        {duration ? (
-                          <div className="mt-4">
-                            <div className="relative h-1 w-full bg-muted rounded-full overflow-hidden">
-                              <div
-                                className="absolute top-0 left-0 h-full bg-green-500"
-                                style={{ width: `${progressPercent}%` }}
-                              />
-                            </div>
-                            <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                              <span>{msToTime(displayProgress)}</span>
-                              <span>{msToTime(duration)}</span>
-                            </div>
-                          </div>
-                        ) : null}
-                      </>
-                    )}
+                {/* Song Info */}
+                <div className="flex flex-col flex-1 text-center sm:text-left">
+                  <div className="flex items-center justify-center sm:justify-start gap-2 text-muted-foreground mb-2">
+                    <SiSpotify
+                      size={20}
+                      color="#1ED760"
+                      className={cn(song?.isPlaying && "animate-pulse")}
+                    />
+                    <span className="text-xs tracking-wide">
+                      {song?.isPlaying ? "Now Playing" : "Spotify"}
+                    </span>
                   </div>
+
+                  <h2 className="text-xl font-semibold text-foreground truncate">
+                    {song?.isPlaying ? song.title : "Not Listening"}
+                  </h2>
+                  <p className="text-sm text-muted-foreground truncate">
+                    {song?.isPlaying ? song.artist : ""}
+                  </p>
+                  {song?.isPlaying && (
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {song.album} {song.releaseDate && `• ${song.releaseDate.slice(0, 4)}`}
+                    </p>
+                  )}
+
+                  {/* Progress bar */}
+                  {song?.isPlaying && song.duration && (
+                    <div className="mt-4">
+                      <div className="relative h-1 w-full bg-muted rounded-full overflow-hidden">
+                        <motion.div
+                          className="absolute left-0 top-0 h-full bg-green-500"
+                          style={{ width: `${progressPercent}%` }}
+                          transition={{ duration: 0.5 }}
+                        />
+                      </div>
+                      <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                        <span>{msToTime(progress)}</span>
+                        <span>{msToTime(song.duration)}</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Link>
-          </MotionCard>
-        </div>
+          </Card>
+        </motion.div>
       </div>
     </section>
   )
 }
 
-// helper: convert ms -> mm:ss
 function msToTime(ms: number) {
   const minutes = Math.floor(ms / 60000)
   const seconds = Math.floor((ms % 60000) / 1000)
