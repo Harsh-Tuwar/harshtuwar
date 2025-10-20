@@ -4,12 +4,14 @@ import { Progress } from "@/components/ui/progress"
 const skills = [
   { name: "JavaScript/TypeScript", level: 95, category: "Frontend" },
   { name: "React/Next.js", level: 90, category: "Frontend" },
-  { name: "Node.js", level: 88, category: "Backend" },
+  { name: "Node.js", level: 92, category: "Backend" },
   { name: "Python", level: 85, category: "Backend" },
-  { name: "PostgreSQL/MongoDB", level: 82, category: "Database" },
+  { name: "PostgreSQL/MySQL", level: 88, category: "Database" },
+  { name: "MongoDB/Supabase", level: 83, category: "Database" },
   { name: "AWS/Vercel", level: 80, category: "DevOps" },
   { name: "Docker/Kubernetes", level: 75, category: "DevOps" },
-  { name: "GraphQL", level: 78, category: "API" },
+  { name: "GraphQL", level: 78, category: "API", },
+  { name: "REST", level: 89, category: "API", },
 ]
 
 const categories = ["Frontend", "Backend", "Database", "DevOps", "API"]
@@ -27,7 +29,7 @@ export function SkillsSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category) => (
-            <Card key={category} className="border-border/50">
+            <Card key={category} className="border-border/50 pt-6">
               <CardHeader>
                 <CardTitle className="text-xl font-montserrat font-semibold text-primary">{category}</CardTitle>
               </CardHeader>
