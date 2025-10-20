@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { siteConfig as config } from '@/lib/metadata'
 import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
 import Link from "next/link"
-import HeadlineSkeleton from '@/app/(content)/(home)/HeadlineSkeleton';
+import HeadlineSkeleton from '@/components/skeletons/headline-skeleton';
 import HeadlineContent from '@/app/(content)/(home)/HeadlineContent';
 
 export function HeroSection() {
