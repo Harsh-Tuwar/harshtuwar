@@ -54,12 +54,21 @@ export async function HeroSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="font-semibold">
-                <Link href="/projects">
-                  View My Work
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+              {config.showProjects ? (
+                <Button asChild size="lg" className="font-semibold">
+                  <Link href="/projects">
+                    View My Work
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              ) : (
+                <Button asChild size="lg" className="font-semibold">
+                  <Link href="/about">
+                    Learn More About Me
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              )}
               <Button variant="outline" size="lg" asChild>
                 <Link href="/contact">Get In Touch</Link>
               </Button>

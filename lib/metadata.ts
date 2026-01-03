@@ -19,6 +19,7 @@ export const siteConfig = {
     github: "https://github.com/harsh-tuwar",
   },
   showBlogs: false,
+  showProjects: false,
   images: {
     htLogo: '/images/HT_Logo.png',
     softDevHeadhshot: '/images/software-developer-headshot.png',
