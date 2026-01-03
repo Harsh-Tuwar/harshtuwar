@@ -1,27 +1,24 @@
 import { notion } from './index';
 import { NotionToMarkdown } from "notion-to-md";
+import { NOTION_IDS } from './constants';
 import {
   parseParagraphBlocks,
   parseBlogPosts,
   parseRecentBlogPosts,
-  parseBlogPost
+  parseBlogPost,
+  parseSkillCategories,
+  parseTechnologies
 } from './parsers';
 import {
   RichText,
   GetAllBlogsResponse,
-  GetRecentBlogsResponse
+  GetRecentBlogsResponse,
+  SkillCategory,
+  Technology
 } from '@/types/global.types';
 
 // Initialize Notion to Markdown converter
 const n2m = new NotionToMarkdown({ notionClient: notion });
-
-// Notion Block IDs and Data Source IDs
-const NOTION_IDS = {
-  HOME_HEADLINE: "02c78ac2798b4a5095299849ae322874",
-  ABOUT_PAGE: "2923324a94d080188a8df932cba65334",
-  ALL_BLOGS_DATASOURCE: "2543324a-94d0-800b-a6ce-000bcc893e63",
-  RECENT_BLOGS_DATASOURCE: "2913324a-94d0-80bb-9527-000bf25b39a9",
-} as const;
 
 /**
  * Get home page headline content from Notion
@@ -90,4 +87,40 @@ export async function getBlogPost(pageId: string): Promise<{
     markdown: mdString.parent,
     metadata: parseBlogPost(metadata)
   };
+}
+
+/**
+ * Get skill categories from Notion database
+ * Returns all skill categories sorted by order field
+ */
+export async function getSkillCategories(): Promise<SkillCategory[]> {
+  if (!NOTION_IDS.SKILL_CATEGORIES_DATASOURCE) {
+    console.warn('SKILL_CATEGORIES_DATASOURCE not configured. Using fallback data.');
+    return [];
+  }
+
+  const page = await notion.dataSources.query({
+    data_source_id: NOTION_IDS.SKILL_CATEGORIES_DATASOURCE
+  });
+
+  const categories = parseSkillCategories(page.results);
+  return categories.sort((a, b) => a.order - b.order);
+}
+
+/**
+ * Get technologies from Notion database
+ * Returns all technologies sorted by order field
+ */
+export async function getTechnologies(): Promise<Technology[]> {
+  if (!NOTION_IDS.TECHNOLOGIES_DATASOURCE) {
+    console.warn('TECHNOLOGIES_DATASOURCE not configured. Using fallback data.');
+    return [];
+  }
+
+  const page = await notion.dataSources.query({
+    data_source_id: NOTION_IDS.TECHNOLOGIES_DATASOURCE
+  });
+
+  const technologies = parseTechnologies(page.results);
+  return technologies.sort((a, b) => a.order - b.order);
 }

@@ -1,53 +1,104 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Code2, Sparkles } from "lucide-react"
+import { getSkillCategories, getTechnologies } from "@/lib/notion/content"
+import { iconMap } from "@/lib/skills/icon-map"
+import { fallbackSkillCategories, fallbackTechnologies } from "@/lib/skills/fallback-data"
 
-const skills = [
-  { name: "JavaScript/TypeScript", level: 95, category: "Frontend" },
-  { name: "React/Next.js", level: 90, category: "Frontend" },
-  { name: "Node.js", level: 92, category: "Backend" },
-  { name: "Python", level: 85, category: "Backend" },
-  { name: "PostgreSQL/MySQL", level: 88, category: "Database" },
-  { name: "MongoDB/Supabase", level: 83, category: "Database" },
-  { name: "AWS/Vercel", level: 80, category: "DevOps" },
-  { name: "Docker/Kubernetes", level: 75, category: "DevOps" },
-  { name: "GraphQL", level: 78, category: "API", },
-  { name: "REST", level: 89, category: "API", },
-]
+export async function SkillsSection() {
+  // Fetch data from Notion, fallback to hardcoded data if not configured
+  const skillCategories = await getSkillCategories().catch(() => fallbackSkillCategories)
+  const technologies = await getTechnologies().catch(() => fallbackTechnologies)
 
-const categories = ["Frontend", "Backend", "Database", "DevOps", "API"]
+  // Use fallback if Notion returns empty
+  const finalSkillCategories = skillCategories.length > 0 ? skillCategories : fallbackSkillCategories
+  const finalTechnologies = technologies.length > 0 ? technologies : fallbackTechnologies
 
-export function SkillsSection() {
   return (
-    <section className="py-20 bg-muted/20">
+    <section className="py-20 bg-gradient-to-br from-background via-muted/30 to-background relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="font-montserrat font-bold text-3xl sm:text-4xl text-foreground mb-4">Technical Skills</h2>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-4">
+            <Sparkles className="h-4 w-4" />
+            <span className="text-sm font-semibold">Expertise</span>
+          </div>
+          <h2 className="font-montserrat font-bold text-3xl sm:text-4xl text-foreground mb-4">
+            Skills & Technologies
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A comprehensive overview of my technical expertise and proficiency levels
+            A comprehensive toolkit combining core competencies with modern technologies
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categories.map((category) => (
-            <Card key={category} className="border-border/50 pt-6">
-              <CardHeader>
-                <CardTitle className="text-xl font-montserrat font-semibold text-primary">{category}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {skills
-                  .filter((skill) => skill.category === category)
-                  .map((skill) => (
-                    <div key={skill.name} className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium text-foreground">{skill.name}</span>
-                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Left Side - Core Skills */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-2 mb-8">
+              <div className="h-1 w-12 bg-gradient-to-r from-primary to-primary/50 rounded-full" />
+              <h3 className="font-montserrat font-bold text-xl text-foreground">Core Skills</h3>
+            </div>
+
+            <div className="space-y-4">
+              {finalSkillCategories.map((category) => {
+                const CategoryIcon = iconMap[category.icon] || Code2
+                return (
+                  <Card
+                    key={category.id}
+                    className="group hover:shadow-xl transition-all duration-300 border-border/50 hover:border-primary/30 overflow-hidden"
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex items-start gap-4">
+                        <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                          <CategoryIcon className="h-6 w-6 text-white" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-montserrat font-semibold text-base text-foreground mb-1 group-hover:text-primary transition-colors">
+                            {category.name}
+                          </h4>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {category.description}
+                          </p>
+                        </div>
                       </div>
-                      <Progress value={skill.level} className="h-2" />
-                    </div>
-                  ))}
-              </CardContent>
-            </Card>
-          ))}
+                    </CardContent>
+                  </Card>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="hidden lg:block absolute left-1/2 top-32 bottom-32 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
+
+          {/* Right Side - Technologies */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-2 mb-8">
+              <div className="h-1 w-12 bg-gradient-to-r from-primary to-primary/50 rounded-full" />
+              <h3 className="font-montserrat font-bold text-xl text-foreground">Tech Stack</h3>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              {finalTechnologies.map((tech, index) => (
+                <Badge
+                  key={tech.id}
+                  variant="outline"
+                  className={`px-4 py-2.5 text-sm font-medium ${tech.color} hover:scale-105 hover:shadow-md transition-all duration-200 cursor-default animate-in fade-in slide-in-from-bottom-4`}
+                  style={{ animationDelay: `${index * 30}ms` }}
+                >
+                  {tech.name}
+                </Badge>
+              ))}
+            </div>
+
+            <div className="mt-8 p-6 rounded-lg bg-muted/50 border border-border/50">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                <span className="font-semibold text-foreground">Always learning.</span> I stay current with the latest technologies and best practices to deliver modern, scalable solutions.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

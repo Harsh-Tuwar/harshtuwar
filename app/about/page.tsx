@@ -2,7 +2,6 @@ import { Navigation } from "@/components/navigation"
 import { AboutHero } from "@/components/about-hero"
 import { SkillsSection } from "@/components/skills-section"
 import { ExperienceTimeline } from "@/components/experience-timeline"
-import { TechnologiesGrid } from "@/components/technologies-grid"
 import { createMetadata, siteConfig } from "@/lib/metadata"
 
 export const metadata = createMetadata({
@@ -18,7 +17,6 @@ export default function AboutPage() {
       <Navigation />
       <AboutHero />
       <SkillsSection />
-      <TechnologiesGrid />
       <ExperienceTimeline />
     </main>
   )
