@@ -16,15 +16,12 @@ export default function ContactPage() {
       <Navigation />
       <ContactHero />
 
-      <div className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Contact Form (full width) */}
         <ContactForm />
 
-        {/* Two cards side by side */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <ContactInfo type="getInTouch" />
-          <ContactInfo type="reachOut" />
-        </div>
+        {/* Unified Contact Info Card */}
+        <ContactInfo />
       </div>
     </main>
   )
