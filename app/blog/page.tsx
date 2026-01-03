@@ -2,7 +2,7 @@ import { Navigation } from "@/components/navigation"
 import { BlogHero } from "@/components/blog-hero"
 import { BlogGrid } from "@/components/blog-grid"
 import { createMetadata } from "@/lib/metadata"
-import { getAllBlogs } from "@/lib/blog-data"
+import { getAllBlogs } from "@/lib/notion/content"
 
 export const metadata = createMetadata({
   title: "Blog",

@@ -1,37 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { siteConfig } from '@/lib/metadata'
-import { RichText, NotionResultItem } from '@/types/global.types';
+import { RichText } from '@/types/global.types';
 import { Download, MapPin, Calendar } from "lucide-react"
-import { notion } from '@/lib/notion';
-
-function parseBlocks(apiResponse: any): RichText[][] {
-  if (!apiResponse?.results) return [];
-
-  return apiResponse.results.map((block: NotionResultItem) => {
-    if (block.type === "paragraph" && block.paragraph?.rich_text) {
-      return block.paragraph.rich_text.map((rt: any) => ({
-        text: rt.plain_text,
-        annotations: {
-          bold: rt.annotations.bold,
-          italic: rt.annotations.italic,
-          underline: rt.annotations.underline,
-          strikethrough: rt.annotations.strikethrough,
-          code: rt.annotations.code,
-          color: rt.annotations.color,
-        },
-      }));
-    }
-    return [];
-  });
-}
-
-async function getAboutContent(): Promise<RichText[][]> {
-  const responseFromNotion = await notion.blocks.children.list({
-    block_id: '2923324a94d080188a8df932cba65334'
-  });
-
-  return parseBlocks(responseFromNotion);
-}
+import { getAboutContent } from '@/lib/notion/content';
 
 export async function AboutHero() {
   const paragraphs = await getAboutContent();
