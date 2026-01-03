@@ -98,9 +98,13 @@ export function createMetadata({
       creator: siteConfig.author.twitter,
     },
     icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon-16x16.png",
-      apple: "/apple-touch-icon.png",
+      icon: [
+        { url: "/icon.png", sizes: "any" },
+        { url: "/images/HT_Logo.png", sizes: "1024x1024", type: "image/png" },
+      ],
+      apple: [
+        { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+      ],
     },
     manifest: "/site.webmanifest",
     alternates: {
