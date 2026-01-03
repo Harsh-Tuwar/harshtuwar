@@ -86,7 +86,7 @@ export async function AboutHero() {
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-primary/30 via-accent/10 to-background blur-2xl opacity-60 group-hover:opacity-80 transition-all duration-700"></div>
               <div className="relative w-full aspect-square rounded-3xl overflow-hidden shadow-2xl ring-1 ring-border/10">
                 <img
-                  src="/developer-multiple-monitors.png"
+                  src="/images/developer-multiple-monitors.png"
                   alt="Developer at work"
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
