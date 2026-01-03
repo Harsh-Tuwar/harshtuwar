@@ -1,11 +1,11 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Calendar, Clock } from "lucide-react"
+import { ArrowRight, Sparkles } from "lucide-react"
 import Link from "next/link"
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import RecentBlogPostsSkeleton from '@/components/skeletons/recent-blog-posts-skeleton';
 import { getRecentBlogs } from '@/lib/notion/content';
+import { RecentBlogPostsClient } from './recent-blog-posts-client';
 
 export async function RecentBlogPosts() {
   const posts = await getRecentBlogs();
@@ -17,79 +17,39 @@ export async function RecentBlogPosts() {
   const recentPosts = posts.slice(0, 3)
 
   return (
-    <section className="py-20 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="font-montserrat font-bold text-3xl sm:text-4xl text-foreground mb-4">Latest Blog Posts</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+    <section className="py-20 relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-4">
+            <Sparkles className="h-4 w-4" />
+            <span>Latest Articles</span>
+          </div>
+          <h2 className="font-montserrat font-bold text-4xl sm:text-5xl bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent mb-4">
+            Recent Blog Posts
+          </h2>
+          <p className="text-lg text-muted-foreground/80 max-w-2xl mx-auto">
             Sharing insights, tutorials, and thoughts on modern web development
           </p>
         </div>
 
         <Suspense fallback={<RecentBlogPostsSkeleton />}>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {recentPosts.map((post) => (
-              <Card
-                key={post.slug}
-                className="group relative overflow-hidden border border-border/50 rounded-2xl shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-500 bg-card"
-              >
-
-                {/* Content */}
-                <div className="p-6 flex flex-col justify-between h-full">
-                  {/* Categories */}
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {post.category.map((cat) => (
-                      <span
-                        key={cat.name}
-                        className="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full font-medium tracking-wide"
-                      >
-                        {cat.name}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Title */}
-                  <CardTitle className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
-                    {post.title}
-                  </CardTitle>
-
-                  {/* Meta info */}
-                  <div className="flex items-center justify-between text-xs text-muted-foreground mb-4 pr-10">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-3.5 w-3.5" />
-                      <span>{post.publishedAt}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3.5 w-3.5" />
-                      <span>{post.readTime}</span>
-                    </div>
-                  </div>
-
-                  {/* Excerpt */}
-                  <CardDescription className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4">
-                    {post.excerpt}
-                  </CardDescription>
-
-                  {/* Read More Button */}
-                  <div className="flex justify-end mt-auto">
-                    <Button asChild variant="outline" size="sm" className="group/btn text-primary border-primary/40 hover:bg-primary hover:text-background transition">
-                      <Link href={`/blog/${post.slug}`}>
-                        Read More
-                        <ArrowRight className="ml-1 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>          
+          <RecentBlogPostsClient posts={recentPosts} />
         </Suspense>
 
-        <div className="text-center">
-          <Button asChild variant="outline" size="lg">
+        {/* View All Button */}
+        <div className="text-center mt-16">
+          <Button
+            asChild
+            size="lg"
+            className="group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105"
+          >
             <Link href="/blog">
               View All Posts
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </Button>
         </div>
