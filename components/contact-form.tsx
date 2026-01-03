@@ -160,24 +160,31 @@ export function ContactForm() {
     setSubmitStatus("idle")
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
-        }),
-      })
+        })
+      }
+
+      const response = await fetch('https://harshtuwar-api.vercel.app/send', requestOptions)
+
+      if (!response || !response.ok) {
+        setSubmitStatus("error")
+        setSubmitMessage("Contact form fields cannot be empty!")
+        setIsSubmitting(false)
+        return
+      }
 
       const result = await response.json()
 
-      if (response.ok) {
+      if (result.status === 'success') {
         setSubmitStatus("success")
-        setSubmitMessage("Thank you for your message! I'll get back to you soon.")
+        setSubmitMessage("Your email has been sent! I will get back to you ASAP. Thanks for contacting!")
         setFormData({ name: "", email: "", subject: "", message: "", honeypot: "" })
         setMessageLength(0)
         // Clear session storage on successful submit
