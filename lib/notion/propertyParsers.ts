@@ -101,3 +101,25 @@ export function parseStatus(property: { status: { id: string; name: string; colo
   }
   return property.status;
 }
+
+/**
+ * Parse select property from Notion
+ * Returns the selected option with id, name, and color
+ */
+export function parseSelect(property: { select: { id: string; name: string; color: string } } | undefined): { id: string; name: string; color: string } | null {
+  if (!property?.select) {
+    return null;
+  }
+  return property.select;
+}
+
+/**
+ * Parse number property from Notion
+ * Returns the number value
+ */
+export function parseNumber(property: { number: number } | undefined): number {
+  if (!property || property.number === undefined) {
+    return 0;
+  }
+  return property.number;
+}

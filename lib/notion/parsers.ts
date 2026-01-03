@@ -10,7 +10,11 @@ import {
   RichText,
   NotionPageProps,
   GetAllBlogsResponse,
-  GetRecentBlogsResponse
+  GetRecentBlogsResponse,
+  SkillCategory,
+  Technology,
+  NotionSkillCategoryProps,
+  NotionTechnologyProps
 } from '@/types/global.types';
 import {
   parsePlainText,
@@ -18,7 +22,9 @@ import {
   parseMultiSelect,
   parseFile,
   parseTitle,
-  parseStatus
+  parseStatus,
+  parseSelect,
+  parseNumber
 } from './propertyParsers';
 
 /**
@@ -146,4 +152,56 @@ export function parseBlogPost(response: GetPageResponse): GetAllBlogsResponse {
     dynamicUrl,
     featuredImage: featuredImageData?.url
   };
+}
+
+/**
+ * Parse skill categories from Notion database query response
+ * Extracts skill category metadata including name, description, icon, and color
+ */
+export function parseSkillCategories(
+  response: (PageObjectResponse | PartialPageObjectResponse | DataSourceObjectResponse | PartialDataSourceObjectResponse)[]
+): SkillCategory[] {
+  return response.map((pageItem) => {
+    const id = pageItem.id;
+    const itemProps = (pageItem as PageObjectResponse).properties as unknown as NotionSkillCategoryProps;
+
+    const name = parseTitle(itemProps.name);
+    const description = parsePlainText(itemProps.description);
+    const icon = parseSelect(itemProps.icon);
+    const color = parseSelect(itemProps.color);
+    const order = parseNumber(itemProps.order);
+
+    return {
+      id,
+      name,
+      description,
+      icon: icon?.name || 'Code2',
+      color: color?.name || 'from-cyan-500 to-blue-500',
+      order
+    };
+  });
+}
+
+/**
+ * Parse technologies from Notion database query response
+ * Extracts technology metadata including name and color
+ */
+export function parseTechnologies(
+  response: (PageObjectResponse | PartialPageObjectResponse | DataSourceObjectResponse | PartialDataSourceObjectResponse)[]
+): Technology[] {
+  return response.map((pageItem) => {
+    const id = pageItem.id;
+    const itemProps = (pageItem as PageObjectResponse).properties as unknown as NotionTechnologyProps;
+
+    const name = parseTitle(itemProps.name);
+    const color = parseSelect(itemProps.color);
+    const order = parseNumber(itemProps.order);
+
+    return {
+      id,
+      name,
+      color: color?.name || 'bg-gray-500/10 text-gray-700 dark:text-gray-300 border-gray-500/20',
+      order
+    };
+  });
 }

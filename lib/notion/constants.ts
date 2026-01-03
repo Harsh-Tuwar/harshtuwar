@@ -1,0 +1,12 @@
+/**
+ * Notion Block IDs and Data Source IDs
+ * Centralized configuration for all Notion integrations
+ */
+export const NOTION_IDS = {
+  HOME_HEADLINE: "02c78ac2798b4a5095299849ae322874",
+  ABOUT_PAGE: "2923324a94d080188a8df932cba65334",
+  ALL_BLOGS_DATASOURCE: "2543324a-94d0-800b-a6ce-000bcc893e63",
+  RECENT_BLOGS_DATASOURCE: "2913324a-94d0-80bb-9527-000bf25b39a9",
+  SKILL_CATEGORIES_DATASOURCE: "2dd3324a-94d0-8066-adc3-000b087aedb0",
+  TECHNOLOGIES_DATASOURCE: "2dd3324a-94d0-8016-9063-000bd0555fb2",
+} as const;

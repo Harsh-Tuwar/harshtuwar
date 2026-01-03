@@ -94,7 +94,7 @@ export type RichText = {
   };
 };
 
-export interface NotionResultItem { 
+export interface NotionResultItem {
 	type: string
 	paragraph: {
 		rich_text: [
@@ -109,5 +109,66 @@ export interface NotionResultItem {
 				color: string
 			}
 		]
+	}
+}
+
+// Skills Section Types
+export type SkillCategory = {
+	id: string
+	name: string
+	description: string
+	icon: string
+	color: string
+	order: number
+}
+
+export type Technology = {
+	id: string
+	name: string
+	color: string
+	order: number
+}
+
+export type NotionSkillCategoryProps = {
+	name: {
+		title: {
+			plain_text: string
+		}[]
+	}
+	description: NotionText
+	icon: {
+		select: {
+			id: string
+			name: string
+			color: string
+		}
+	}
+	color: {
+		select: {
+			id: string
+			name: string
+			color: string
+		}
+	}
+	order: {
+		number: number
+	}
+}
+
+export type NotionTechnologyProps = {
+	name: {
+		title: {
+			plain_text: string
+		}[]
+	}
+	color: {
+		select: {
+			id: string
+			name: string
+			color: string
+		}
+	}
+	order: {
+		number: number
 	}
 }
