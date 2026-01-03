@@ -1,7 +1,6 @@
 "use client"
 
 import { Suspense, useState } from "react"
-import useSWR from "swr"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -13,17 +12,15 @@ import BlogGridSkeleton from '@/components/skeletons/blog-grid-skeleton'
 
 const categories = ["All", "React", "NextJS", "TypeScript", "Web Development", "Performance", "Tutorial"]
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json()).then((data) => data.data);
+interface BlogGridProps {
+  initialBlogs: GetAllBlogsResponse[]
+}
 
-export function BlogGrid() {
+export function BlogGrid({ initialBlogs }: BlogGridProps) {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [searchQuery, setSearchQuery] = useState("")
 
-  const { data: blogPosts, error, isLoading } = useSWR("/api/content/blogs", fetcher)
-
-  if (error) {
-    return <p className="text-center text-red-500">Failed to load posts.</p>
-  }
+  const blogPosts = initialBlogs
 
   const filteredPosts = blogPosts && blogPosts.filter((post: GetAllBlogsResponse) => {
     const matchesCategory = selectedCategory === "All" || post.category.findIndex((ic) => ic.name === selectedCategory) !== -1
@@ -66,8 +63,7 @@ export function BlogGrid() {
           </div>
         </div>
 
-        {isLoading && <BlogGridSkeleton />}
-
+  
         {/* Blog Posts Grid */}
         <Suspense fallback={<BlogGridSkeleton />}>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

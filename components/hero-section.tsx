@@ -4,9 +4,69 @@ import { siteConfig as config } from '@/lib/metadata'
 import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
 import Link from "next/link"
 import HeadlineSkeleton from '@/components/skeletons/headline-skeleton';
-import HeadlineContent from '@/app/(content)/(home)/HeadlineContent';
+import { notion } from '@/lib/notion';
+import { RichText, NotionResultItem } from '@/types/global.types';
 
-export function HeroSection() {
+function parseBlocks(apiResponse: any): RichText[][] {
+  if (!apiResponse?.results) return [];
+
+  return apiResponse.results.map((block: NotionResultItem) => {
+    if (block.type === "paragraph" && block.paragraph?.rich_text) {
+      return block.paragraph.rich_text.map((rt: any) => ({
+        text: rt.plain_text,
+        annotations: {
+          bold: rt.annotations.bold,
+          italic: rt.annotations.italic,
+          underline: rt.annotations.underline,
+          strikethrough: rt.annotations.strikethrough,
+          code: rt.annotations.code,
+          color: rt.annotations.color,
+        },
+      }));
+    }
+    return [];
+  });
+}
+
+async function getHeadlineContent(): Promise<RichText[][]> {
+  const responseFromNotion = await notion.blocks.children.list({
+    block_id: "02c78ac2798b4a5095299849ae322874",
+  });
+
+  return parseBlocks(responseFromNotion);
+}
+
+function HeadlineContent({ paragraphs }: { paragraphs: RichText[][] }) {
+  return (
+    <div className="text-md text-muted-foreground leading-relaxed max-w-xl space-y-4">
+      {paragraphs.map((para, i) => (
+        <p key={i}>
+          {para.map((item, j) => {
+            const { bold, italic, underline, strikethrough, color = "default" } = item.annotations;
+            const className = [
+              bold ? "font-bold" : "",
+              italic ? "italic" : "",
+              underline ? "underline" : "",
+              strikethrough ? "line-through" : "",
+              color !== "default" ? `text-${color}-500` : "",
+            ]
+              .filter(Boolean)
+              .join(" ");
+
+            return (
+              <span key={j} className={className}>
+                {item.text}
+              </span>
+            );
+          })}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+export async function HeroSection() {
+  const headlineContent = await getHeadlineContent();
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted/50 to-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -19,9 +79,7 @@ export function HeroSection() {
               <h2 className="font-montserrat font-semibold text-xl sm:text-2xl text-muted-foreground">
                 {config.role}
               </h2>
-              <Suspense fallback={<HeadlineSkeleton />}>
-                <HeadlineContent />
-              </Suspense>
+              <HeadlineContent paragraphs={headlineContent} />
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">

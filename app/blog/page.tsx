@@ -2,6 +2,7 @@ import { Navigation } from "@/components/navigation"
 import { BlogHero } from "@/components/blog-hero"
 import { BlogGrid } from "@/components/blog-grid"
 import { createMetadata } from "@/lib/metadata"
+import { getAllBlogs } from "@/lib/blog-data"
 
 export const metadata = createMetadata({
   title: "Blog",
@@ -10,12 +11,14 @@ export const metadata = createMetadata({
   url: "/blog",
 })
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const initialBlogs = await getAllBlogs();
+
   return (
     <main className="min-h-screen">
       <Navigation />
       <BlogHero />
-      <BlogGrid />
+      <BlogGrid initialBlogs={initialBlogs} />
     </main>
   )
 }
