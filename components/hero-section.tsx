@@ -4,37 +4,8 @@ import { siteConfig as config } from '@/lib/metadata'
 import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
 import Link from "next/link"
 import HeadlineSkeleton from '@/components/skeletons/headline-skeleton';
-import { notion } from '@/lib/notion';
-import { RichText, NotionResultItem } from '@/types/global.types';
-
-function parseBlocks(apiResponse: any): RichText[][] {
-  if (!apiResponse?.results) return [];
-
-  return apiResponse.results.map((block: NotionResultItem) => {
-    if (block.type === "paragraph" && block.paragraph?.rich_text) {
-      return block.paragraph.rich_text.map((rt: any) => ({
-        text: rt.plain_text,
-        annotations: {
-          bold: rt.annotations.bold,
-          italic: rt.annotations.italic,
-          underline: rt.annotations.underline,
-          strikethrough: rt.annotations.strikethrough,
-          code: rt.annotations.code,
-          color: rt.annotations.color,
-        },
-      }));
-    }
-    return [];
-  });
-}
-
-async function getHeadlineContent(): Promise<RichText[][]> {
-  const responseFromNotion = await notion.blocks.children.list({
-    block_id: "02c78ac2798b4a5095299849ae322874",
-  });
-
-  return parseBlocks(responseFromNotion);
-}
+import { RichText } from '@/types/global.types';
+import { getHeadlineContent } from '@/lib/notion/content';
 
 function HeadlineContent({ paragraphs }: { paragraphs: RichText[][] }) {
   return (

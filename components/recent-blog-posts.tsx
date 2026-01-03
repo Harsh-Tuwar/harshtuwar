@@ -2,46 +2,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Calendar, Clock } from "lucide-react"
 import Link from "next/link"
-import { GetRecentBlogsResponse, NotionPageProps } from '@/types/global.types'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import RecentBlogPostsSkeleton from '@/components/skeletons/recent-blog-posts-skeleton';
-import { notion } from '@/lib/notion';
-import { DataSourceObjectResponse, PageObjectResponse, PartialDataSourceObjectResponse, PartialPageObjectResponse } from '@notionhq/client';
-
-function parseContent(response: (PageObjectResponse | PartialPageObjectResponse | DataSourceObjectResponse | PartialDataSourceObjectResponse)[]): GetRecentBlogsResponse[] {
-  return response.map((pageItem) => {
-    const id = pageItem.id;
-    const itemProps = (pageItem as PageObjectResponse).properties as unknown as NotionPageProps;
-
-    const category = itemProps.category.multi_select;
-    const excerpt = itemProps.excerpt.rich_text[0].plain_text;
-    const readTime = itemProps.readTime.rich_text[0].plain_text;
-    const title = itemProps.title.title[0].plain_text;
-    const slug = itemProps.slug.rich_text[0].plain_text;
-    const publishedAt = itemProps.publishedAt.rich_text[0].plain_text;
-    const dynamicUrl = (pageItem as any).url.replace('https://www.notion.so/', '');
-
-    return {
-      id,
-      category,
-      excerpt,
-      readTime,
-      title,
-      slug,
-      publishedAt,
-      dynamicUrl
-    }
-  });
-}
-
-async function getRecentBlogs(): Promise<GetRecentBlogsResponse[]> {
-  const page = await notion.dataSources.query({
-    data_source_id: '2913324a-94d0-80bb-9527-000bf25b39a9'
-  });
-
-  return parseContent(page.results);
-}
+import { getRecentBlogs } from '@/lib/notion/content';
 
 export async function RecentBlogPosts() {
   const posts = await getRecentBlogs();
