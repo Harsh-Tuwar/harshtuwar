@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button"
 import { siteConfig } from '@/lib/metadata'
-import { RichText } from '@/types/global.types';
 import { Download, MapPin, Calendar } from "lucide-react"
 import { getAboutContent } from '@/lib/notion/content';
 

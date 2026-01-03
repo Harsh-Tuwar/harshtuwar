@@ -123,3 +123,14 @@ export function parseNumber(property: { number: number } | undefined): number {
   }
   return property.number;
 }
+
+/**
+ * Parse URL property from Notion
+ * Returns the URL string
+ */
+export function parseUrl(property: { url: string } | undefined): string {
+  if (!property?.url) {
+    return '';
+  }
+  return property.url;
+}

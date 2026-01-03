@@ -172,3 +172,38 @@ export type NotionTechnologyProps = {
 		number: number
 	}
 }
+
+// Experience Section Types
+export type Experience = {
+	id: string
+	companyName: string
+	position: string
+	skills: NotionMultiSelect[]
+	tenure: string
+	companyLogo: string
+	url: string
+	ordinal: number
+}
+
+export type NotionExperienceProps = {
+	CompanyName: NotionText
+	Position: NotionText
+	Skills: {
+		multi_select: NotionMultiSelect[]
+	}
+	Tenure: NotionText
+	CompanyLogo: {
+		files: {
+			name: string
+			file: {
+				url: string
+			}
+		}[]
+	}
+	URL: {
+		url: string
+	}
+	Ordinal: {
+		number: number
+	}
+}

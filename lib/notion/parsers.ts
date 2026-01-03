@@ -14,7 +14,9 @@ import {
   SkillCategory,
   Technology,
   NotionSkillCategoryProps,
-  NotionTechnologyProps
+  NotionTechnologyProps,
+  Experience,
+  NotionExperienceProps
 } from '@/types/global.types';
 import {
   parsePlainText,
@@ -24,7 +26,8 @@ import {
   parseTitle,
   parseStatus,
   parseSelect,
-  parseNumber
+  parseNumber,
+  parseUrl
 } from './propertyParsers';
 
 /**
@@ -202,6 +205,38 @@ export function parseTechnologies(
       name,
       color: color?.name || 'bg-gray-500/10 text-gray-700 dark:text-gray-300 border-gray-500/20',
       order
+    };
+  });
+}
+
+/**
+ * Parse experiences from Notion database query response
+ * Extracts experience metadata including company name, position, skills, tenure, etc.
+ */
+export function parseExperiences(
+  response: (PageObjectResponse | PartialPageObjectResponse | DataSourceObjectResponse | PartialDataSourceObjectResponse)[]
+): Experience[] {
+  return response.map((pageItem) => {
+    const id = pageItem.id;
+    const itemProps = (pageItem as PageObjectResponse).properties as unknown as NotionExperienceProps;
+
+    const companyName = parsePlainText(itemProps.CompanyName);
+    const position = parsePlainText(itemProps.Position);
+    const skills = parseMultiSelect(itemProps.Skills);
+    const tenure = parsePlainText(itemProps.Tenure);
+    const companyLogoData = parseFile(itemProps.CompanyLogo);
+    const url = parseUrl(itemProps.URL);
+    const ordinal = parseNumber(itemProps.Ordinal);
+
+    return {
+      id,
+      companyName,
+      position,
+      skills,
+      tenure,
+      companyLogo: companyLogoData?.url || '',
+      url,
+      ordinal
     };
   });
 }
