@@ -1,14 +1,12 @@
 "use client"
 
 import { Suspense, useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Calendar, Clock, Search } from "lucide-react"
-import Link from "next/link"
+import { Search } from "lucide-react"
 import { GetAllBlogsResponse } from '@/types/global.types'
 import BlogGridSkeleton from '@/components/skeletons/blog-grid-skeleton'
+import { BlogPostCard } from '@/components/blog-post-card'
 
 const categories = ["All", "React", "NextJS", "TypeScript", "Web Development", "Performance", "Tutorial"]
 
@@ -90,72 +88,5 @@ export function BlogGrid({ initialBlogs }: BlogGridProps) {
         )}
       </div>
     </section>
-  )
-}
-
-interface BlogPostCardProps {
-  post: GetAllBlogsResponse
-}
-
-function BlogPostCard({ post }: BlogPostCardProps) {
-  return (
-    <Card className="group hover:shadow-xl transition-all duration-300 border-border/50 hover:border-primary/20 h-full flex flex-col">
-      <div className="relative overflow-hidden rounded-t-lg">
-        <img
-          src={post.heroImage || "/placeholder.svg"}
-          alt={post.heroImageName}
-          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 brightness-70"
-        />
-        <div className="absolute top-4 right-4 space-x-1">
-          {post.category.map((i) => {
-            return <Badge key={i.id} variant="secondary" className="bg-background/95 text-primary hover:text-primary hover:bg-background/95">{i.name}</Badge>
-          })}
-        </div>
-      </div>
-
-      <CardHeader className="flex-1">
-        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-          <div className="flex items-center gap-1">
-            <Calendar className="h-4 w-4" />
-            {post.publishedAt}
-          </div>
-          <div className="flex items-center gap-1">
-            <Clock className="h-4 w-4" />
-            {post.readTime}
-          </div>
-        </div>
-
-        <CardTitle className="group-hover:text-primary transition-colors line-clamp-2">{post.title}</CardTitle>
-        <CardDescription className="leading-relaxed line-clamp-3">{post.excerpt}</CardDescription>
-      </CardHeader>
-
-      <CardContent className="pt-0">
-        <div className="space-y-4">
-          <div className="flex flex-wrap gap-2">
-            {post.tags.slice(0, 3).map((tag) => (
-              <Badge key={tag.id} variant="outline" className="text-xs">
-                {tag.name}
-              </Badge>
-            ))}
-            {post.tags.length > 3 && (
-              <Badge variant="outline" className="text-xs">
-                +{post.tags.length - 3}
-              </Badge>
-            )}
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              {/* <User className="h-4 w-4" /> */}
-              {/* {post.author} */}
-            </div>
-
-            <Button asChild size="sm" variant="ghost" className="text-primary hover:text-background">
-              <Link href={`/blog/${post.id}`} >Read More →</Link>
-            </Button>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
   )
 }
