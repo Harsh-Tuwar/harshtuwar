@@ -20,6 +20,7 @@ import {
   Experience,
   Education
 } from '@/types/global.types';
+import { redirect } from 'next/navigation';
 
 // Initialize Notion to Markdown converter
 const n2m = new NotionToMarkdown({ notionClient: notion });
@@ -76,20 +77,31 @@ export async function getRecentBlogs(): Promise<GetRecentBlogsResponse[]> {
  * Get a single blog post by ID with markdown content
  * Returns both the markdown content and metadata for the blog post
  */
-export async function getBlogPost(pageId: string): Promise<{
+export async function getBlogPost(slug: string): Promise<{
   markdown: string,
   metadata: GetAllBlogsResponse
 }> {
-  const metadata = await notion.pages.retrieve({
-    page_id: pageId,
+  const { results } = await notion.dataSources.query({
+    data_source_id: NOTION_IDS.ALL_BLOGS_DATASOURCE,
+    filter: {
+      property: "slug",
+      rich_text: { equals: slug },
+    },
+    page_size: 1,
   });
 
-  const mdblocks = await n2m.pageToMarkdown(pageId);
+  const page = results[0];
+  if (!page || page.object !== "page") {
+    redirect("/");
+  }
+
+  // Fetch markdown (only other API call)
+  const mdblocks = await n2m.pageToMarkdown(page.id);
   const mdString = n2m.toMarkdownString(mdblocks);
 
   return {
     markdown: mdString.parent,
-    metadata: parseBlogPost(metadata)
+    metadata: parseBlogPost(page), // <-- parse directly from query result
   };
 }
 
