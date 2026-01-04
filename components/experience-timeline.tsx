@@ -3,6 +3,8 @@ import { Calendar, ExternalLink, Briefcase } from "lucide-react"
 import { getExperiences } from "@/lib/notion/content"
 import Image from "next/image"
 
+// export const revalidate = 60;
+
 export async function ExperienceTimeline() {
   const experiences = await getExperiences()
 
