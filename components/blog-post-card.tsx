@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock, ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import { GetAllBlogsResponse } from '@/types/global.types'
@@ -9,7 +8,7 @@ interface BlogPostCardProps {
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
   return (
-    <Link href={`/blog/${post.id}`} className="group block h-full">
+    <Link href={`/blog/${post.slug}`} className="group block h-full">
       <article className="relative h-full flex flex-col bg-gradient-to-br from-card via-card to-muted/5 rounded-3xl overflow-hidden border border-border/50 hover:border-primary/40 transition-all duration-700 shadow-lg hover:shadow-2xl hover:shadow-primary/10">
 
         {/* Decorative Corner Accent */}
