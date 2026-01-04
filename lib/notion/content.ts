@@ -8,7 +8,8 @@ import {
   parseBlogPost,
   parseSkillCategories,
   parseTechnologies,
-  parseExperiences
+  parseExperiences,
+  parseEducation
 } from './parsers';
 import {
   RichText,
@@ -16,7 +17,8 @@ import {
   GetRecentBlogsResponse,
   SkillCategory,
   Technology,
-  Experience
+  Experience,
+  Education
 } from '@/types/global.types';
 
 // Initialize Notion to Markdown converter
@@ -143,4 +145,22 @@ export async function getExperiences(): Promise<Experience[]> {
 
   const experiences = parseExperiences(page.results);
   return experiences.sort((a, b) => a.ordinal - b.ordinal);
+}
+
+/**
+ * Get education from Notion database
+ * Returns all education entries sorted by ordinal field
+ */
+export async function getEducation(): Promise<Education[]> {
+  if (!NOTION_IDS.EDUCATION_DATASOURCE) {
+    console.warn('EDUCATION_DATASOURCE not configured. Using fallback data.');
+    return [];
+  }
+
+  const page = await notion.dataSources.query({
+    data_source_id: NOTION_IDS.EDUCATION_DATASOURCE
+  });
+
+  const education = parseEducation(page.results);
+  return education.sort((a, b) => a.ordinal - b.ordinal);
 }

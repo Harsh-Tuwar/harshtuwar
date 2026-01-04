@@ -14,9 +14,10 @@ export const siteConfig = {
   author: {
     name: "Harsh Tuwar",
     email: "tuwarharsh08@gmail.com",
-    twitter: "@johndoe",
+    twitter: "@harshtuwar",
     linkedin: "https://linkedin.com/in/tuwar08",
     github: "https://github.com/harsh-tuwar",
+    stackoverflow: "https://stackoverflow.com/users/10497679/harsh-tuwar",
   },
   showBlogs: false,
   showProjects: false,
@@ -90,13 +91,6 @@ export function createMetadata({
           alt: metaTitle,
         },
       ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: metaTitle,
-      description: metaDescription,
-      images: [metaImage],
-      creator: siteConfig.author.twitter,
     },
     icons: {
       icon: [

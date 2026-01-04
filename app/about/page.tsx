@@ -2,6 +2,7 @@ import { Navigation } from "@/components/navigation"
 import { AboutHero } from "@/components/about-hero"
 import { SkillsSection } from "@/components/skills-section"
 import { ExperienceTimeline } from "@/components/experience-timeline"
+import { EducationTimeline } from "@/components/education-timeline"
 import { createMetadata, siteConfig } from "@/lib/metadata"
 
 export const metadata = createMetadata({
@@ -18,6 +19,7 @@ export default function AboutPage() {
       <AboutHero />
       <SkillsSection />
       <ExperienceTimeline />
+      <EducationTimeline />
     </main>
   )
 }

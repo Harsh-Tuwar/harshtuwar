@@ -1,7 +1,8 @@
 import { Suspense } from 'react';
 import { Button } from "@/components/ui/button"
 import { siteConfig as config } from '@/lib/metadata'
-import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
+import { ArrowRight, Github, Linkedin } from "lucide-react"
+import { SiStackoverflow } from "react-icons/si"
 import Link from "next/link"
 import HeadlineSkeleton from '@/components/skeletons/headline-skeleton';
 import { RichText } from '@/types/global.types';
@@ -76,25 +77,31 @@ export async function HeroSection() {
 
             <div className="flex items-center space-x-6">
               <Link
-                href="https://github.com"
+                href={config.author.github}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
                 aria-label="GitHub"
               >
                 <Github className="h-6 w-6" />
               </Link>
               <Link
-                href="https://linkedin.com"
+                href={config.author.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-6 w-6" />
               </Link>
               <Link
-                href="https://twitter.com"
+                href={config.author.stackoverflow}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Twitter"
+                aria-label="Stack Overflow"
               >
-                <Twitter className="h-6 w-6" />
+                <SiStackoverflow className="h-6 w-6" />
               </Link>
             </div>
           </div>

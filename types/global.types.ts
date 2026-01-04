@@ -186,7 +186,11 @@ export type Experience = {
 }
 
 export type NotionExperienceProps = {
-	CompanyName: NotionText
+	CompanyName: {
+		title: {
+			plain_text: string
+		}[]
+	}
 	Position: NotionText
 	Skills: {
 		multi_select: NotionMultiSelect[]
@@ -201,6 +205,45 @@ export type NotionExperienceProps = {
 		}[]
 	}
 	URL: {
+		url: string
+	}
+	Ordinal: {
+		number: number
+	}
+}
+
+// Education Section Types
+export type Education = {
+	id: string
+	instName: string
+	degreeName: string
+	skills: NotionMultiSelect[]
+	period: string
+	instLogo: string
+	instUrl: string
+	ordinal: number
+}
+
+export type NotionEducationProps = {
+	InstName: {
+		title: {
+			plain_text: string
+		}[]
+	}
+	DegreeName: NotionText
+	Skills: {
+		multi_select: NotionMultiSelect[]
+	}
+	Period: NotionText
+	InstLogo: {
+		files: {
+			name: string
+			file: {
+				url: string
+			}
+		}[]
+	}
+	InstUrl: {
 		url: string
 	}
 	Ordinal: {
