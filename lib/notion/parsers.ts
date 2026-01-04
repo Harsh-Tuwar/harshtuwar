@@ -16,7 +16,9 @@ import {
   NotionSkillCategoryProps,
   NotionTechnologyProps,
   Experience,
-  NotionExperienceProps
+  NotionExperienceProps,
+  Education,
+  NotionEducationProps
 } from '@/types/global.types';
 import {
   parsePlainText,
@@ -220,7 +222,7 @@ export function parseExperiences(
     const id = pageItem.id;
     const itemProps = (pageItem as PageObjectResponse).properties as unknown as NotionExperienceProps;
 
-    const companyName = parsePlainText(itemProps.CompanyName);
+    const companyName = parseTitle(itemProps.CompanyName);
     const position = parsePlainText(itemProps.Position);
     const skills = parseMultiSelect(itemProps.Skills);
     const tenure = parsePlainText(itemProps.Tenure);
@@ -236,6 +238,38 @@ export function parseExperiences(
       tenure,
       companyLogo: companyLogoData?.url || '',
       url,
+      ordinal
+    };
+  });
+}
+
+/**
+ * Parse education from Notion database query response
+ * Extracts education metadata including institution name, degree, skills, period, etc.
+ */
+export function parseEducation(
+  response: (PageObjectResponse | PartialPageObjectResponse | DataSourceObjectResponse | PartialDataSourceObjectResponse)[]
+): Education[] {
+  return response.map((pageItem) => {
+    const id = pageItem.id;
+    const itemProps = (pageItem as PageObjectResponse).properties as unknown as NotionEducationProps;
+
+    const instName = parseTitle(itemProps.InstName);
+    const degreeName = parsePlainText(itemProps.DegreeName);
+    const skills = parseMultiSelect(itemProps.Skills);
+    const period = parsePlainText(itemProps.Period);
+    const instLogoData = parseFile(itemProps.InstLogo);
+    const instUrl = parseUrl(itemProps.InstUrl);
+    const ordinal = parseNumber(itemProps.Ordinal);
+
+    return {
+      id,
+      instName,
+      degreeName,
+      skills,
+      period,
+      instLogo: instLogoData?.url || '',
+      instUrl,
       ordinal
     };
   });

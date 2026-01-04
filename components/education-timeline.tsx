@@ -1,10 +1,10 @@
 import { Badge } from "@/components/ui/badge"
-import { Calendar, ExternalLink, Briefcase } from "lucide-react"
-import { getExperiences } from "@/lib/notion/content"
+import { Calendar, ExternalLink, GraduationCap } from "lucide-react"
+import { getEducation } from "@/lib/notion/content"
 import Image from "next/image"
 
-export async function ExperienceTimeline() {
-  const experiences = await getExperiences()
+export async function EducationTimeline() {
+  const education = await getEducation()
 
   return (
     <section className="relative py-20 bg-gradient-to-br from-background via-muted/30 to-background overflow-hidden">
@@ -16,25 +16,25 @@ export async function ExperienceTimeline() {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 mb-4 shadow-md">
-            <Briefcase className="w-7 h-7 text-primary" />
+            <GraduationCap className="w-7 h-7 text-primary" />
           </div>
           <h2 className="font-montserrat font-bold text-3xl sm:text-4xl text-foreground mb-3">
-            Work Experience
+            Education
           </h2>
           <div className="flex items-center justify-center gap-2 mb-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-border" />
             <p className="text-sm text-muted-foreground uppercase tracking-wider font-medium">
-              Professional Journey
+              Academic Journey
             </p>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-border" />
           </div>
         </div>
 
-        {/* Experience Cards */}
+        {/* Education Cards */}
         <div className="space-y-6">
-          {experiences.map((exp, index) => (
+          {education.map((edu, index) => (
             <article
-              key={exp.id}
+              key={edu.id}
               className="group relative animate-in fade-in slide-in-from-bottom-4"
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -47,45 +47,45 @@ export async function ExperienceTimeline() {
                   {/* Header Row */}
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
                     <div className="flex items-start gap-4 flex-1 min-w-0">
-                      {/* Company Logo */}
-                      {exp.companyLogo && (
+                      {/* Institution Logo */}
+                      {edu.instLogo && (
                         <div className="relative w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 bg-background rounded-2xl border border-border/50 p-2.5 shadow-md ring-1 ring-border/10 group-hover:shadow-lg transition-shadow duration-300">
                           <Image
-                            src={exp.companyLogo}
-                            alt={exp.companyName}
+                            src={edu.instLogo}
+                            alt={edu.instName}
                             fill
                             className="object-contain p-0.5 rounded-xl"
                           />
                         </div>
                       )}
 
-                      {/* Company & Position */}
+                      {/* Institution & Degree */}
                       <div className="flex-1 min-w-0">
-                        {exp.url ? (
+                        {edu.instUrl ? (
                           <a
-                            href={exp.url}
+                            href={edu.instUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group/link inline-flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors duration-300"
                           >
-                            <span className="truncate">{exp.companyName}</span>
+                            <span className="truncate">{edu.instName}</span>
                             <ExternalLink className="w-4 h-4 flex-shrink-0 opacity-60 group-hover/link:opacity-100 transition-opacity duration-300" />
                           </a>
                         ) : (
                           <h3 className="text-xl font-bold text-foreground truncate">
-                            {exp.companyName}
+                            {edu.instName}
                           </h3>
                         )}
                         <p className="text-lg font-semibold text-muted-foreground mt-1.5">
-                          {exp.position}
+                          {edu.degreeName}
                         </p>
                       </div>
                     </div>
 
-                    {/* Duration Badge */}
+                    {/* Period Badge */}
                     <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground bg-muted/50 px-3.5 py-2 rounded-full border border-border/30 shadow-sm self-start">
                       <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
-                      <span className="whitespace-nowrap">{exp.tenure}</span>
+                      <span className="whitespace-nowrap">{edu.period}</span>
                     </div>
                   </div>
 
@@ -93,9 +93,9 @@ export async function ExperienceTimeline() {
                   <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-6" />
 
                   {/* Skills */}
-                  {exp.skills.length > 0 && (
+                  {edu.skills.length > 0 && (
                     <div className="flex flex-wrap gap-2">
-                      {exp.skills.map((skill, skillIndex) => (
+                      {edu.skills.map((skill, skillIndex) => (
                         <Badge
                           key={skill.id}
                           variant="secondary"

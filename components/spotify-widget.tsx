@@ -2,11 +2,11 @@
 
 import { motion } from "framer-motion"
 import { SiSpotify } from "react-icons/si"
+import { Music } from "lucide-react"
 import useSWR from "swr"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
 interface SpotifySong {
@@ -64,86 +64,153 @@ export default function SpotifyWidget() {
   const { progress, progressPercent } = useSmoothProgress(song)
 
   return (
-    <section className="bg-gradient-to-b from-background via-muted/40 to-background py-12 px-4">
-      <div className="max-w-3xl mx-auto">
-        <motion.div
-          whileHover={{ scale: 1.02 }}
+    <section className="relative py-20 bg-gradient-to-br from-background via-muted/30 to-background overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-primary/5 blur-3xl rounded-full" />
+      <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-primary/5 blur-3xl rounded-full" />
+
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-green-500/5 mb-4 shadow-md">
+            <Music className="w-7 h-7 text-green-500" />
+          </div>
+          <h2 className="font-montserrat font-bold text-3xl sm:text-4xl text-foreground mb-3">
+            Now Playing
+          </h2>
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <div className="h-px w-8 bg-gradient-to-r from-transparent to-border" />
+            <p className="text-sm text-muted-foreground uppercase tracking-wider font-medium">
+              Live from Spotify
+            </p>
+            <div className="h-px w-8 bg-gradient-to-l from-transparent to-border" />
+          </div>
+        </div>
+
+        {/* Spotify Card */}
+        <motion.article
+          className="group relative animate-in fade-in slide-in-from-bottom-4"
+          whileHover={{ scale: 1.01, y: -4 }}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
         >
-          <Card
-            className={cn(
-              "relative overflow-hidden rounded-2xl backdrop-blur-xl border border-muted/50 bg-card/70 shadow-lg transition-all",
-              song?.isPlaying && "ring-2 ring-green-500/40"
-            )}
+          <Link
+            href={song?.songUrl ?? "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
           >
-            <Link
-              href={song?.songUrl ?? "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <CardContent className="flex flex-col sm:flex-row items-center gap-6 p-6">
-                {/* Album Art */}
-                <div className="relative w-[120px] h-[120px] flex-shrink-0">
-                  {song?.albumImageUrl ? (
-                    <Image
-                      src={song.albumImageUrl}
-                      alt={song.album}
-                      fill
-                      className="rounded-xl object-cover shadow-md"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center rounded-xl bg-muted">
-                      <SiSpotify size={50} color="#1ED760" />
-                    </div>
-                  )}
-                </div>
+            <div className={cn(
+              "relative bg-gradient-to-br from-card via-card to-muted/5 rounded-3xl border border-border/50 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500",
+              song?.isPlaying && "hover:border-green-500/40 ring-2 ring-green-500/20"
+            )}>
+              {/* Decorative corner accent */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-                {/* Song Info */}
-                <div className="flex flex-col flex-1 text-center sm:text-left">
-                  <div className="flex items-center justify-center sm:justify-start gap-2 text-muted-foreground mb-2">
-                    <SiSpotify
-                      size={20}
-                      color="#1ED760"
-                      className={cn(song?.isPlaying && "animate-pulse")}
-                    />
-                    <span className="text-xs tracking-wide">
-                      {song?.isPlaying ? "Now Playing" : "Spotify"}
-                    </span>
-                  </div>
+              {/* Spotify Brand Badge */}
+              <div className="absolute top-6 right-6 flex items-center gap-2 bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10">
+                <SiSpotify size={16} color="#1ED760" className={cn(song?.isPlaying && "animate-pulse")} />
+                <span className="text-xs font-medium text-white">Spotify</span>
+              </div>
 
-                  <h2 className="text-xl font-semibold text-foreground truncate">
-                    {song?.isPlaying ? song.title : "Not Listening"}
-                  </h2>
-                  <p className="text-sm text-muted-foreground truncate">
-                    {song?.isPlaying ? song.artist : ""}
-                  </p>
-                  {song?.isPlaying && (
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {song.album} {song.releaseDate && `• ${song.releaseDate.slice(0, 4)}`}
-                    </p>
-                  )}
-
-                  {/* Progress bar */}
-                  {song?.isPlaying && song.duration && (
-                    <div className="mt-4">
-                      <div className="relative h-1 w-full bg-muted rounded-full overflow-hidden">
-                        <motion.div
-                          className="absolute left-0 top-0 h-full bg-green-500"
-                          style={{ width: `${progressPercent}%` }}
-                          transition={{ duration: 0.5 }}
+              {/* Card Content */}
+              <div className="relative p-7 sm:p-8">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                  {/* Album Art */}
+                  <div className="relative w-32 h-32 sm:w-36 sm:h-36 flex-shrink-0">
+                    {song?.albumImageUrl ? (
+                      <div className="relative w-full h-full bg-background rounded-2xl border border-border/50 p-2 shadow-md ring-1 ring-border/10 group-hover:shadow-lg transition-shadow duration-300">
+                        <Image
+                          src={song.albumImageUrl}
+                          alt={song.album}
+                          fill
+                          className="object-cover rounded-xl"
                         />
                       </div>
-                      <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                        <span>{msToTime(progress)}</span>
-                        <span>{msToTime(song.duration)}</span>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center rounded-2xl bg-muted border border-border/50">
+                        <SiSpotify size={60} color="#1ED760" />
                       </div>
+                    )}
+
+                    {/* Playing indicator */}
+                    {song?.isPlaying && (
+                      <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-green-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                        <div className="flex gap-0.5 items-end h-4">
+                          <motion.div
+                            className="w-1 bg-white rounded-full"
+                            animate={{ height: ["40%", "100%", "60%"] }}
+                            transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
+                          />
+                          <motion.div
+                            className="w-1 bg-white rounded-full"
+                            animate={{ height: ["100%", "40%", "80%"] }}
+                            transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                          />
+                          <motion.div
+                            className="w-1 bg-white rounded-full"
+                            animate={{ height: ["60%", "80%", "40%"] }}
+                            transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Song Info */}
+                  <div className="flex flex-col flex-1 text-center sm:text-left min-w-0">
+                    <div className="flex items-center justify-center sm:justify-start gap-2 mb-4">
+                      <div className={cn(
+                        "h-2 w-2 rounded-full",
+                        song?.isPlaying ? "bg-green-500 animate-pulse" : "bg-muted-foreground"
+                      )} />
+                      <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                        {song?.isPlaying ? "Now Playing" : "Not Listening"}
+                      </span>
                     </div>
-                  )}
+
+                    <h3 className="text-2xl font-bold text-foreground mb-2 truncate">
+                      {song?.isPlaying ? song.title : "Waiting for music..."}
+                    </h3>
+
+                    {song?.isPlaying && (
+                      <>
+                        <p className="text-lg font-semibold text-muted-foreground truncate mb-1">
+                          {song.artist}
+                        </p>
+                        <p className="text-sm text-muted-foreground truncate">
+                          {song.album} {song.releaseDate && `• ${song.releaseDate.slice(0, 4)}`}
+                        </p>
+
+                        {/* Progress bar */}
+                        {song.duration && (
+                          <div className="mt-6">
+                            <div className="relative h-2 w-full bg-muted/50 rounded-full overflow-hidden backdrop-blur-sm">
+                              <motion.div
+                                className="absolute left-0 top-0 h-full bg-gradient-to-r from-green-500 to-green-400 shadow-lg shadow-green-500/30"
+                                style={{ width: `${progressPercent}%` }}
+                                transition={{ duration: 0.5 }}
+                              />
+                            </div>
+                            <div className="flex justify-between text-xs font-medium text-muted-foreground mt-2">
+                              <span>{msToTime(progress)}</span>
+                              <span>{msToTime(song.duration)}</span>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
                 </div>
-              </CardContent>
-            </Link>
-          </Card>
-        </motion.div>
+              </div>
+
+              {/* Bottom accent line */}
+              <div className={cn(
+                "h-1 bg-gradient-to-r from-transparent via-green-500 to-transparent transition-transform duration-700",
+                song?.isPlaying ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+              )} />
+            </div>
+          </Link>
+        </motion.article>
       </div>
     </section>
   )
