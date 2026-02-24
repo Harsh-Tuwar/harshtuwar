@@ -10,7 +10,6 @@ import {
   RichText,
   NotionPageProps,
   GetAllBlogsResponse,
-  GetRecentBlogsResponse,
   SkillCategory,
   Technology,
   NotionSkillCategoryProps,
@@ -83,38 +82,6 @@ export function parseBlogPosts(
       author,
       readTime,
       title,
-      dynamicUrl
-    };
-  });
-}
-
-/**
- * Parse recent blog posts from Notion database query response
- * Similar to parseBlogPosts but with fewer fields for homepage display
- */
-export function parseRecentBlogPosts(
-  response: (PageObjectResponse | PartialPageObjectResponse | DataSourceObjectResponse | PartialDataSourceObjectResponse)[]
-): GetRecentBlogsResponse[] {
-  return response.map((pageItem) => {
-    const id = pageItem.id;
-    const itemProps = (pageItem as PageObjectResponse).properties as unknown as NotionPageProps;
-
-    const category = parseMultiSelect(itemProps.category);
-    const excerpt = parsePlainText(itemProps.excerpt);
-    const readTime = parsePlainText(itemProps.readTime);
-    const title = parseTitle(itemProps.title);
-    const slug = parsePlainText(itemProps.slug);
-    const publishedAt = parsePlainText(itemProps.publishedAt);
-    const dynamicUrl = (pageItem as any).url.replace('https://www.notion.so/', '');
-
-    return {
-      id,
-      category,
-      excerpt,
-      readTime,
-      title,
-      slug,
-      publishedAt,
       dynamicUrl
     };
   });
