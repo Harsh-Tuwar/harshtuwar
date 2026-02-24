@@ -3,13 +3,13 @@
 import { ArrowRight, Calendar, Clock, Sparkles } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { GetRecentBlogsResponse } from '@/types/global.types';
+import { GetAllBlogsResponse } from '@/types/global.types';
 
 interface RecentBlogPostsClientProps {
-  posts: GetRecentBlogsResponse[]
+  posts: GetAllBlogsResponse[]
 }
 
-function BlogPostCard({ post, index }: { post: GetRecentBlogsResponse; index: number }) {
+function BlogPostCard({ post, index }: { post: GetAllBlogsResponse; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

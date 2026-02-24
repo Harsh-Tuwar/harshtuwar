@@ -4,7 +4,6 @@ import { NOTION_IDS } from './constants';
 import {
   parseParagraphBlocks,
   parseBlogPosts,
-  parseRecentBlogPosts,
   parseBlogPost,
   parseSkillCategories,
   parseTechnologies,
@@ -14,7 +13,6 @@ import {
 import {
   RichText,
   GetAllBlogsResponse,
-  GetRecentBlogsResponse,
   SkillCategory,
   Technology,
   Experience,
@@ -65,12 +63,13 @@ export async function getAllBlogs(): Promise<GetAllBlogsResponse[]> {
  * Get recent blog posts from Notion database
  * Returns limited set of recent posts for homepage display
  */
-export async function getRecentBlogs(): Promise<GetRecentBlogsResponse[]> {
+export async function getRecentBlogs(): Promise<GetAllBlogsResponse[]> {
   const page = await notion.dataSources.query({
-    data_source_id: NOTION_IDS.RECENT_BLOGS_DATASOURCE
+    data_source_id: NOTION_IDS.ALL_BLOGS_DATASOURCE,
+    page_size: 3,
   });
 
-  return parseRecentBlogPosts(page.results);
+  return parseBlogPosts(page.results);
 }
 
 /**

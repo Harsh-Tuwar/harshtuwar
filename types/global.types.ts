@@ -71,16 +71,6 @@ export type GetAllBlogsResponse = {
 	featuredImage?: string
 }
 
-export type GetRecentBlogsResponse = {
-	id: string,
-	category: NotionMultiSelect[],
-	excerpt: string,
-	readTime: string,
-	title: string,
-	slug: string,
-	publishedAt: string,
-	dynamicUrl: string,
-}
 
 export type RichText = {
   text: string;
