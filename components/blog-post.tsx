@@ -17,7 +17,7 @@ export async function BlogPost({
   return (
     <article className="relative">
       {/* Hero Section with Background */}
-      <div className="relative bg-gradient-to-br from-background via-muted/10 to-background overflow-hidden">
+      <div className="relative bg-linear-to-br from-background via-muted/10 to-background overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -89,7 +89,7 @@ export async function BlogPost({
 
       {/* Featured Image - Full Bleed */}
       <div className="relative w-full h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
+        <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent z-10" />
         <img
           src={metadata.featuredImage || "/placeholder.svg"}
           alt={metadata.title}
