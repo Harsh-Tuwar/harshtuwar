@@ -6,10 +6,9 @@ import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Loader2, Send, CheckCircle, AlertCircle } from "lucide-react"
+import { Loader2, Send, CheckCircle, AlertCircle, Mail } from "lucide-react"
 
 interface FormData {
   name: string
@@ -210,18 +209,28 @@ export function ContactForm() {
   }
 
   return (
-    <div className="relative">
-      {/* Glass card container */}
-      <Card className="border-border/30 bg-background/60 backdrop-blur-xl shadow-2xl shadow-primary/5 pt-8 pb-8">
-        <CardHeader className="space-y-3 pb-8">
-          <CardTitle className="font-montserrat text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-            Send me a message
-          </CardTitle>
-          <CardDescription className="text-base text-muted-foreground/80">
-            Fill out the form below and I'll get back to you as soon as possible.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+    <div className="group relative">
+      <div className="relative bg-gradient-to-br from-card via-card to-muted/5 rounded-3xl border border-border/50 overflow-hidden shadow-lg hover:shadow-2xl hover:border-primary/40 transition-all duration-500">
+        {/* Decorative corner accent */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+        <div className="relative p-7 sm:p-8">
+          {/* Header */}
+          <div className="mb-8">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 mb-4 shadow-md">
+              <Mail className="w-7 h-7 text-primary" />
+            </div>
+            <h2 className="font-montserrat text-3xl font-bold text-foreground mb-2">
+              Send me a message
+            </h2>
+            <p className="text-base text-muted-foreground/80">
+              Fill out the form below and I&apos;ll get back to you as soon as possible.
+            </p>
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8" />
+
           <form onSubmit={handleSubmit} onKeyDown={handleKeyDown} className="space-y-6">
           {/* Honeypot field - hidden from users */}
           <input
@@ -245,7 +254,7 @@ export function ContactForm() {
                 value={formData.name}
                 onChange={(e) => handleInputChange("name", e.target.value)}
                 placeholder="Your full name"
-                className={`h-11 bg-background/50 backdrop-blur-sm border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200 ${errors.name ? "border-destructive focus:border-destructive focus:ring-destructive/20" : ""}`}
+                className={`h-11 bg-background/50 backdrop-blur-sm border-border/50 placeholder:text-muted-foreground/40 placeholder:font-normal placeholder:italic focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200 ${errors.name ? "border-destructive focus:border-destructive focus:ring-destructive/20" : ""}`}
                 disabled={isSubmitting}
               />
               {errors.name && (
@@ -266,7 +275,7 @@ export function ContactForm() {
                 value={formData.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
                 placeholder="your.email@example.com"
-                className={`h-11 bg-background/50 backdrop-blur-sm border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200 ${errors.email ? "border-destructive focus:border-destructive focus:ring-destructive/20" : ""}`}
+                className={`h-11 bg-background/50 backdrop-blur-sm border-border/50 placeholder:text-muted-foreground/40 placeholder:font-normal placeholder:italic focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200 ${errors.email ? "border-destructive focus:border-destructive focus:ring-destructive/20" : ""}`}
                 disabled={isSubmitting}
               />
               {errors.email && (
@@ -287,7 +296,7 @@ export function ContactForm() {
               value={formData.subject}
               onChange={(e) => handleInputChange("subject", e.target.value)}
               placeholder="What's this about?"
-              className={`h-11 bg-background/50 backdrop-blur-sm border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200 ${errors.subject ? "border-destructive focus:border-destructive focus:ring-destructive/20" : ""}`}
+              className={`h-11 bg-background/50 backdrop-blur-sm border-border/50 placeholder:text-muted-foreground/40 placeholder:font-normal placeholder:italic focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200 ${errors.subject ? "border-destructive focus:border-destructive focus:ring-destructive/20" : ""}`}
               disabled={isSubmitting}
             />
             {errors.subject && (
@@ -320,7 +329,7 @@ export function ContactForm() {
               onChange={(e) => handleInputChange("message", e.target.value)}
               placeholder="Tell me about your project or inquiry..."
               rows={6}
-              className={`resize-none overflow-hidden bg-background/50 backdrop-blur-sm border-border/50 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200 ${
+              className={`resize-none overflow-hidden bg-background/50 backdrop-blur-sm border-border/50 placeholder:text-muted-foreground/40 placeholder:font-normal placeholder:italic focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200 ${
                 errors.message ? "border-destructive focus:border-destructive focus:ring-destructive/20" : ""
               }`}
               disabled={isSubmitting}
@@ -363,7 +372,7 @@ export function ContactForm() {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-12 text-base font-semibold bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02]"
+            className="w-full h-12 text-base font-semibold cursor-pointer bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02] hover:brightness-110 active:scale-[0.98]"
           >
             {isSubmitting ? (
               <>
@@ -378,8 +387,11 @@ export function ContactForm() {
             )}
           </Button>
         </form>
-      </CardContent>
-    </Card>
+        </div>
+
+        {/* Bottom accent line */}
+        <div className="h-1 bg-gradient-to-r from-transparent via-primary to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+      </div>
     </div>
   )
 }

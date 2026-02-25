@@ -27,44 +27,51 @@ export function ContactInfo() {
 
           {/* Contact Details Grid */}
           <div className="grid sm:grid-cols-3 gap-6 mb-8">
-            {contactDetails.map(({ icon: Icon, title, main, sub, href }, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 + i * 0.1 }}
-                whileHover={{ y: -4 }}
-                className="group relative"
-              >
-                {href ? (
-                  <a href={href} className="block">
-                    <div className="relative p-5 rounded-2xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="relative">
-                        <div className="inline-flex p-2.5 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 mb-3 group-hover:scale-110 transition-transform duration-300">
-                          <Icon className="h-5 w-5 text-primary" />
-                        </div>
-                        <h3 className="font-semibold text-foreground mb-1">{title}</h3>
-                        <p className="text-sm text-foreground/90 font-medium mb-1">{main}</p>
-                        <p className="text-xs text-muted-foreground/70">{sub}</p>
-                      </div>
+            {contactDetails.map(({ icon: Icon, title, main, sub, href }, i) => {
+              const cardContent = (
+                <div className="relative h-full overflow-hidden rounded-2xl bg-background/60 backdrop-blur-xl border border-border/30 shadow-lg shadow-primary/5 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:scale-[1.02] hover:border-primary/40">
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+
+                  {/* Glow effect */}
+                  <div className="absolute -inset-px bg-linear-to-br from-primary/20 via-transparent to-primary/20 rounded-2xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-500" />
+
+                  <div className="relative p-6">
+                    {/* Decorative dots - top left */}
+                    <div className="absolute top-4 left-4 flex gap-1.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary/30 group-hover:bg-primary transition-colors duration-500" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary/20 group-hover:bg-primary/60 transition-colors duration-500 delay-75" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary/10 group-hover:bg-primary/30 transition-colors duration-500 delay-150" />
                     </div>
-                  </a>
-                ) : (
-                  <div className="relative p-5 rounded-2xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="relative">
-                      <div className="inline-flex p-2.5 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 mb-3 group-hover:scale-110 transition-transform duration-300">
-                        <Icon className="h-5 w-5 text-primary" />
-                      </div>
-                      <h3 className="font-semibold text-foreground mb-1">{title}</h3>
-                      <p className="text-sm text-foreground/90 font-medium mb-1">{main}</p>
-                      <p className="text-xs text-muted-foreground/70">{sub}</p>
+
+                    {/* Icon */}
+                    <div className="inline-flex p-2.5 rounded-xl bg-linear-to-br from-primary/20 to-primary/10 mb-3 mt-3 group-hover:scale-110 transition-transform duration-300">
+                      <Icon className="h-5 w-5 text-primary" />
                     </div>
+
+                    <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">{title}</h3>
+                    <p className="text-sm text-foreground/90 font-medium mb-1">{main}</p>
+                    <p className="text-xs text-muted-foreground/70">{sub}</p>
                   </div>
-                )}
-              </motion.div>
-            ))}
+                </div>
+              )
+
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.2 + i * 0.1 }}
+                  className="group relative h-full"
+                >
+                  {href ? (
+                    <a href={href} className="block h-full">{cardContent}</a>
+                  ) : (
+                    cardContent
+                  )}
+                </motion.div>
+              )
+            })}
           </div>
 
           {/* Divider */}
@@ -87,17 +94,22 @@ export function ContactInfo() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 0.5 + i * 0.1 }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+                className="group relative"
               >
                 <Link
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-3 px-6 py-3 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
+                  className="relative flex items-center gap-3 px-6 py-3 rounded-2xl overflow-hidden bg-background/60 backdrop-blur-xl border border-border/30 shadow-lg shadow-primary/5 hover:shadow-2xl hover:shadow-primary/10 hover:scale-[1.02] hover:border-primary/40 transition-all duration-500"
                 >
-                  <Icon className="h-5 w-5 text-primary group-hover:scale-110 transition-transform duration-300" />
-                  <span className="font-medium text-foreground/90 group-hover:text-foreground">{label}</span>
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+
+                  {/* Glow effect */}
+                  <div className="absolute -inset-px bg-linear-to-br from-primary/20 via-transparent to-primary/20 rounded-2xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-500" />
+
+                  <Icon className="relative h-5 w-5 text-primary group-hover:scale-110 transition-transform duration-300" />
+                  <span className="relative font-medium text-foreground/90 group-hover:text-primary transition-colors duration-300">{label}</span>
                 </Link>
               </motion.div>
             ))}
