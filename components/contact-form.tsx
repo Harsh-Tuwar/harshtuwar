@@ -25,7 +25,9 @@ interface FormErrors {
   message?: string
 }
 
-const SESSION_STORAGE_KEY = "contact_form_data"
+const SESSION_STORAGE_KEY = "contact_form_data";
+const API_BASE_URL = "https://harshtuwar-api.vercel.app";
+const API_CONTACT_ENDPOINT_PATH = "send";
 
 export function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
@@ -166,11 +168,14 @@ export function ContactForm() {
           name: formData.name,
           email: formData.email,
           subject: formData.subject,
-          message: formData.message,
+          msg: formData.message,
         })
       }
 
-      const response = await fetch('https://harshtuwar-api.vercel.app/send', requestOptions)
+      const response = await fetch(
+        `${API_BASE_URL}/${API_CONTACT_ENDPOINT_PATH}`,
+        requestOptions
+      );
 
       if (!response || !response.ok) {
         setSubmitStatus("error")
@@ -210,14 +215,14 @@ export function ContactForm() {
 
   return (
     <div className="group relative">
-      <div className="relative bg-gradient-to-br from-card via-card to-muted/5 rounded-3xl border border-border/50 overflow-hidden shadow-lg hover:shadow-2xl hover:border-primary/40 transition-all duration-500">
+      <div className="relative bg-linear-to-br from-card via-card to-muted/5 rounded-3xl border border-border/50 overflow-hidden shadow-lg hover:shadow-2xl hover:border-primary/40 transition-all duration-500">
         {/* Decorative corner accent */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
         <div className="relative p-7 sm:p-8">
           {/* Header */}
           <div className="mb-8">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 mb-4 shadow-md">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-linear-to-br from-primary/20 to-primary/5 mb-4 shadow-md">
               <Mail className="w-7 h-7 text-primary" />
             </div>
             <h2 className="font-montserrat text-3xl font-bold text-foreground mb-2">
@@ -229,7 +234,7 @@ export function ContactForm() {
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8" />
+          <div className="h-px bg-linear-to-r from-transparent via-border to-transparent mb-8" />
 
           <form onSubmit={handleSubmit} onKeyDown={handleKeyDown} className="space-y-6">
           {/* Honeypot field - hidden from users */}
@@ -390,7 +395,7 @@ export function ContactForm() {
         </div>
 
         {/* Bottom accent line */}
-        <div className="h-1 bg-gradient-to-r from-transparent via-primary to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+        <div className="h-1 bg-linear-to-r from-transparent via-primary to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
       </div>
     </div>
   )
