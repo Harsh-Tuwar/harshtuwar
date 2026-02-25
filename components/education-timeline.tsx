@@ -54,6 +54,7 @@ export async function EducationTimeline() {
                             src={edu.instLogo}
                             alt={edu.instName}
                             fill
+                            unoptimized
                             className="object-contain p-0.5 rounded-xl"
                           />
                         </div>
