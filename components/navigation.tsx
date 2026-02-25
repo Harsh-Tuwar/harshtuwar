@@ -50,11 +50,7 @@ export function Navigation() {
 
   const handleThemeToggle = () => {
     const currentTheme = resolvedTheme || theme
-    console.log("[v0] Current theme:", currentTheme)
-    console.log("[v0] Raw theme:", theme)
-    console.log("[v0] Resolved theme:", resolvedTheme)
     const newTheme = currentTheme === "dark" ? "light" : "dark"
-    console.log("[v0] Setting theme to:", newTheme)
     setTheme(newTheme)
   }
 

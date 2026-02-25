@@ -9,8 +9,8 @@ export const siteConfig = {
   allowResumeDownload: false,
   description:
     "Personal portfolio and blog of Harsh Tuwar, a Senior Full Stack Developer specializing in modern web technologies, React, Next.js, TypeScript and cloud specialist.",
-  url: "https://johndoe.dev",
-  ogImage: "https://johndoe.dev/og-image.png",
+  url: "https://harshtuwar.vercel.app",
+  ogImage: "https://harshtuwar.vercel.app/og-image.png",
   author: {
     name: "Harsh Tuwar",
     email: "tuwarharsh08@gmail.com",

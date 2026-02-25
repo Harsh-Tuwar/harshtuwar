@@ -56,6 +56,7 @@ export async function ExperienceTimeline() {
                             src={exp.companyLogo}
                             alt={exp.companyName}
                             fill
+                            unoptimized
                             className="object-contain p-0.5 rounded-xl"
                           />
                         </div>

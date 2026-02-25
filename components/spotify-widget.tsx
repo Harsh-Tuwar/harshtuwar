@@ -8,6 +8,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
+import { SPOTIFY_REFRESH_INTERVAL } from "@/lib/spotify"
 
 interface SpotifySong {
   album: string
@@ -40,13 +41,13 @@ function useSmoothProgress(song?: SpotifySong) {
 
     const update = () => {
       const elapsed = performance.now() - base.ts
-      const next = Math.min(base.value + elapsed, song.duration)
+      const next = Math.min(base.value + elapsed, song.duration!)
       setProgress(next)
       rafRef.current = requestAnimationFrame(update)
     }
 
     rafRef.current = requestAnimationFrame(update)
-    return () => rafRef.current && cancelAnimationFrame(rafRef.current)
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
   }, [song?.title, song?.isPlaying])
 
   return {
@@ -57,7 +58,7 @@ function useSmoothProgress(song?: SpotifySong) {
 
 export default function SpotifyWidget() {
   const { data: song } = useSWR<SpotifySong>("/api/spotify", fetcher, {
-    refreshInterval: 5000,
+    refreshInterval: SPOTIFY_REFRESH_INTERVAL,
     revalidateOnFocus: false,
   })
 
