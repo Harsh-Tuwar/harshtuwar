@@ -4,6 +4,8 @@ import { Inter, Montserrat } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { StructuredData } from "@/components/structured-data"
 import { ScrollToTop } from "@/components/scroll-to-top"
+import { Toaster } from "sonner"
+import NextTopLoader from "nextjs-toploader"
 import { createMetadata } from "@/lib/metadata"
 import "./globals.css"
 
@@ -37,6 +39,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#059669" media="(prefers-color-scheme: dark)" />
       </head>
       <body className="font-sans antialiased theme-transition">
+        <NextTopLoader color="var(--primary)" showSpinner={false} height={3} shadow={false} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -46,6 +49,7 @@ export default function RootLayout({
         >
           {children}
           <ScrollToTop />
+          <Toaster richColors position="bottom-right" />
         </ThemeProvider>
       </body>
     </html>
