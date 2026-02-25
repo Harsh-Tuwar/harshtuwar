@@ -19,7 +19,7 @@ export async function RecentBlogPosts() {
   return (
     <section className="py-20 relative overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+      <div className="absolute inset-0 bg-linear-to-b from-background via-muted/20 to-background" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -28,7 +28,7 @@ export async function RecentBlogPosts() {
             <Sparkles className="h-4 w-4" />
             <span>Latest Articles</span>
           </div>
-          <h2 className="font-montserrat font-bold text-4xl sm:text-5xl bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent mb-4">
+          <h2 className="font-montserrat font-bold text-4xl sm:text-5xl bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent mb-4">
             Recent Blog Posts
           </h2>
           <p className="text-lg text-muted-foreground/80 max-w-2xl mx-auto">
@@ -45,7 +45,7 @@ export async function RecentBlogPosts() {
           <Button
             asChild
             size="lg"
-            className="group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105"
+            className="group bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105"
           >
             <Link href="/blog">
               View All Posts
