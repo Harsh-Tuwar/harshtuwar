@@ -1,6 +1,5 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
 import { Moon, Sun, Monitor, Palette } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
@@ -23,10 +22,10 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <Button variant="ghost" size="icon" className="hover:bg-primary/10 transition-colors duration-200">
+      <button className="inline-flex items-center justify-center h-9 w-9 rounded-md text-foreground/80 hover:text-primary hover:bg-primary/10 transition-colors duration-200">
         <div className="h-5 w-5" />
         <span className="sr-only">Toggle theme</span>
-      </Button>
+      </button>
     )
   }
 
@@ -37,10 +36,8 @@ export function ThemeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="hover:bg-primary/10 transition-all duration-300 hover:scale-105 relative overflow-hidden group"
+        <button
+          className="inline-flex items-center justify-center h-9 w-9 rounded-md text-foreground/80 hover:text-primary hover:bg-primary/10 transition-all duration-300 hover:scale-105 active:scale-95 relative overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         >
           <Sun
             className={`h-5 w-5 transition-all duration-300 ${
@@ -60,7 +57,7 @@ export function ThemeToggle() {
 
           <div className="absolute inset-0 bg-primary/5 rounded-md scale-0 group-hover:scale-100 transition-transform duration-300" />
           <span className="sr-only">Toggle theme</span>
-        </Button>
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
         <DropdownMenuLabel className="flex items-center gap-2">
