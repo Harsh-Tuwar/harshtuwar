@@ -9,7 +9,7 @@ interface BlogPostCardProps {
 export function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block h-full">
-      <article className="relative h-full flex flex-col bg-gradient-to-br from-card via-card to-muted/5 rounded-3xl overflow-hidden border border-border/50 hover:border-primary/40 transition-all duration-700 shadow-lg hover:shadow-2xl hover:shadow-primary/10">
+      <article className="relative h-full flex flex-col bg-linear-to-br from-card via-card to-muted/5 rounded-3xl overflow-hidden border border-border/50 hover:border-primary/40 transition-all duration-700 shadow-lg hover:shadow-2xl hover:shadow-primary/10">
 
         {/* Decorative Corner Accent */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -17,7 +17,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
         {/* Image Container */}
         <div className="relative h-56 overflow-hidden">
           {/* Subtle overlay for better text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-background/20 z-10 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-background/20 z-10 mix-blend-multiply" />
 
           <img
             src={post.heroImage || "/placeholder.svg"}
@@ -66,7 +66,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
           </h3>
 
           {/* Divider */}
-          <div className="w-12 h-0.5 bg-gradient-to-r from-primary to-transparent group-hover:w-20 transition-all duration-500" />
+          <div className="w-12 h-0.5 bg-linear-to-r from-primary to-transparent group-hover:w-20 transition-all duration-500" />
 
           {/* Excerpt */}
           <p className="flex-1 text-sm leading-relaxed text-muted-foreground/90 line-clamp-3">
@@ -100,7 +100,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
         </div>
 
         {/* Bottom Accent Line */}
-        <div className="h-1 bg-gradient-to-r from-transparent via-primary to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+        <div className="h-1 bg-linear-to-r from-transparent via-primary to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
       </article>
     </Link>
   )

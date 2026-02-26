@@ -99,7 +99,7 @@ export function Navigation() {
                 className={cn(
                   "relative text-sm font-medium transition-colors duration-200 hover:text-primary",
                   isActiveLink(item.href)
-                    ? "text-primary after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-full"
+                    ? "text-primary after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-full"
                     : "text-foreground/80",
                 )}
               >

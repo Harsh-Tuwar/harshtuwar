@@ -3,13 +3,11 @@ import { Calendar, ExternalLink, Briefcase } from "lucide-react"
 import { getExperiences } from "@/lib/notion/content"
 import Image from "next/image"
 
-// export const revalidate = 60;
-
 export async function ExperienceTimeline() {
   const experiences = await getExperiences()
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-background via-muted/30 to-background overflow-hidden">
+    <section className="relative py-20 bg-linear-to-br from-background via-muted/30 to-background overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute -top-20 -left-20 w-72 h-72 bg-primary/5 blur-3xl rounded-full" />
       <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-primary/5 blur-3xl rounded-full" />
@@ -17,18 +15,18 @@ export async function ExperienceTimeline() {
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 mb-4 shadow-md">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-linear-to-br from-primary/20 to-primary/5 mb-4 shadow-md">
             <Briefcase className="w-7 h-7 text-primary" />
           </div>
           <h2 className="font-montserrat font-bold text-3xl sm:text-4xl text-foreground mb-3">
             Work Experience
           </h2>
           <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="h-px w-8 bg-gradient-to-r from-transparent to-border" />
+            <div className="h-px w-8 bg-linear-to-r from-transparent to-border" />
             <p className="text-sm text-muted-foreground uppercase tracking-wider font-medium">
               Professional Journey
             </p>
-            <div className="h-px w-8 bg-gradient-to-l from-transparent to-border" />
+            <div className="h-px w-8 bg-linear-to-l from-transparent to-border" />
           </div>
         </div>
 
@@ -40,7 +38,7 @@ export async function ExperienceTimeline() {
               className="group relative animate-in fade-in slide-in-from-bottom-4"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="relative bg-gradient-to-br from-card via-card to-muted/5 rounded-3xl border border-border/50 overflow-hidden shadow-lg hover:shadow-2xl hover:border-primary/40 transition-all duration-500 hover:-translate-y-1">
+              <div className="relative bg-linear-to-br from-card via-card to-muted/5 rounded-3xl border border-border/50 overflow-hidden shadow-lg hover:shadow-2xl hover:border-primary/40 transition-all duration-500 hover:-translate-y-1">
                 {/* Decorative corner accent */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
@@ -51,7 +49,7 @@ export async function ExperienceTimeline() {
                     <div className="flex items-start gap-4 flex-1 min-w-0">
                       {/* Company Logo */}
                       {exp.companyLogo && (
-                        <div className="relative w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 bg-background rounded-2xl border border-border/50 p-2.5 shadow-md ring-1 ring-border/10 group-hover:shadow-lg transition-shadow duration-300">
+                        <div className="relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 bg-background rounded-2xl border border-border/50 p-2.5 shadow-md ring-1 ring-border/10 group-hover:shadow-lg transition-shadow duration-300">
                           <Image
                             src={exp.companyLogo}
                             alt={exp.companyName}
@@ -72,7 +70,7 @@ export async function ExperienceTimeline() {
                             className="group/link inline-flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors duration-300"
                           >
                             <span className="truncate">{exp.companyName}</span>
-                            <ExternalLink className="w-4 h-4 flex-shrink-0 opacity-60 group-hover/link:opacity-100 transition-opacity duration-300" />
+                            <ExternalLink className="w-4 h-4 shrink-0 opacity-60 group-hover/link:opacity-100 transition-opacity duration-300" />
                           </a>
                         ) : (
                           <h3 className="text-xl font-bold text-foreground truncate">
@@ -87,13 +85,13 @@ export async function ExperienceTimeline() {
 
                     {/* Duration Badge */}
                     <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground bg-muted/50 px-3.5 py-2 rounded-full border border-border/30 shadow-sm self-start">
-                      <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
+                      <Calendar className="w-3.5 h-3.5 shrink-0" />
                       <span className="whitespace-nowrap">{exp.tenure}</span>
                     </div>
                   </div>
 
                   {/* Divider Line */}
-                  <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-6" />
+                  <div className="h-px bg-linear-to-r from-transparent via-border to-transparent mb-6" />
 
                   {/* Skills */}
                   {exp.skills.length > 0 && (
@@ -113,7 +111,7 @@ export async function ExperienceTimeline() {
                 </div>
 
                 {/* Bottom accent line */}
-                <div className="h-1 bg-gradient-to-r from-transparent via-primary to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+                <div className="h-1 bg-linear-to-r from-transparent via-primary to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
               </div>
             </article>
           ))}

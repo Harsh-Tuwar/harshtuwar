@@ -65,7 +65,7 @@ export default function SpotifyWidget() {
   const { progress, progressPercent } = useSmoothProgress(song)
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-background via-muted/30 to-background overflow-hidden">
+    <section className="relative py-20 bg-linear-to-br from-background via-muted/30 to-background overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute -top-20 -left-20 w-72 h-72 bg-primary/5 blur-3xl rounded-full" />
       <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-primary/5 blur-3xl rounded-full" />
@@ -73,18 +73,18 @@ export default function SpotifyWidget() {
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-green-500/5 mb-4 shadow-md">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-linear-to-br from-green-500/20 to-green-500/5 mb-4 shadow-md">
             <Music className="w-7 h-7 text-green-500" />
           </div>
           <h2 className="font-montserrat font-bold text-3xl sm:text-4xl text-foreground mb-3">
             Now Playing
           </h2>
           <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="h-px w-8 bg-gradient-to-r from-transparent to-border" />
+            <div className="h-px w-8 bg-linear-to-r from-transparent to-border" />
             <p className="text-sm text-muted-foreground uppercase tracking-wider font-medium">
               Live from Spotify
             </p>
-            <div className="h-px w-8 bg-gradient-to-l from-transparent to-border" />
+            <div className="h-px w-8 bg-linear-to-l from-transparent to-border" />
           </div>
         </div>
 
@@ -101,7 +101,7 @@ export default function SpotifyWidget() {
             className="block"
           >
             <div className={cn(
-              "relative bg-gradient-to-br from-card via-card to-muted/5 rounded-3xl border border-border/50 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500",
+              "relative bg-linear-to-br from-card via-card to-muted/5 rounded-3xl border border-border/50 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500",
               song?.isPlaying && "hover:border-green-500/40 ring-2 ring-green-500/20"
             )}>
               {/* Decorative corner accent */}
@@ -117,7 +117,7 @@ export default function SpotifyWidget() {
               <div className="relative p-7 sm:p-8">
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                   {/* Album Art */}
-                  <div className="relative w-32 h-32 sm:w-36 sm:h-36 flex-shrink-0">
+                  <div className="relative w-32 h-32 sm:w-36 sm:h-36 shrink-0">
                     {song?.albumImageUrl ? (
                       <div className="relative w-full h-full bg-background rounded-2xl border border-border/50 p-2 shadow-md ring-1 ring-border/10 group-hover:shadow-lg transition-shadow duration-300">
                         <Image
@@ -187,7 +187,7 @@ export default function SpotifyWidget() {
                           <div className="mt-6">
                             <div className="relative h-2 w-full bg-muted/50 rounded-full overflow-hidden backdrop-blur-sm">
                               <motion.div
-                                className="absolute left-0 top-0 h-full bg-gradient-to-r from-green-500 to-green-400 shadow-lg shadow-green-500/30"
+                                className="absolute left-0 top-0 h-full bg-linear-to-r from-green-500 to-green-400 shadow-lg shadow-green-500/30"
                                 style={{ width: `${progressPercent}%` }}
                                 transition={{ duration: 0.5 }}
                               />
@@ -206,7 +206,7 @@ export default function SpotifyWidget() {
 
               {/* Bottom accent line */}
               <div className={cn(
-                "h-1 bg-gradient-to-r from-transparent via-green-500 to-transparent transition-transform duration-700",
+                "h-1 bg-linear-to-r from-transparent via-green-500 to-transparent transition-transform duration-700",
                 song?.isPlaying ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               )} />
             </div>

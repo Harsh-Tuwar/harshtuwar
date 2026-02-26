@@ -15,9 +15,9 @@ export async function SkillsSection() {
   const finalTechnologies = technologies.length > 0 ? technologies : fallbackTechnologies
 
   return (
-    <section className="py-20 bg-gradient-to-br from-background via-muted/30 to-background relative overflow-hidden">
+    <section className="py-20 bg-linear-to-br from-background via-muted/30 to-background relative overflow-hidden">
       {/* Decorative background elements */}
-      <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
+      <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800 mask-[linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
@@ -37,7 +37,7 @@ export async function SkillsSection() {
           {/* Left Side - Core Skills */}
           <div className="space-y-6">
             <div className="flex items-center gap-2 mb-8">
-              <div className="h-1 w-12 bg-gradient-to-r from-primary to-primary/50 rounded-full" />
+              <div className="h-1 w-12 bg-linear-to-r from-primary to-primary/50 rounded-full" />
               <h3 className="font-montserrat font-bold text-xl text-foreground">Core Skills</h3>
             </div>
 
@@ -51,7 +51,7 @@ export async function SkillsSection() {
                   >
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
-                        <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                        <div className={`w-12 h-12 rounded-lg bg-linear-to-br ${category.color} flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                           <CategoryIcon className="h-6 w-6 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -71,12 +71,12 @@ export async function SkillsSection() {
           </div>
 
           {/* Divider */}
-          <div className="hidden lg:block absolute left-1/2 top-32 bottom-32 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
+          <div className="hidden lg:block absolute left-1/2 top-32 bottom-32 w-px bg-linear-to-b from-transparent via-border to-transparent" />
 
           {/* Right Side - Technologies */}
           <div className="space-y-6">
             <div className="flex items-center gap-2 mb-8">
-              <div className="h-1 w-12 bg-gradient-to-r from-primary to-primary/50 rounded-full" />
+              <div className="h-1 w-12 bg-linear-to-r from-primary to-primary/50 rounded-full" />
               <h3 className="font-montserrat font-bold text-xl text-foreground">Tech Stack</h3>
             </div>
 

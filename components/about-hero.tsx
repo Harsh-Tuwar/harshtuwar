@@ -7,7 +7,7 @@ export async function AboutHero() {
   const paragraphs = await getAboutContent();
 
   return (
-    <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-background via-muted/20 to-background">
+    <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24 bg-linear-to-br from-background via-muted/20 to-background">
       {/* Decorative Gradient Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-40 h-40 sm:w-72 sm:h-72 bg-primary/10 blur-3xl rounded-full"></div>
@@ -59,7 +59,7 @@ export async function AboutHero() {
                     return (
                       <span
                         key={j}
-                        className={`${className} [text-wrap:balance]`}
+                        className={`${className} text-balance`}
                       >
                         {content.text}
                       </span>
@@ -72,7 +72,7 @@ export async function AboutHero() {
             {siteConfig.allowResumeDownload && (
               <Button
                 size="lg"
-                className="w-full sm:w-auto font-semibold shadow-md hover:shadow-xl hover:-translate-y-[2px] transition-all duration-300 bg-primary/90 hover:bg-primary text-primary-foreground"
+                className="w-full sm:w-auto font-semibold shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 bg-primary/90 hover:bg-primary text-primary-foreground"
               >
                 <Download className="mr-2 h-4 w-4" />
                 Download Resume
@@ -82,8 +82,8 @@ export async function AboutHero() {
 
           {/* Image Section */}
           <div className="flex justify-center lg:justify-end mt-8 lg:mt-0">
-            <div className="relative group w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px]">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-primary/30 via-accent/10 to-background blur-2xl opacity-60 group-hover:opacity-80 transition-all duration-700"></div>
+            <div className="relative group w-full max-w-[320px] sm:max-w-95 lg:max-w-105">
+              <div className="absolute inset-0 rounded-3xl bg-linear-to-tr from-primary/30 via-accent/10 to-background blur-2xl opacity-60 group-hover:opacity-80 transition-all duration-700"></div>
               <div className="relative w-full aspect-square rounded-3xl overflow-hidden shadow-2xl ring-1 ring-border/10">
                 <img
                   src="/images/developer-multiple-monitors.png"

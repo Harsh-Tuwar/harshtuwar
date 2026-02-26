@@ -1,10 +1,8 @@
-import { Suspense } from 'react';
 import { Button } from "@/components/ui/button"
 import { siteConfig as config } from '@/lib/metadata'
 import { ArrowRight, Github, Linkedin } from "lucide-react"
 import { SiStackoverflow } from "react-icons/si"
 import Link from "next/link"
-import HeadlineSkeleton from '@/components/skeletons/headline-skeleton';
 import { RichText } from '@/types/global.types';
 import { getHeadlineContent } from '@/lib/notion/content';
 
@@ -40,7 +38,7 @@ function HeadlineContent({ paragraphs }: { paragraphs: RichText[][] }) {
 export async function HeroSection() {
   const headlineContent = await getHeadlineContent();
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted/50 to-background">
+    <section className="min-h-screen flex items-center justify-center bg-linear-to-br from-background via-muted/50 to-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
@@ -108,7 +106,7 @@ export async function HeroSection() {
 
           <div className="flex justify-center lg:justify-end">
             <div className="relative">
-              <div className="w-80 h-80 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+              <div className="w-80 h-80 rounded-full bg-linear-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                 <img
                   src={config.images.softDevHeadhshot}
                   alt="John Doe - Senior Full Stack Developer"
