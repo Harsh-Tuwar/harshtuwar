@@ -3,6 +3,7 @@ import { siteConfig as config } from '@/lib/metadata'
 import { ArrowRight, Github, Linkedin } from "lucide-react"
 import { SiStackoverflow } from "react-icons/si"
 import Link from "next/link"
+import Image from "next/image"
 import { RichText } from '@/types/global.types';
 import { getHeadlineContent } from '@/lib/notion/content';
 
@@ -106,15 +107,19 @@ export async function HeroSection() {
 
           <div className="flex justify-center lg:justify-end">
             <div className="relative">
-              <div className="w-80 h-80 rounded-full bg-linear-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                <img
+              <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-linear-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                <Image
                   src={config.images.softDevHeadhshot}
-                  alt="John Doe - Senior Full Stack Developer"
-                  className="w-72 h-72 rounded-full object-cover border-4 border-background shadow-2xl"
+                  alt={`${config.name}, ${config.role}`}
+                  width={288}
+                  height={288}
+                  priority
+                  sizes="(max-width: 640px) 224px, 288px"
+                  className="w-56 h-56 sm:w-72 sm:h-72 rounded-full object-cover border-4 border-background shadow-2xl"
                 />
               </div>
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full animate-pulse"></div>
-              <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-accent/10 rounded-full animate-pulse delay-1000"></div>
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl"></div>
+              <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-accent/10 rounded-full blur-2xl"></div>
             </div>
           </div>
         </div>

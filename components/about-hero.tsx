@@ -20,7 +20,7 @@ export async function AboutHero() {
           {/* Text Section */}
           <div className="space-y-6 sm:space-y-8 lg:space-y-12">
             <header className="space-y-4 sm:space-y-6">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-serif tracking-tight text-foreground leading-[1.1]">
+              <h1 className="font-montserrat text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-[1.05]">
                 About <span className="text-primary">Me</span>
               </h1>
 
@@ -37,12 +37,9 @@ export async function AboutHero() {
             </header>
 
             {/* About Content — Enhanced Typography */}
-            <div className="relative space-y-4 sm:space-y-6 text-base sm:text-[1.05rem] font-light leading-relaxed sm:leading-[1.9] tracking-[0.01em] text-muted-foreground/90 text-left sm:text-justify selection:bg-primary/10 selection:text-primary transition-colors duration-500 hyphens-auto">
+            <div className="relative max-w-[68ch] space-y-4 sm:space-y-6 text-base sm:text-[1.05rem] leading-relaxed sm:leading-[1.8] text-muted-foreground">
               {paragraphs.map((para, i) => (
-                <p
-                  key={i}
-                  className="hover:text-foreground/95 transition-colors duration-500"
-                >
+                <p key={i}>
                   {para.map((content, j) => {
                     const { bold, italic, underline, strikethrough, color = "default" } = content.annotations;
 
@@ -57,10 +54,7 @@ export async function AboutHero() {
                       .join(" ");
 
                     return (
-                      <span
-                        key={j}
-                        className={`${className} text-balance`}
-                      >
+                      <span key={j} className={className}>
                         {content.text}
                       </span>
                     );

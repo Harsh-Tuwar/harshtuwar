@@ -14,7 +14,7 @@ export const metadata = createMetadata({
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen">
+    <main id="main" className="min-h-screen">
       <Navigation />
       <AboutHero />
       <SkillsSection />

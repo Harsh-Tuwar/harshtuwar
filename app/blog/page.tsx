@@ -15,7 +15,7 @@ export default async function BlogPage() {
   const initialBlogs = await getAllBlogs();
 
   return (
-    <main className="min-h-screen">
+    <main id="main" className="min-h-screen">
       <Navigation />
       <BlogHero />
       <BlogGrid initialBlogs={initialBlogs} />

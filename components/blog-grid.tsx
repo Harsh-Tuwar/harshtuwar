@@ -40,7 +40,7 @@ export function BlogGrid({ initialBlogs }: BlogGridProps) {
   })
 
   return (
-    <section className="py-20">
+    <section className="pt-4 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Search and Filter Controls */}
         <div className="mb-12 space-y-4">

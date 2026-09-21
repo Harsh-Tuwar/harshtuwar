@@ -18,7 +18,7 @@ export default function ProjectsPage() {
   }
 
   return (
-    <main className="min-h-screen">
+    <main id="main" className="min-h-screen">
       <Navigation />
       <ProjectsHero />
       <ProjectsGrid />

@@ -10,22 +10,53 @@ import { cn } from "@/lib/utils"
 import Image from 'next/image'
 import { siteConfig as config } from '@/lib/metadata'
 
-export function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+function ThemeToggle({ className }: { className?: string }) {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
-  const pathname = usePathname()
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
+  const handleThemeToggle = () => {
+    const currentTheme = resolvedTheme || theme
+    setTheme(currentTheme === "dark" ? "light" : "dark")
+  }
+
+  return (
+    <button
+      onClick={handleThemeToggle}
+      // `relative` gives the stacked icons a containing block; without it the
+      // absolutely positioned moon resolved against the fixed <nav>.
+      className={cn(
+        "relative inline-flex items-center justify-center h-9 w-9 rounded-md text-foreground/80 hover:text-primary hover:bg-primary/10",
+        className,
+      )}
+      aria-label="Toggle theme"
+    >
+      {/* Rendered only after mount: the server cannot know the resolved theme,
+          and announcing the wrong one is worse than announcing none. */}
+      {mounted && (
+        <>
+          <Sun className="h-5 w-5 rotate-0 scale-100 transition-transform duration-200 dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-transform duration-200 dark:rotate-0 dark:scale-100" />
+        </>
+      )}
+    </button>
+  )
+}
+
+export function Navigation() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
+    const handleScroll = () => setIsScrolled(window.scrollY > 50)
+    handleScroll()
+    // A scroll listener that never calls preventDefault should say so, or it
+    // blocks the compositor on every frame.
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -41,53 +72,30 @@ export function Navigation() {
     { href: "/contact", label: "Contact" },
   ]
 
-  const isActiveLink = (href: string) => {
-    if (href === "/") {
-      return pathname === "/"
-    }
-    return pathname.startsWith(href)
-  }
-
-  const handleThemeToggle = () => {
-    const currentTheme = resolvedTheme || theme
-    const newTheme = currentTheme === "dark" ? "light" : "dark"
-    setTheme(newTheme)
-  }
-
-  if (!mounted) {
-    return (
-      <nav className="fixed top-0 w-full z-50 bg-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Image src={config.images.htLogo} width={62} height={62} alt='HT_Logo' />
-            <div className="hidden md:flex items-center space-x-8">
-              <div className="w-20 h-4 bg-muted animate-pulse rounded"></div>
-              <div className="w-20 h-4 bg-muted animate-pulse rounded"></div>
-              <div className="w-20 h-4 bg-muted animate-pulse rounded"></div>
-              <div className="w-20 h-4 bg-muted animate-pulse rounded"></div>
-              <div className="w-20 h-4 bg-muted animate-pulse rounded"></div>
-              <div className="w-10 h-10 bg-muted animate-pulse rounded"></div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    )
-  }
+  const isActiveLink = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href))
 
   return (
     <nav
       className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
-        isScrolled ? "bg-background/95 backdrop-blur-sm border-b border-border shadow-sm" : "bg-transparent",
+        "fixed top-0 w-full z-50 transition-[background-color,border-color,box-shadow] duration-200",
+        isScrolled
+          ? "bg-background/85 backdrop-blur-md border-b border-border shadow-sm"
+          : "bg-transparent border-b border-transparent",
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link
-            href="/"
-            className="font-montserrat font-black text-xl text-primary hover:text-primary/80 transition-colors duration-200"
-          >
-            <Image src={config.images.htLogo} width={62} height={62} alt='HT_Logo' />
+          <Link href="/" className="shrink-0 rounded-md" aria-label={`${config.name} — home`}>
+            <Image
+              src={config.images.htLogo}
+              width={44}
+              height={44}
+              alt=""
+              priority
+              /* The mark is a near-black glyph on transparency, so it
+                 disappears against the dark theme's background. */
+              className="h-11 w-11 object-contain dark:invert"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -96,8 +104,9 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={isActiveLink(item.href) ? "page" : undefined}
                 className={cn(
-                  "relative text-sm font-medium transition-colors duration-200 hover:text-primary",
+                  "relative text-sm font-medium hover:text-primary",
                   isActiveLink(item.href)
                     ? "text-primary after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-full"
                     : "text-foreground/80",
@@ -106,32 +115,20 @@ export function Navigation() {
                 {item.label}
               </Link>
             ))}
-            <button
-              onClick={handleThemeToggle}
-              className="inline-flex items-center justify-center h-9 w-9 rounded-md text-foreground/80 hover:text-primary hover:bg-primary/10 transition-colors duration-200"
-              aria-label="Toggle theme"
-            >
-              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </button>
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-2">
-            <button
-              onClick={handleThemeToggle}
-              className="inline-flex items-center justify-center h-9 w-9 rounded-md text-foreground/80 hover:text-primary hover:bg-primary/10 transition-colors duration-200"
-              aria-label="Toggle theme"
-            >
-              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </button>
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="hover:bg-primary/10 transition-colors duration-200"
-              aria-label="Toggle menu"
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              className="hover:bg-primary/10"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-nav"
             >
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -139,9 +136,13 @@ export function Navigation() {
         </div>
 
         <div
+          id="mobile-nav"
+          // Collapsing with max-height alone left the links keyboard-focusable
+          // and screen-reader visible while the menu looked closed.
+          inert={!isMobileMenuOpen}
           className={cn(
-            "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
-            isMobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0",
+            "md:hidden overflow-hidden transition-[max-height,opacity] duration-200 ease-out",
+            isMobileMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0",
           )}
         >
           <div className="bg-background/95 backdrop-blur-sm border-t border-border">
@@ -150,8 +151,9 @@ export function Navigation() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  aria-current={isActiveLink(item.href) ? "page" : undefined}
                   className={cn(
-                    "block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200",
+                    "block px-3 py-2 rounded-md text-sm font-medium",
                     isActiveLink(item.href)
                       ? "text-primary bg-primary/10"
                       : "text-foreground/80 hover:text-primary hover:bg-primary/5",
