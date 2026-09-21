@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { GetAllBlogsResponse } from '@/types/global.types'
 import { Calendar, Clock, User, ArrowLeft, Eye } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { ShareButton } from '@/components/blog-share-button';
@@ -88,14 +89,20 @@ export async function BlogPost({
       </div>
 
       {/* Featured Image - Full Bleed */}
-      <div className="relative w-full h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent z-10" />
-        <img
-          src={metadata.featuredImage || "/placeholder.svg"}
-          alt={metadata.title}
-          className="w-full h-full object-cover"
-        />
-      </div>
+      {metadata.featuredImage && (
+        <div className="relative w-full h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden">
+          <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent z-10" />
+          <Image
+            src={metadata.featuredImage}
+            /* The <h1> above already names the article. */
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+      )}
 
       {/* Content Container */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

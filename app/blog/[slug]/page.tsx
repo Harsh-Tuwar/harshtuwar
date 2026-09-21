@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return createMetadata({
     title: metadata.title,
     description: metadata.excerpt,
-    url: `/blog/${metadata.dynamicUrl}`,
+    url: `/blog/${metadata.slug}`,
     type: "article",
     image: metadata.heroImage,
   })
@@ -38,7 +38,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const markdown = response.markdown;
   
   return (
-    <main className="min-h-screen">
+    <main id="main" className="min-h-screen">
       <Navigation />
       
       <BlogPost markdown={markdown} metadata={post} />
@@ -49,10 +49,22 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           headline: post.title,
           description: post.excerpt,
           image: post.heroImage,
+          url: `/blog/${post.slug}`,
           datePublished: post.publishedAt,
           dateModified: post.publishedAt,
-          articleSection: post.category,
-          keywords: post.tags,
+          articleSection: post.category.map((c) => c.name),
+          keywords: post.tags.map((t) => t.name),
+        }}
+      />
+
+      <StructuredData
+        type="BreadcrumbList"
+        data={{
+          items: [
+            { name: "Home", url: "/" },
+            { name: "Blog", url: "/blog" },
+            { name: post.title, url: `/blog/${post.slug}` },
+          ],
         }}
       />
     </main>

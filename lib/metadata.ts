@@ -10,7 +10,7 @@ export const siteConfig = {
   description:
     "Personal portfolio and blog of Harsh Tuwar, a Senior Full Stack Developer specializing in modern web technologies, React, Next.js, TypeScript and cloud specialist.",
   url: "https://harshtuwar.vercel.app",
-  ogImage: "https://harshtuwar.vercel.app/og-image.png",
+  ogImage: "/opengraph-image.png",
   author: {
     name: "Harsh Tuwar",
     email: "tuwarharsh08@gmail.com",
@@ -59,6 +59,9 @@ export function createMetadata({
   const metaUrl = url ? `${siteConfig.url}${url}` : siteConfig.url
 
   return {
+    // Lets Next resolve relative image and canonical URLs to absolute ones,
+    // which crawlers and social scrapers require.
+    metadataBase: new URL(siteConfig.url),
     title: metaTitle,
     description: metaDescription,
     keywords: siteConfig.keywords,
@@ -84,13 +87,17 @@ export function createMetadata({
       description: metaDescription,
       siteName: siteConfig.name,
       images: [
-        {
-          url: metaImage,
-          width: 1200,
-          height: 630,
-          alt: metaTitle,
-        },
+        image
+          ? { url: image, alt: metaTitle }
+          : { url: siteConfig.ogImage, width: 1200, height: 630, alt: metaTitle },
       ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: metaTitle,
+      description: metaDescription,
+      images: [metaImage],
+      creator: siteConfig.author.twitter,
     },
     icons: {
       icon: [
@@ -101,7 +108,12 @@ export function createMetadata({
         { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
       ],
     },
-    manifest: "/site.webmanifest",
+    // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION in Vercel to verify the property
+    // in Google Search Console without redeploying code.
+    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+      ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+      : {}),
+    manifest: "/manifest.webmanifest",
     alternates: {
       canonical: metaUrl,
     },

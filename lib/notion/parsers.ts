@@ -28,7 +28,8 @@ import {
   parseStatus,
   parseSelect,
   parseNumber,
-  parseUrl
+  parseUrl,
+  notionImageUrl
 } from './propertyParsers';
 
 /**
@@ -67,12 +68,11 @@ export function parseBlogPosts(
     const author = parsePlainText(itemProps.author);
     const readTime = parsePlainText(itemProps.readTime);
     const title = parseTitle(itemProps.title);
-    const dynamicUrl = (pageItem as any).url.replace('https://www.notion.so/', '');
 
     return {
       id,
       status,
-      heroImage: heroImageData?.url || '',
+      heroImage: notionImageUrl(pageItem as any, 'heroImage'),
       heroImageName: heroImageData?.name || '',
       tags,
       publishedAt,
@@ -81,8 +81,7 @@ export function parseBlogPosts(
       slug,
       author,
       readTime,
-      title,
-      dynamicUrl
+      title
     };
   });
 }
@@ -105,13 +104,11 @@ export function parseBlogPost(response: GetPageResponse): GetAllBlogsResponse {
   const author = parsePlainText(itemProps.author);
   const readTime = parsePlainText(itemProps.readTime);
   const title = parseTitle(itemProps.title);
-  const dynamicUrl = (response as any).url.replace('https://www.notion.so/', '');
-  const featuredImageData = parseFile(itemProps.featuredImage);
 
   return {
     id,
     status,
-    heroImage: heroImageData?.url || '',
+    heroImage: notionImageUrl(response as any, 'heroImage'),
     heroImageName: heroImageData?.name || '',
     tags,
     publishedAt,
@@ -121,8 +118,7 @@ export function parseBlogPost(response: GetPageResponse): GetAllBlogsResponse {
     author,
     readTime,
     title,
-    dynamicUrl,
-    featuredImage: featuredImageData?.url
+    featuredImage: notionImageUrl(response as any, 'featuredImage')
   };
 }
 
@@ -193,7 +189,6 @@ export function parseExperiences(
     const position = parsePlainText(itemProps.Position);
     const skills = parseMultiSelect(itemProps.Skills);
     const tenure = parsePlainText(itemProps.Tenure);
-    const companyLogoData = parseFile(itemProps.CompanyLogo);
     const url = parseUrl(itemProps.URL);
     const ordinal = parseNumber(itemProps.Ordinal);
 
@@ -203,7 +198,7 @@ export function parseExperiences(
       position,
       skills,
       tenure,
-      companyLogo: companyLogoData?.url || '',
+      companyLogo: notionImageUrl(pageItem as any, 'CompanyLogo'),
       url,
       ordinal
     };
@@ -225,7 +220,6 @@ export function parseEducation(
     const degreeName = parsePlainText(itemProps.DegreeName);
     const skills = parseMultiSelect(itemProps.Skills);
     const period = parsePlainText(itemProps.Period);
-    const instLogoData = parseFile(itemProps.InstLogo);
     const instUrl = parseUrl(itemProps.InstUrl);
     const ordinal = parseNumber(itemProps.Ordinal);
 
@@ -235,7 +229,7 @@ export function parseEducation(
       degreeName,
       skills,
       period,
-      instLogo: instLogoData?.url || '',
+      instLogo: notionImageUrl(pageItem as any, 'InstLogo'),
       instUrl,
       ordinal
     };

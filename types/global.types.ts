@@ -67,7 +67,6 @@ export type GetAllBlogsResponse = {
 	author: string,
 	readTime: string,
 	title: string,
-	dynamicUrl: string,
 	featuredImage?: string
 }
 

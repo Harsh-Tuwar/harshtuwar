@@ -18,10 +18,19 @@ import {
   Experience,
   Education
 } from '@/types/global.types';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
 // Initialize Notion to Markdown converter
 const n2m = new NotionToMarkdown({ notionClient: notion });
+
+// Images inside post content carry the same one-hour signed URLs as file
+// properties do, so point them at the proxy instead of inlining a URL that
+// expires long before the cached page does.
+n2m.setCustomTransformer('image', async (block: any) => {
+  const alt = (block.image?.caption ?? []).map((part: any) => part.plain_text).join('');
+  const version = String(block.last_edited_time ?? '').replace(/\D/g, '');
+  return `![${alt}](/api/notion-image?block=${block.id}&v=${version})`;
+});
 
 /**
  * Get home page headline content from Notion
@@ -91,7 +100,9 @@ export async function getBlogPost(slug: string): Promise<{
 
   const page = results[0];
   if (!page || page.object !== "page") {
-    redirect("/");
+    // A 404 keeps search engines from indexing a missing post as a duplicate of
+    // the homepage, which a redirect would.
+    notFound();
   }
 
   // Fetch markdown (only other API call)

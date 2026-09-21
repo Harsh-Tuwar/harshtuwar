@@ -1,4 +1,22 @@
-import { RichText } from '@/types/global.types';
+import type { RichText } from '@/types/global.types';
+
+type NotionFile = {
+  name: string;
+  type?: 'file' | 'external';
+  file?: { url: string };
+  external?: { url: string };
+};
+
+export type NotionFilesProperty = { files: NotionFile[] };
+
+/** Image-bearing properties that /api/notion-image is allowed to serve. */
+export type NotionImageProp = 'heroImage' | 'featuredImage' | 'CompanyLogo' | 'InstLogo';
+
+type NotionPageLike = {
+  id: string;
+  last_edited_time?: string;
+  properties?: Partial<Record<NotionImageProp, NotionFilesProperty>>;
+};
 
 /**
  * Helper functions for parsing Notion property types
@@ -52,32 +70,57 @@ export function parseMultiSelect(property: { multi_select: { id: string; name: s
 /**
  * Parse files property from Notion
  * Returns the first file's URL and name
+ *
+ * A Notion file is either an upload (`file.url`, signed and expiring) or an
+ * external link (`external.url`, stable). Reading `file.file.url` blindly
+ * throws on the external kind.
  */
-export function parseFile(property: { files: { name: string; file: { url: string } }[] } | undefined): { url: string; name: string } | null {
-  if (!property?.files || property.files.length === 0) {
+export function parseFile(property: NotionFilesProperty | undefined): { url: string; name: string } | null {
+  const file = property?.files?.[0];
+  if (!file) {
     return null;
   }
 
-  const file = property.files[0];
-  return {
-    url: file.file.url,
-    name: file.name,
-  };
+  const url = file.type === 'external' ? file.external?.url : file.file?.url;
+  if (!url) {
+    return null;
+  }
+
+  return { url, name: file.name };
+}
+
+/**
+ * Build a stable URL for an image held in a Notion files property.
+ *
+ * The URL Notion returns is signed for one hour, so storing it in a page that
+ * gets statically cached guarantees a broken image once the cache outlives the
+ * signature. This points at /api/notion-image, which resolves a fresh signed
+ * URL per request. The `v` stamp busts the cache when the image is replaced.
+ */
+export function notionImageUrl(page: NotionPageLike, prop: NotionImageProp): string {
+  if (!parseFile(page?.properties?.[prop])) {
+    return '';
+  }
+
+  const version = String(page.last_edited_time ?? '').replace(/\D/g, '');
+  return `/api/notion-image?page=${page.id}&prop=${prop}&v=${version}`;
 }
 
 /**
  * Parse files array from Notion
  * Returns all files with their URLs and names
  */
-export function parseFiles(property: { files: { name: string; file: { url: string } }[] } | undefined): { url: string; name: string }[] {
+export function parseFiles(property: NotionFilesProperty | undefined): { url: string; name: string }[] {
   if (!property?.files || property.files.length === 0) {
     return [];
   }
 
-  return property.files.map(file => ({
-    url: file.file.url,
-    name: file.name,
-  }));
+  return property.files
+    .map(file => ({
+      url: (file.type === 'external' ? file.external?.url : file.file?.url) ?? '',
+      name: file.name,
+    }))
+    .filter(file => file.url !== '');
 }
 
 /**

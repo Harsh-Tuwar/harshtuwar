@@ -2,17 +2,17 @@ import { Navigation } from "@/components/navigation"
 import { ContactHero } from "@/components/contact-hero"
 import { ContactForm } from "@/components/contact-form"
 import { ContactInfo } from "@/components/contact-info"
-import { createMetadata } from "@/lib/metadata"
+import { createMetadata, siteConfig } from "@/lib/metadata"
 
 export const metadata = createMetadata({
   title: "Contact",
-  description: "Get in touch with John Doe for web development projects, collaborations, or consulting opportunities.",
+  description: `Get in touch with ${siteConfig.name} for web development projects, collaborations, or consulting opportunities.`,
   url: "/contact",
 })
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen">
+    <main id="main" className="min-h-screen">
       <Navigation />
       <ContactHero />
 

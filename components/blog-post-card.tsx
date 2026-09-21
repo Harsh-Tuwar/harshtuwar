@@ -1,5 +1,6 @@
 import { Calendar, Clock, ArrowUpRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { GetAllBlogsResponse } from '@/types/global.types'
 
 interface BlogPostCardProps {
@@ -9,24 +10,28 @@ interface BlogPostCardProps {
 export function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block h-full">
-      <article className="relative h-full flex flex-col bg-linear-to-br from-card via-card to-muted/5 rounded-3xl overflow-hidden border border-border/50 hover:border-primary/40 transition-all duration-700 shadow-lg hover:shadow-2xl hover:shadow-primary/10">
-
-        {/* Decorative Corner Accent */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+      <article className="relative h-full flex flex-col bg-card rounded-2xl overflow-hidden border border-border/60 hover:border-primary/40 transition-[border-color,box-shadow,transform] duration-200 ease-out shadow-sm hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-0.5">
 
         {/* Image Container */}
-        <div className="relative h-56 overflow-hidden">
-          {/* Subtle overlay for better text contrast */}
-          <div className="absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-background/20 z-10 mix-blend-multiply" />
-
-          <img
-            src={post.heroImage || "/placeholder.svg"}
-            alt={post.heroImageName}
-            className="w-full h-full object-cover group-hover:scale-105 group-hover:rotate-1 transition-all duration-700 ease-out"
-          />
+        <div className="relative h-56 overflow-hidden bg-muted">
+          {post.heroImage ? (
+            <Image
+              src={post.heroImage}
+              /* The title sits directly below, so repeating it here — or worse,
+                 reading out the upload's filename — only adds noise. */
+              alt=""
+              fill
+              /* Notion serves the original upload; one hero is 5740px wide.
+                 Routing it through the optimizer ships a card-sized image. */
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover group-hover:scale-[1.03] transition-transform duration-300 ease-out"
+            />
+          ) : (
+            <div className="w-full h-full bg-linear-to-br from-muted to-card" />
+          )}
 
           {/* Floating Category Pills */}
-          <div className="absolute top-5 left-5 z-20 flex flex-wrap gap-2">
+          <div className="absolute top-4 left-4 right-4 z-20 flex flex-wrap gap-2">
             {post.category.slice(0, 2).map((cat) => (
               <span
                 key={cat.id}
@@ -36,17 +41,10 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
               </span>
             ))}
           </div>
-
-          {/* Hover Overlay with Icon */}
-          <div className="absolute inset-0 bg-primary/90 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-            <div className="transform scale-50 group-hover:scale-100 transition-transform duration-500">
-              <ArrowUpRight className="w-12 h-12 text-primary-foreground" strokeWidth={2.5} />
-            </div>
-          </div>
         </div>
 
         {/* Content Container */}
-        <div className="flex-1 flex flex-col p-7 space-y-5">
+        <div className="flex-1 flex flex-col p-6 space-y-4">
 
           {/* Meta Information */}
           <div className="flex items-center gap-5 text-xs text-muted-foreground font-medium">
@@ -61,12 +59,12 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
           </div>
 
           {/* Title */}
-          <h3 className="text-2xl font-bold leading-snug line-clamp-2 text-foreground group-hover:text-primary transition-colors duration-300">
+          <h3 className="text-xl font-bold leading-snug line-clamp-2 text-foreground group-hover:text-primary transition-colors duration-150">
             {post.title}
           </h3>
 
           {/* Divider */}
-          <div className="w-12 h-0.5 bg-linear-to-r from-primary to-transparent group-hover:w-20 transition-all duration-500" />
+          <div className="w-12 h-0.5 bg-linear-to-r from-primary to-transparent group-hover:w-20 transition-[width] duration-300 ease-out" />
 
           {/* Excerpt */}
           <p className="flex-1 text-sm leading-relaxed text-muted-foreground/90 line-clamp-3">
@@ -95,12 +93,12 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
             <span className="text-sm font-semibold text-primary group-hover:underline underline-offset-4 decoration-2">
               Read more
             </span>
-            <ArrowUpRight className="h-5 w-5 text-primary transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+            <ArrowUpRight className="h-5 w-5 text-primary transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200 ease-out" />
           </div>
         </div>
 
         {/* Bottom Accent Line */}
-        <div className="h-1 bg-linear-to-r from-transparent via-primary to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+        <div className="h-0.5 bg-linear-to-r from-transparent via-primary to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
       </article>
     </Link>
   )
