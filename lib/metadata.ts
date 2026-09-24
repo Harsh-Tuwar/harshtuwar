@@ -108,11 +108,12 @@ export function createMetadata({
         { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
       ],
     },
-    // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION in Vercel to verify the property
-    // in Google Search Console without redeploying code.
-    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-      ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
-      : {}),
+    // Google Search Console token; NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION overrides it.
+    verification: {
+      google:
+        process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
+        "2MsGfTLweyNeKQEDfKGq82tzdb4L_b8CLwrmvEFHr9s",
+    },
     manifest: "/manifest.webmanifest",
     alternates: {
       canonical: metaUrl,
