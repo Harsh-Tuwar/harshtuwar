@@ -2,13 +2,13 @@ import type { Metadata } from "next"
 
 export const siteConfig = {
   name: "Harsh Tuwar",
-  role: "Senior Full Stack Developer",
-  title: "Harsh Tuwar | Senior Full Stack Developer",
-  location: "Toronto, ON, Canada 🇨🇦",
+  role: "Senior Full Stack Software Engineer",
+  title: "Harsh Tuwar | Senior Full Stack Software Engineer",
+  location: "Hamilton, ON, Canada 🇨🇦",
   experienceStartYear: 2019,
   allowResumeDownload: false,
   description:
-    "Personal portfolio and blog of Harsh Tuwar, a Senior Full Stack Developer specializing in modern web technologies, React, Next.js, TypeScript and cloud specialist.",
+    "Personal portfolio and blog of Harsh Tuwar, a Senior Full Stack Software Engineer building fintech backends, event-driven microservices and React Native apps with Node.js, TypeScript, Kubernetes and the cloud.",
   url: "https://harshtuwar.vercel.app",
   ogImage: "/opengraph-image.png",
   author: {

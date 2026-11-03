@@ -29,7 +29,7 @@ export function StructuredData({ type, data = {} }: StructuredDataProps) {
           name: siteConfig.author.name,
           url: siteConfig.url,
           email: siteConfig.author.email,
-          jobTitle: "Senior Full Stack Developer",
+          jobTitle: "Senior Full Stack Software Engineer",
           worksFor: {
             "@type": "Organization",
             name: "Freelance",
